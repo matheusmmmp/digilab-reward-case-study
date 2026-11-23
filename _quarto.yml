@@ -1,0 +1,37 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - notebooks/02_case_study.ipynb
+    - notebooks/01_reproduce_official_results.ipynb
+    - resumo-pt.qmd
+    - data/SCHEMA.md
+    - PROVENANCE.md
+
+website:
+  title: "Reward and a virtual pet"
+  navbar:
+    left:
+      - href: notebooks/02_case_study.ipynb
+        text: Case study
+      - href: notebooks/01_reproduce_official_results.ipynb
+        text: Reproduction appendix
+      - href: resumo-pt.qmd
+        text: Resumo em português
+      - href: data/SCHEMA.md
+        text: Data schema
+      - href: PROVENANCE.md
+        text: Provenance
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
+    code-tools: false
+    fig-format: png
+    mainfont: system-ui, -apple-system, "Segoe UI", sans-serif
+
+execute:
+  warning: false

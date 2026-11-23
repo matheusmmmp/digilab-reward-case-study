@@ -1,0 +1,7 @@
+---
+title: "Does reward keep a virtual pet awake?"
+---
+
+<meta http-equiv="refresh" content="0; url=notebooks/02_case_study.html">
+
+The case study is at [notebooks/02_case_study.html](notebooks/02_case_study.ipynb).

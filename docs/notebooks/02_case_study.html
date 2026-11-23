@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Does reward keep a virtual pet awake? – Reward and a virtual pet</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-1f2952ac8752d868b0aa618cc118742e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Reward and a virtual pet</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../notebooks/02_case_study.html" aria-current="page"> 
+<span class="menu-text">Case study</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notebooks/01_reproduce_official_results.html"> 
+<span class="menu-text">Reproduction appendix</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resumo-pt.html"> 
+<span class="menu-text">Resumo em português</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../data/SCHEMA.html"> 
+<span class="menu-text">Data schema</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../PROVENANCE.html"> 
+<span class="menu-text">Provenance</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-question" id="toc-the-question" class="nav-link active" data-scroll-target="#the-question">1. The question</a></li>
+  <li><a href="#why-pre-register" id="toc-why-pre-register" class="nav-link" data-scroll-target="#why-pre-register">2. Why pre-register</a></li>
+  <li><a href="#the-design" id="toc-the-design" class="nav-link" data-scroll-target="#the-design">3. The design</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">4. The data</a></li>
+  <li><a href="#the-result" id="toc-the-result" class="nav-link" data-scroll-target="#the-result">5. The result</a>
+  <ul class="collapse">
+  <li><a href="#the-contrasts" id="toc-the-contrasts" class="nav-link" data-scroll-target="#the-contrasts">The contrasts</a></li>
+  <li><a href="#applying-the-rules" id="toc-applying-the-rules" class="nav-link" data-scroll-target="#applying-the-rules">Applying the rules</a></li>
+  <li><a href="#absolute-and-standardized-size-exploratory-after-the-result" id="toc-absolute-and-standardized-size-exploratory-after-the-result" class="nav-link" data-scroll-target="#absolute-and-standardized-size-exploratory-after-the-result">Absolute and standardized size (Exploratory, after the result)</a></li>
+  </ul></li>
+  <li><a href="#where-it-happens-descriptive" id="toc-where-it-happens-descriptive" class="nav-link" data-scroll-target="#where-it-happens-descriptive">6. Where it happens (descriptive)</a></li>
+  <li><a href="#the-bug-and-the-fix" id="toc-the-bug-and-the-fix" class="nav-link" data-scroll-target="#the-bug-and-the-fix">7. The bug and the fix</a></li>
+  <li><a href="#exploratory-after-the-result" id="toc-exploratory-after-the-result" class="nav-link" data-scroll-target="#exploratory-after-the-result">8. Exploratory, after the result</a>
+  <ul class="collapse">
+  <li><a href="#a-the-body-effect-alone-body_only-no_petting" id="toc-a-the-body-effect-alone-body_only-no_petting" class="nav-link" data-scroll-target="#a-the-body-effect-alone-body_only-no_petting">(a) The body effect alone: body_only − no_petting</a></li>
+  <li><a href="#b-a-predictive-model-of-the-awake-fraction" id="toc-b-a-predictive-model-of-the-awake-fraction" class="nav-link" data-scroll-target="#b-a-predictive-model-of-the-awake-fraction">(b) A predictive model of the awake fraction</a></li>
+  </ul></li>
+  <li><a href="#what-this-does-not-show-and-what-i-would-do-differently" id="toc-what-this-does-not-show-and-what-i-would-do-differently" class="nav-link" data-scroll-target="#what-this-does-not-show-and-what-i-would-do-differently">9. What this does not show, and what I would do differently</a></li>
+  <li><a href="#reproduce-it" id="toc-reproduce-it" class="nav-link" data-scroll-target="#reproduce-it">10. Reproduce it</a></li>
+  <li><a href="#appendix-the-pre-registration-entry" id="toc-appendix-the-pre-registration-entry" class="nav-link" data-scroll-target="#appendix-the-pre-registration-entry">Appendix: the pre-registration entry</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Does reward keep a virtual pet awake?</h1>
+<p class="subtitle lead">A pre-registered simulation study: question, design, result, and the bug that hit the analysis</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>In short.</strong> A virtual pet sleeps a lot. I asked whether petting it right after it eats or plays (and giving its learning agent reward credit for that moment) would keep it awake more. Before running anything I wrote down the design, the outcome, the analysis and the rule that turns numbers into an answer. Then I ran it once: 9,600 simulated lives. The answer, read by the pre-written rule, was <strong>no: with the reward the pet sleeps more</strong>, slightly. Its welfare measure improved, but that gain cannot be told apart from what petting does to the body: it is not evidence that the reward credit itself makes the pet better off. The analysis crashed after the lives were saved; this page also shows that bug, how it was fixed before any result was read, and what I would do differently.</p>
+<p>Every official number on this page is recomputed in a code cell from the published data (<code>data/lives.parquet</code>) and asserted against the official values (<code>data/reference.json</code>) to within 1e-9. Anything that was <em>not</em> part of the official, pre-registered result is marked <strong>Exploratory, after the result</strong>. Code is folded; click “Code” to see it.</p>
+<div id="setup" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Setup: imports, data, shared helpers</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ROOT <span class="op">=</span> Path.cwd().parent <span class="cf">if</span> Path.cwd().name <span class="op">==</span> <span class="st">"notebooks"</span> <span class="cf">else</span> Path.cwd()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="bu">str</span>(ROOT))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> HTML, Markdown, display</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> casestudy <span class="im">as</span> cs</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> casestudy <span class="im">import</span> style</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>style.<span class="bu">apply</span>()</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>REF <span class="op">=</span> cs.REF</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>CHECKS <span class="op">=</span> []  <span class="co"># every official number shown below is asserted and logged here</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check(got, ref, what):</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    cs.assert_matches(got, ref, what)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    CHECKS.append(what)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> say(text):</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    display(Markdown(text))</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> show(df):</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plain HTML table without the index: deterministic markup, unlike a Styler</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    display(HTML(df.to_html(index<span class="op">=</span><span class="va">False</span>, border<span class="op">=</span><span class="dv">0</span>, classes<span class="op">=</span><span class="st">"table table-sm"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="the-question" class="level2">
+<h2 class="anchored" data-anchor-id="the-question">1. The question</h2>
+<p>The pet is a small simulated animal driven by <strong>a learning agent: when it receives reward credit, the action it just took becomes more likely</strong>. Its day is a long sequence of decisions (eat, play, sleep and so on), and in the simulation it sleeps a lot.</p>
+<p>The question, in plain words: <strong>if its simulated owner pets it right after it eats or plays, does the pet stay awake more?</strong> Petting does two things at once: it changes the pet’s body state, and it can give the learning agent reward credit for what it just did. A careful answer has to separate those two.</p>
+<p>Before the run I also wrote down what I expected: <em>“no: it sleeps more or stays the same”</em>. That expectation came from a quick look at 20 units run with the seeds reserved for the project’s software tests (“test seeds”), which are not part of the research data.</p>
+</section>
+<section id="why-pre-register" class="level2">
+<h2 class="anchored" data-anchor-id="why-pre-register">2. Why pre-register</h2>
+<p>With a simulator you can run as many variants as you like and report the one that looks best. To make that impossible, the question, outcome, analysis, relevant effect size and reading rule were committed to the project’s history <em>before</em> the simulation code was merged and long before the run. The pre-registration entry is commit <code>455c6d61</code> of the project’s private repository, dated 2026-11-20 14:06:26 UTC−3; its relevant lines are quoted, translated and in the original Portuguese, in the <a href="#appendix-the-pre-registration-entry">appendix</a>, and <a href="../PROVENANCE.html">PROVENANCE</a> lists every hash and file checksum. The commit times (2026-11-20, UTC−3) tell the story:</p>
+<div id="timeline" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Timeline from the commit history</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>timeline <span class="op">=</span> pd.DataFrame([</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"14:06"</span>, <span class="st">"Pre-registration entry committed"</span>, <span class="st">"before"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"14:19"</span>, <span class="st">"Analysis plan approved"</span>, <span class="st">"before"</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"15:13"</span>, <span class="st">"Simulation code merged"</span>, <span class="st">"before"</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"15:51"</span>, <span class="st">"Run started"</span>, <span class="st">"run"</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"18:36"</span>, <span class="st">"All 9,600 lives measured and saved; analysis crashed"</span>, <span class="st">"run"</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"18:38"</span>, <span class="st">"Fix committed (no result number had been read)"</span>, <span class="st">"after"</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"18:41"</span>, <span class="st">"Re-analysis of the saved measurements"</span>, <span class="st">"after"</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"18:44"</span>, <span class="st">"Result written"</span>, <span class="st">"after"</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>], columns<span class="op">=</span>[<span class="st">"time (UTC−3)"</span>, <span class="st">"event"</span>, <span class="st">"phase"</span>])</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> pd.to_datetime(timeline[<span class="st">"time (UTC−3)"</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"%H:%M"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>run_hours <span class="op">=</span> (t[<span class="dv">4</span>] <span class="op">-</span> t[<span class="dv">3</span>]).total_seconds() <span class="op">/</span> <span class="dv">3600</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>fix_minutes <span class="op">=</span> (t[<span class="dv">5</span>] <span class="op">-</span> t[<span class="dv">4</span>]).total_seconds() <span class="op">/</span> <span class="dv">60</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>show(timeline)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f"The run took **</span><span class="sc">{</span><span class="bu">int</span>(run_hours)<span class="sc">}</span><span class="ss"> h </span><span class="sc">{</span><span class="bu">round</span>(run_hours <span class="op">%</span> <span class="dv">1</span> <span class="op">*</span> <span class="dv">60</span>)<span class="sc">}</span><span class="ss"> min** of wall time, inside the pre-registered stopping rule "</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"(projected cost above 4 h → no run). The fix was committed **</span><span class="sc">{</span>fix_minutes<span class="sc">:.0f}</span><span class="ss"> min** after the lives were saved."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="timeline-1" class="cell-output cell-output-display">
+<table class="dataframe table table-sm caption-top table-striped small">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">time (UTC−3)</th>
+<th data-quarto-table-cell-role="th">event</th>
+<th data-quarto-table-cell-role="th">phase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>14:06</td>
+<td>Pre-registration entry committed</td>
+<td>before</td>
+</tr>
+<tr class="even">
+<td>14:19</td>
+<td>Analysis plan approved</td>
+<td>before</td>
+</tr>
+<tr class="odd">
+<td>15:13</td>
+<td>Simulation code merged</td>
+<td>before</td>
+</tr>
+<tr class="even">
+<td>15:51</td>
+<td>Run started</td>
+<td>run</td>
+</tr>
+<tr class="odd">
+<td>18:36</td>
+<td>All 9,600 lives measured and saved; analysis crashed</td>
+<td>run</td>
+</tr>
+<tr class="even">
+<td>18:38</td>
+<td>Fix committed (no result number had been read)</td>
+<td>after</td>
+</tr>
+<tr class="odd">
+<td>18:41</td>
+<td>Re-analysis of the saved measurements</td>
+<td>after</td>
+</tr>
+<tr class="even">
+<td>18:44</td>
+<td>Result written</td>
+<td>after</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="timeline-2" class="cell-output cell-output-display cell-output-markdown">
+<p>The run took <strong>2 h 45 min</strong> of wall time, inside the pre-registered stopping rule (projected cost above 4 h → no run). The fix was committed <strong>2 min</strong> after the lives were saved.</p>
+</div>
+</div>
+<p>The stopping rule was simple: run once; integrity checks fail loudly before any measurement; if the projected cost is above 4 hours, do not run.</p>
+</section>
+<section id="the-design" class="level2">
+<h2 class="anchored" data-anchor-id="the-design">3. The design</h2>
+<p>Four <strong>arms</strong> (what happens around eating and playing) × four simulated <strong>owner types</strong> × three <strong>places</strong> of the food × 200 <strong>paired units</strong>. A unit uses the same random seed in all four arms, so every comparison between arms is a paired one. Each life lasts 14 simulated days.</p>
+<div id="design" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Arms and contrasts</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>arms <span class="op">=</span> pd.DataFrame([</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"no_petting"</span>, <span class="st">"control: no extra petting"</span>, <span class="st">"no"</span>, <span class="st">"—"</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"petting_body_only"</span>, <span class="st">"extra petting changes the pet's body state"</span>, <span class="st">"no"</span>, <span class="st">"—"</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"petting_with_credit"</span>, <span class="st">"extra petting plus reward credit"</span>, <span class="st">"yes"</span>, <span class="st">"right after eating/playing"</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"petting_with_credit_random_time"</span>, <span class="st">"the same number of extra petting acts with credit"</span>, <span class="st">"yes"</span>, <span class="st">"at a random time"</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>], columns<span class="op">=</span>[<span class="st">"arm"</span>, <span class="st">"what happens"</span>, <span class="st">"reward credit"</span>, <span class="st">"timing"</span>])</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>contrasts <span class="op">=</span> pd.DataFrame([</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"D1"</span>, <span class="st">"with_credit − no_petting"</span>, <span class="st">"the whole effect (primary)"</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"D2"</span>, <span class="st">"with_credit − random_time"</span>, <span class="st">"the timing"</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"D3"</span>, <span class="st">"with_credit − body_only"</span>, <span class="st">"the credit"</span>),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>], columns<span class="op">=</span>[<span class="st">"contrast"</span>, <span class="st">"difference"</span>, <span class="st">"what it isolates"</span>])</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">list</span>(arms.arm) <span class="op">==</span> cs.ARMS</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cid, (a, b) <span class="kw">in</span> <span class="bu">zip</span>([<span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>], [(<span class="st">"petting_with_credit"</span>, <span class="st">"no_petting"</span>),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                                           (<span class="st">"petting_with_credit"</span>, <span class="st">"petting_with_credit_random_time"</span>),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                                           (<span class="st">"petting_with_credit"</span>, <span class="st">"petting_body_only"</span>)]):</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> cs.CONTRASTS[cid] <span class="op">==</span> {<span class="st">"a"</span>: a, <span class="st">"b"</span>: b}</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>show(arms)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>show(contrasts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="design-1" class="cell-output cell-output-display">
+<table class="dataframe table table-sm caption-top table-striped small">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">arm</th>
+<th data-quarto-table-cell-role="th">what happens</th>
+<th data-quarto-table-cell-role="th">reward credit</th>
+<th data-quarto-table-cell-role="th">timing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>no_petting</td>
+<td>control: no extra petting</td>
+<td>no</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>petting_body_only</td>
+<td>extra petting changes the pet's body state</td>
+<td>no</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>petting_with_credit</td>
+<td>extra petting plus reward credit</td>
+<td>yes</td>
+<td>right after eating/playing</td>
+</tr>
+<tr class="even">
+<td>petting_with_credit_random_time</td>
+<td>the same number of extra petting acts with credit</td>
+<td>yes</td>
+<td>at a random time</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="design-2" class="cell-output cell-output-display">
+<table class="dataframe table table-sm caption-top table-striped small">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">contrast</th>
+<th data-quarto-table-cell-role="th">difference</th>
+<th data-quarto-table-cell-role="th">what it isolates</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>D1</td>
+<td>with_credit − no_petting</td>
+<td>the whole effect (primary)</td>
+</tr>
+<tr class="even">
+<td>D2</td>
+<td>with_credit − random_time</td>
+<td>the timing</td>
+</tr>
+<tr class="odd">
+<td>D3</td>
+<td>with_credit − body_only</td>
+<td>the credit</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Owner types: <code>attentive</code>, <code>neglectful</code>, <code>random</code>, <code>inconsistent</code>. Places of the food: <code>at_feeder</code>, <code>near</code>, <code>far</code>. The 4 × 3 owner/place combinations are the 12 <strong>cells</strong>.</p>
+<p><strong>Primary outcome.</strong> <code>awake_frac_d1_14</code>: the fraction of the pet’s decisions over the 14 days that were not “sleep”. Each life has 1,344 decisions (96 a day, one every 15 simulated minutes), so a fraction of decisions reads directly as a fraction of the pet’s day. The project’s primary welfare measure, <code>time_well</code> (fraction of decisions taken while the pet was neither deprived nor exhausted), is read alongside it.</p>
+<p><strong>Analysis.</strong> For each unit, take the arm difference in each of the 12 cells and average them: one number per unit. The estimate is the mean of the 200 unit numbers; the 95% confidence interval is Student t over the units.</p>
+<p><strong>Relevant size.</strong> δ_A = 0.02 of the day awake. The plan marks it as having <strong>no external source</strong>: it is a judgement call, written down before the run but after the 20-unit look at test seeds mentioned above. The same holds for the welfare margin (0.032) and for the premise floors: the pre-registered minimums the design had to reach for a reading to hold (for example, at least 50 extra petting events per life in 95% of the lives). A premise that misses its floor is recorded and limits what can be read; it does not stop the run.</p>
+<p><strong>Reading rules, applied in order</strong> (the first line that applies wins):</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>rule</th>
+<th>condition</th>
+<th>answer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>L-AWAKE (D1, awake fraction)</td>
+<td>CI upper &lt; 0</td>
+<td>no: with the reward the pet sleeps more</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>CI within ±δ_A</td>
+<td>no: stays the same (if the lower bound is also above 0: “goes up, but below the relevant size”)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>CI lower &gt; δ_A</td>
+<td>yes, stays awake more</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>otherwise</td>
+<td>inconclusive</td>
+</tr>
+<tr class="odd">
+<td>L-WELL (D1, time_well)</td>
+<td>CI lower &gt; 0</td>
+<td>the pet is better off</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>CI lower &gt; −0.032</td>
+<td>not worse</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>CI upper &lt; −0.032</td>
+<td>worse</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>otherwise</td>
+<td>inconclusive</td>
+</tr>
+<tr class="odd">
+<td>L-WHY (only if L-AWAKE is not “stays the same”)</td>
+<td>D2 and D3 lower bounds &gt; 0</td>
+<td>by the timely reward and by what the pet learns</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>only D3 lower bound &gt; 0</td>
+<td>by the credit, at any time</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>neither</td>
+<td>by the body effect of petting, not by learning</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>the dose premise failed (too few credits had an effect)</td>
+<td>only the third answer can come out</td>
+</tr>
+</tbody>
+</table>
+<div id="cell-delta-minutes" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> cs.DECISIONS_PER_DAY <span class="op">*</span> <span class="dv">15</span> <span class="op">==</span> cs.MIN_PER_DAY  <span class="co"># one decision every 15 simulated minutes</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f"For scale: δ_A = </span><span class="sc">{</span>cs<span class="sc">.</span>DELTA_A<span class="sc">}</span><span class="ss"> of the decisions (</span><span class="sc">{</span>cs<span class="sc">.</span>DECISIONS_PER_DAY<span class="sc">}</span><span class="ss"> decisions a day, one every 15 minutes), "</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"read as a share of a 24-hour day, is about "</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"**</span><span class="sc">{</span>cs<span class="sc">.</span>minutes(cs.DELTA_A)<span class="sc">:.0f}</span><span class="ss"> minutes** of the pet's day."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="delta-minutes" class="cell-output cell-output-display cell-output-markdown">
+<p>For scale: δ_A = 0.02 of the decisions (96 decisions a day, one every 15 minutes), read as a share of a 24-hour day, is about <strong>29 minutes</strong> of the pet’s day.</p>
+</div>
+</div>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">4. The data</h2>
+<p>One row per simulated life, 13 columns; the full dictionary is on the <a href="../data/SCHEMA.html">data schema</a> page. Only outcome measures are published; the agent’s internal state is not. The checks below are plain DuckDB SQL over the parquet file (the same checks run in <code>scripts/check_data.py</code> before anything else).</p>
+<div id="data-counts" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>DuckDB: counts and pairing</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>per_arm <span class="op">=</span> cs.sql(<span class="st">"SELECT arm, count(*) AS lives, count(DISTINCT owner || place) AS cells, "</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"count(DISTINCT unit) AS units FROM lives GROUP BY arm ORDER BY arm"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>show(per_arm)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>pairing <span class="op">=</span> cs.sql(<span class="st">"""</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT count(*) AS unit_cells, min(arms) AS min_arms, max(arms) AS max_arms</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM (SELECT unit, owner, place, count(DISTINCT arm) AS arms FROM lives GROUP BY ALL)"""</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>show(pairing)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>n_lives <span class="op">=</span> <span class="bu">int</span>(per_arm.lives.<span class="bu">sum</span>())</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> n_lives <span class="op">==</span> REF[<span class="st">"preregistered"</span>][<span class="st">"lives"</span>] <span class="op">==</span> <span class="dv">9600</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (per_arm.cells <span class="op">==</span> <span class="dv">12</span>).<span class="bu">all</span>() <span class="kw">and</span> (per_arm.units <span class="op">==</span> cs.N_UNITS).<span class="bu">all</span>()</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> pairing.min_arms[<span class="dv">0</span>] <span class="op">==</span> pairing.max_arms[<span class="dv">0</span>] <span class="op">==</span> <span class="dv">4</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f"**</span><span class="sc">{</span>n_lives<span class="sc">:,}</span><span class="ss"> lives** = </span><span class="sc">{</span><span class="bu">len</span>(per_arm)<span class="sc">}</span><span class="ss"> arms × </span><span class="sc">{</span>per_arm<span class="sc">.</span>cells[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> cells × </span><span class="sc">{</span>per_arm<span class="sc">.</span>units[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> units; "</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"each of the </span><span class="sc">{</span>pairing<span class="sc">.</span>unit_cells[<span class="dv">0</span>]<span class="sc">:,}</span><span class="ss"> unit-cells appears in all </span><span class="sc">{</span>pairing<span class="sc">.</span>max_arms[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> arms."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="data-counts-1" class="cell-output cell-output-display">
+<table class="dataframe table table-sm caption-top table-striped small">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">arm</th>
+<th data-quarto-table-cell-role="th">lives</th>
+<th data-quarto-table-cell-role="th">cells</th>
+<th data-quarto-table-cell-role="th">units</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>no_petting</td>
+<td>2400</td>
+<td>12</td>
+<td>200</td>
+</tr>
+<tr class="even">
+<td>petting_body_only</td>
+<td>2400</td>
+<td>12</td>
+<td>200</td>
+</tr>
+<tr class="odd">
+<td>petting_with_credit</td>
+<td>2400</td>
+<td>12</td>
+<td>200</td>
+</tr>
+<tr class="even">
+<td>petting_with_credit_random_time</td>
+<td>2400</td>
+<td>12</td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="data-counts-2" class="cell-output cell-output-display">
+<table class="dataframe table table-sm caption-top table-striped small">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">unit_cells</th>
+<th data-quarto-table-cell-role="th">min_arms</th>
+<th data-quarto-table-cell-role="th">max_arms</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2400</td>
+<td>4</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="data-counts-3" class="cell-output cell-output-display cell-output-markdown">
+<p><strong>9,600 lives</strong> = 4 arms × 12 cells × 200 units; each of the 2,400 unit-cells appears in all 4 arms.</p>
+</div>
+</div>
+<div id="cell-arm-means" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>DuckDB: arm means, checked against the official values</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> cs.sql(<span class="st">"SELECT arm, avg(awake_frac_d1_14) AS awake_frac_d1_14, avg(time_well) AS time_well "</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">"FROM lives GROUP BY arm ORDER BY arm"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r <span class="kw">in</span> means.itertuples():</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> m <span class="kw">in</span> (<span class="st">"awake_frac_d1_14"</span>, <span class="st">"time_well"</span>):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="bu">abs</span>(<span class="bu">getattr</span>(r, m) <span class="op">-</span> REF[<span class="st">"arm_means"</span>][r.arm][m]) <span class="op">&lt;=</span> cs.TOL</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        CHECKS.append(<span class="ss">f"arm mean </span><span class="sc">{</span>r<span class="sc">.</span>arm<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>display(means.set_index(<span class="st">"arm"</span>).<span class="bu">round</span>(<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="arm-means" class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">awake_frac_d1_14</th>
+<th data-quarto-table-cell-role="th">time_well</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">arm</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">no_petting</th>
+<td>0.5300</td>
+<td>0.7767</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">petting_body_only</th>
+<td>0.5121</td>
+<td>0.7939</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">petting_with_credit</th>
+<td>0.5191</td>
+<td>0.7951</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">petting_with_credit_random_time</th>
+<td>0.5095</td>
+<td>0.7926</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="the-result" class="level2">
+<h2 class="anchored" data-anchor-id="the-result">5. The result</h2>
+<section id="the-contrasts" class="level3">
+<h3 class="anchored" data-anchor-id="the-contrasts">The contrasts</h3>
+<p>The official paired contrasts, recomputed from the parquet and asserted against <code>reference.json</code>:</p>
+<div id="cell-contrasts" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Recompute D1, D2, D3 and assert them</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> {}</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> (<span class="st">"awake_frac_d1_14"</span>, <span class="st">"time_well"</span>):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cid <span class="kw">in</span> (<span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> cs.contrast(cid, m)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        check(r, REF[<span class="st">"contrasts"</span>][m][cid], <span class="ss">f"</span><span class="sc">{</span>cid<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        res[(m, cid)] <span class="op">=</span> r</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> pd.DataFrame([<span class="bu">dict</span>(measure<span class="op">=</span>m, contrast<span class="op">=</span>c, estimate<span class="op">=</span>r[<span class="st">"mean"</span>], ci_low<span class="op">=</span>r[<span class="st">"ci_low"</span>],</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                           ci_high<span class="op">=</span>r[<span class="st">"ci_high"</span>]) <span class="cf">for</span> (m, c), r <span class="kw">in</span> res.items()])</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>show(table.<span class="bu">round</span>(<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="contrasts" class="cell-output cell-output-display">
+<table class="dataframe table table-sm caption-top table-striped small">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">measure</th>
+<th data-quarto-table-cell-role="th">contrast</th>
+<th data-quarto-table-cell-role="th">estimate</th>
+<th data-quarto-table-cell-role="th">ci_low</th>
+<th data-quarto-table-cell-role="th">ci_high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>awake_frac_d1_14</td>
+<td>D1</td>
+<td>-0.0109</td>
+<td>-0.0113</td>
+<td>-0.0105</td>
+</tr>
+<tr class="even">
+<td>awake_frac_d1_14</td>
+<td>D2</td>
+<td>0.0096</td>
+<td>0.0093</td>
+<td>0.0100</td>
+</tr>
+<tr class="odd">
+<td>awake_frac_d1_14</td>
+<td>D3</td>
+<td>0.0070</td>
+<td>0.0067</td>
+<td>0.0073</td>
+</tr>
+<tr class="even">
+<td>time_well</td>
+<td>D1</td>
+<td>0.0183</td>
+<td>0.0152</td>
+<td>0.0215</td>
+</tr>
+<tr class="odd">
+<td>time_well</td>
+<td>D2</td>
+<td>0.0025</td>
+<td>-0.0007</td>
+<td>0.0056</td>
+</tr>
+<tr class="even">
+<td>time_well</td>
+<td>D3</td>
+<td>0.0012</td>
+<td>-0.0015</td>
+<td>0.0038</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-fig-forest" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Forest plot</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> {<span class="st">"D1"</span>: <span class="st">"D1  whole effect</span><span class="ch">\n</span><span class="st">(credit − none)"</span>, <span class="st">"D2"</span>: <span class="st">"D2  timing</span><span class="ch">\n</span><span class="st">(credit − random time)"</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">"D3"</span>: <span class="st">"D3  credit</span><span class="ch">\n</span><span class="st">(credit − body only)"</span>}</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="fl">9.2</span>, <span class="fl">3.0</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, m, title <span class="kw">in</span> <span class="bu">zip</span>(axes, (<span class="st">"awake_frac_d1_14"</span>, <span class="st">"time_well"</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                        (<span class="st">"Awake fraction (primary)"</span>, <span class="st">"Time well (welfare)"</span>)):</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, cid <span class="kw">in</span> <span class="bu">enumerate</span>((<span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>)):</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> res[(m, cid)]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> style.ACCENT <span class="cf">if</span> cid <span class="op">==</span> <span class="st">"D1"</span> <span class="cf">else</span> style.CONTEXT</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        ax.plot([r[<span class="st">"ci_low"</span>], r[<span class="st">"ci_high"</span>]], [i, i], color<span class="op">=</span>color, lw<span class="op">=</span><span class="dv">2</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        ax.plot(r[<span class="st">"mean"</span>], i, <span class="st">"o"</span>, ms<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span>color, mec<span class="op">=</span>style.SURFACE, mew<span class="op">=</span><span class="dv">2</span>, zorder<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="ss">f"</span><span class="sc">{</span>r[<span class="st">'mean'</span>]<span class="sc">:+.4f}</span><span class="ss">"</span>, (r[<span class="st">"ci_high"</span>], i), xytext<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">0</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                    va<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span>style.INK_2, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    ax.axvline(<span class="dv">0</span>, color<span class="op">=</span>style.BASELINE, lw<span class="op">=</span><span class="dv">1</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    ax.set_title(title)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="fl">2.6</span>, <span class="op">-</span><span class="fl">0.6</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    ax.grid(axis<span class="op">=</span><span class="st">"y"</span>, visible<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].axvspan(<span class="op">-</span>cs.DELTA_A, cs.DELTA_A, color<span class="op">=</span>style.WASH, zorder<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].text(cs.DELTA_A, <span class="fl">2.55</span>, <span class="ss">f"±δ_A = </span><span class="sc">{</span>cs<span class="sc">.</span>DELTA_A<span class="sc">}</span><span class="ss">  "</span>, ha<span class="op">=</span><span class="st">"right"</span>, va<span class="op">=</span><span class="st">"bottom"</span>, color<span class="op">=</span>style.MUTED, fontsize<span class="op">=</span><span class="fl">8.5</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlim(<span class="op">-</span><span class="fl">0.03</span>, <span class="fl">0.03</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].axvline(<span class="op">-</span>cs.MARGIN_WELL, color<span class="op">=</span>style.MUTED, lw<span class="op">=</span><span class="dv">1</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].text(<span class="op">-</span>cs.MARGIN_WELL, <span class="fl">2.55</span>, <span class="ss">f"  margin −</span><span class="sc">{</span>cs<span class="sc">.</span>MARGIN_WELL<span class="sc">}</span><span class="ss">"</span>, ha<span class="op">=</span><span class="st">"left"</span>, va<span class="op">=</span><span class="st">"bottom"</span>, color<span class="op">=</span>style.MUTED, fontsize<span class="op">=</span><span class="fl">8.5</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlim(<span class="op">-</span><span class="fl">0.045</span>, <span class="fl">0.035</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_yticks(<span class="bu">range</span>(<span class="dv">3</span>), [labels[c] <span class="cf">for</span> c <span class="kw">in</span> (<span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>)])</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes:</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"difference in fraction of decisions"</span>)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-forest" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-forest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02_case_study_files/figure-html/fig-forest-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-forest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The three pre-registered contrasts with 95% CIs (on the awake fraction the intervals are narrower than the dots). Left: awake fraction, with the pre-registered ‘stays the same’ band ±δ_A. Right: time well, with the non-inferiority margin −0.032.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="applying-the-rules" class="level3">
+<h3 class="anchored" data-anchor-id="applying-the-rules">Applying the rules</h3>
+<p>The reading rules are code (in <code>casestudy/__init__.py</code>), applied to the recomputed intervals; the label they return is asserted against the label recorded in the official result.</p>
+<div id="cell-readings" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Apply L-AWAKE, L-WELL and L-WHY</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>a, w <span class="op">=</span> res[(<span class="st">"awake_frac_d1_14"</span>, <span class="st">"D1"</span>)], res[(<span class="st">"time_well"</span>, <span class="st">"D1"</span>)]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>d2, d3 <span class="op">=</span> res[(<span class="st">"awake_frac_d1_14"</span>, <span class="st">"D2"</span>)], res[(<span class="st">"awake_frac_d1_14"</span>, <span class="st">"D3"</span>)]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>w2, w3 <span class="op">=</span> res[(<span class="st">"time_well"</span>, <span class="st">"D2"</span>)], res[(<span class="st">"time_well"</span>, <span class="st">"D3"</span>)]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>l_awake <span class="op">=</span> cs.read_awake(a[<span class="st">"ci_low"</span>], a[<span class="st">"ci_high"</span>])</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>l_well <span class="op">=</span> cs.read_well(w[<span class="st">"ci_low"</span>], w[<span class="st">"ci_high"</span>])</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>l_why <span class="op">=</span> cs.read_why(l_awake, d2[<span class="st">"ci_low"</span>], d3[<span class="st">"ci_low"</span>], REF[<span class="st">"dose_premise_held"</span>])</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rule, label <span class="kw">in</span> ((<span class="st">"L-AWAKE"</span>, l_awake), (<span class="st">"L-WELL"</span>, l_well), (<span class="st">"L-WHY"</span>, l_why)):</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> label <span class="op">==</span> REF[<span class="st">"readings"</span>][rule][<span class="st">"label"</span>], (rule, label)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    CHECKS.append(<span class="ss">f"reading </span><span class="sc">{</span>rule<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>within <span class="op">=</span> <span class="op">-</span>cs.DELTA_A <span class="op">&lt;=</span> a[<span class="st">"ci_low"</span>] <span class="kw">and</span> a[<span class="st">"ci_high"</span>] <span class="op">&lt;=</span> cs.DELTA_A</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> within</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">all</span>(r[<span class="st">"ci_low"</span>] <span class="op">&lt;</span> <span class="dv">0</span> <span class="op">&lt;</span> r[<span class="st">"ci_high"</span>] <span class="cf">for</span> r <span class="kw">in</span> (w2, w3))  <span class="co"># the time-well caveat below relies on this</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f"""</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- **L-AWAKE: "</span><span class="sc">{</span>l_awake<span class="sc">}</span><span class="ss">".** D1 on the awake fraction is </span><span class="sc">{</span>cs<span class="sc">.</span>fmt(a)<span class="sc">}</span><span class="ss">: the whole interval is below zero.</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="ss">  That is about **</span><span class="sc">{</span><span class="bu">abs</span>(cs.minutes(a[<span class="st">'mean'</span>]))<span class="sc">:.0f}</span><span class="ss"> minutes less awake per simulated day**.</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="ss">  The interval also fits inside ±δ_A, so the "stays the same" line would apply too; the rule is read</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="ss">  in order and the first line ("upper &lt; 0") applies.</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- **L-WELL: "</span><span class="sc">{</span>l_well<span class="sc">}</span><span class="ss">".** D1 on time well is </span><span class="sc">{</span>cs<span class="sc">.</span>fmt(w)<span class="sc">}</span><span class="ss">: the lower bound is above zero.</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="ss">  **This gain cannot be separated from the body effect of petting:** on time well, D2 is </span><span class="sc">{</span>cs<span class="sc">.</span>fmt(w2)<span class="sc">}</span><span class="ss"> and</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="ss">  D3 is </span><span class="sc">{</span>cs<span class="sc">.</span>fmt(w3)<span class="sc">}</span><span class="ss">, both intervals include zero. The three arms with petting sit close to each other,</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="ss">  above no_petting, so the welfare gain is not shown to come from the reward credit or its timing.</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- **L-WHY.** D2's lower bound (</span><span class="sc">{</span>d2[<span class="st">'ci_low'</span>]<span class="sc">:+.4f}</span><span class="ss">) and D3's (</span><span class="sc">{</span>d3[<span class="st">'ci_low'</span>]<span class="sc">:+.4f}</span><span class="ss">) are both above zero, so the</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="ss">  rule returns **"</span><span class="sc">{</span>l_why<span class="sc">}</span><span class="ss">"**. Read it with the caveat just below: D1 has the opposite sign.</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="readings" class="cell-output cell-output-display cell-output-markdown">
+<ul>
+<li><strong>L-AWAKE: “no: with the reward the pet sleeps more”.</strong> D1 on the awake fraction is -0.0109 [-0.0113; -0.0105]: the whole interval is below zero. That is about <strong>16 minutes less awake per simulated day</strong>. The interval also fits inside ±δ_A, so the “stays the same” line would apply too; the rule is read in order and the first line (“upper &lt; 0”) applies.</li>
+<li><strong>L-WELL: “the pet is better off”.</strong> D1 on time well is +0.0183 [+0.0152; +0.0215]: the lower bound is above zero. <strong>This gain cannot be separated from the body effect of petting:</strong> on time well, D2 is +0.0025 [-0.0007; +0.0056] and D3 is +0.0012 [-0.0015; +0.0038], both intervals include zero. The three arms with petting sit close to each other, above no_petting, so the welfare gain is not shown to come from the reward credit or its timing.</li>
+<li><strong>L-WHY.</strong> D2’s lower bound (+0.0093) and D3’s (+0.0067) are both above zero, so the rule returns <strong>“by the timely reward and by what the pet learns”</strong>. Read it with the caveat just below: D1 has the opposite sign.</li>
+</ul>
+</div>
+</div>
+<div id="why-signs" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>signs <span class="op">=</span> {c: np.sign(res[(<span class="st">"awake_frac_d1_14"</span>, c)][<span class="st">"mean"</span>]) <span class="cf">for</span> c <span class="kw">in</span> (<span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>)}</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> signs <span class="op">==</span> {<span class="st">"D1"</span>: <span class="op">-</span><span class="dv">1</span>, <span class="st">"D2"</span>: <span class="dv">1</span>, <span class="st">"D3"</span>: <span class="dv">1</span>}</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f"""**The L-WHY label needs a caveat.** It was written assuming D1 would have the same sign as D2 and D3.</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ss">It came out opposite: D1 is negative (</span><span class="sc">{</span>a[<span class="st">'mean'</span>]<span class="sc">:+.4f}</span><span class="ss">) while D2 (</span><span class="sc">{</span>d2[<span class="st">'mean'</span>]<span class="sc">:+.4f}</span><span class="ss">) and D3 (</span><span class="sc">{</span>d3[<span class="st">'mean'</span>]<span class="sc">:+.4f}</span><span class="ss">)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ss">are positive. The official result keeps the label as written and states what the numbers actually show:</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ss">**petting's effect on the body makes the pet sleep more; the credit (D3) and the right timing (D2) push it</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="ss">back toward awake, without covering the loss.**"""</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>ep, late <span class="op">=</span> cs.contrast(<span class="st">"D1"</span>, <span class="st">"episode_rate"</span>), cs.contrast(<span class="st">"D1"</span>, <span class="st">"awake_frac_d8_14"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>check(ep, REF[<span class="st">"contrasts"</span>][<span class="st">"episode_rate"</span>][<span class="st">"D1"</span>], <span class="st">"guard D1 episode_rate"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>check(late, REF[<span class="st">"contrasts"</span>][<span class="st">"awake_frac_d8_14"</span>][<span class="st">"D1"</span>], <span class="st">"window D1 awake_frac_d8_14"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f"""Two more official numbers, one line each. **Guard:** the share of hunger episodes closed by eating</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="ss">rises, D1 = </span><span class="sc">{</span>cs<span class="sc">.</span>fmt(ep)<span class="sc">}</span><span class="ss">; the plan gives this guard no automatic verdict. **Days 8–14 only:** D1 on the</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="ss">awake fraction shrinks to </span><span class="sc">{</span>cs<span class="sc">.</span>fmt(late)<span class="sc">}</span><span class="ss">."""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="why-signs-1" class="cell-output cell-output-display cell-output-markdown">
+<p><strong>The L-WHY label needs a caveat.</strong> It was written assuming D1 would have the same sign as D2 and D3. It came out opposite: D1 is negative (-0.0109) while D2 (+0.0096) and D3 (+0.0070) are positive. The official result keeps the label as written and states what the numbers actually show: <strong>petting’s effect on the body makes the pet sleep more; the credit (D3) and the right timing (D2) push it back toward awake, without covering the loss.</strong></p>
+</div>
+<div id="why-signs-2" class="cell-output cell-output-display cell-output-markdown">
+<p>Two more official numbers, one line each. <strong>Guard:</strong> the share of hunger episodes closed by eating rises, D1 = +0.0209 [+0.0147; +0.0270]; the plan gives this guard no automatic verdict. <strong>Days 8–14 only:</strong> D1 on the awake fraction shrinks to -0.0062 [-0.0069; -0.0056].</p>
+</div>
+</div>
+</section>
+<section id="absolute-and-standardized-size-exploratory-after-the-result" class="level3">
+<h3 class="anchored" data-anchor-id="absolute-and-standardized-size-exploratory-after-the-result">Absolute and standardized size (Exploratory, after the result)</h3>
+<p>The standardized effect dz (mean of the unit differences divided by their standard deviation) was not part of the official reading.</p>
+<div id="dz" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dz <span class="op">=</span> pd.DataFrame([<span class="bu">dict</span>(measure<span class="op">=</span>m, contrast<span class="op">=</span>c, estimate<span class="op">=</span>r[<span class="st">"mean"</span>], sd_of_unit_diffs<span class="op">=</span>r[<span class="st">"sd"</span>], dz<span class="op">=</span>r[<span class="st">"dz"</span>],</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                        minutes_per_day<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>cs<span class="sc">.</span>minutes(r[<span class="st">'mean'</span>])<span class="sc">:+.1f}</span><span class="ss">"</span> <span class="cf">if</span> m <span class="op">==</span> <span class="st">"awake_frac_d1_14"</span> <span class="cf">else</span> <span class="st">"—"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                   <span class="cf">for</span> (m, c), r <span class="kw">in</span> res.items()])</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>show(dz.<span class="bu">round</span>({<span class="st">"estimate"</span>: <span class="dv">4</span>, <span class="st">"sd_of_unit_diffs"</span>: <span class="dv">4</span>, <span class="st">"dz"</span>: <span class="dv">2</span>}))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">abs</span>(a[<span class="st">"mean"</span>]) <span class="op">&lt;</span> cs.DELTA_A <span class="kw">and</span> <span class="bu">abs</span>(a[<span class="st">"dz"</span>]) <span class="op">&gt;</span> <span class="fl">0.8</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f"""D1 on the awake fraction has dz = </span><span class="sc">{</span>a[<span class="st">'dz'</span>]<span class="sc">:.2f}</span><span class="ss">, which looks enormous next to the usual</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="ss">"0.8 is large" conventions. Yet it is about </span><span class="sc">{</span><span class="bu">abs</span>(cs.minutes(a[<span class="st">'mean'</span>]))<span class="sc">:.0f}</span><span class="ss"> minutes a day, under the</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="ss">pre-registered δ_A. The two are consistent: each unit number is an average over 12 cells, and the arms share</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="ss">the same seed, so most noise cancels and the standard deviation of the unit differences is tiny</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="ss">(</span><span class="sc">{</span>a[<span class="st">'sd'</span>]<span class="sc">:.4f}</span><span class="ss">). A standardized effect measures how *reliably* the difference shows up, not how *much*</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="ss">it matters; that is why both are reported here, with the absolute one first."""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="dz-1" class="cell-output cell-output-display">
+<table class="dataframe table table-sm caption-top table-striped small">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">measure</th>
+<th data-quarto-table-cell-role="th">contrast</th>
+<th data-quarto-table-cell-role="th">estimate</th>
+<th data-quarto-table-cell-role="th">sd_of_unit_diffs</th>
+<th data-quarto-table-cell-role="th">dz</th>
+<th data-quarto-table-cell-role="th">minutes_per_day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>awake_frac_d1_14</td>
+<td>D1</td>
+<td>-0.0109</td>
+<td>0.0030</td>
+<td>-3.70</td>
+<td>-15.7</td>
+</tr>
+<tr class="even">
+<td>awake_frac_d1_14</td>
+<td>D2</td>
+<td>0.0096</td>
+<td>0.0027</td>
+<td>3.55</td>
+<td>+13.9</td>
+</tr>
+<tr class="odd">
+<td>awake_frac_d1_14</td>
+<td>D3</td>
+<td>0.0070</td>
+<td>0.0022</td>
+<td>3.18</td>
+<td>+10.0</td>
+</tr>
+<tr class="even">
+<td>time_well</td>
+<td>D1</td>
+<td>0.0183</td>
+<td>0.0226</td>
+<td>0.81</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>time_well</td>
+<td>D2</td>
+<td>0.0025</td>
+<td>0.0225</td>
+<td>0.11</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>time_well</td>
+<td>D3</td>
+<td>0.0012</td>
+<td>0.0188</td>
+<td>0.06</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="dz-2" class="cell-output cell-output-display cell-output-markdown">
+<p>D1 on the awake fraction has dz = -3.70, which looks enormous next to the usual “0.8 is large” conventions. Yet it is about 16 minutes a day, under the pre-registered δ_A. The two are consistent: each unit number is an average over 12 cells, and the arms share the same seed, so most noise cancels and the standard deviation of the unit differences is tiny (0.0030). A standardized effect measures how <em>reliably</em> the difference shows up, not how <em>much</em> it matters; that is why both are reported here, with the absolute one first.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="where-it-happens-descriptive" class="level2">
+<h2 class="anchored" data-anchor-id="where-it-happens-descriptive">6. Where it happens (descriptive)</h2>
+<p>The official result also reports the contrasts by owner type (averaging the 3 places within each unit) and by place (averaging the 4 owners). These breakdowns are <strong>descriptive</strong>: no reading rule applies to them. They are recomputed here and asserted against the official breakdowns.</p>
+<div id="cell-breakdowns" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Recompute the by-owner and by-place contrasts and assert them</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> by, groups, key <span class="kw">in</span> ((<span class="st">"owner"</span>, cs.OWNERS, <span class="st">"by_owner"</span>), (<span class="st">"place"</span>, cs.PLACES, <span class="st">"by_place"</span>)):</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> g <span class="kw">in</span> groups:</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> m <span class="kw">in</span> (<span class="st">"awake_frac_d1_14"</span>, <span class="st">"time_well"</span>):</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> cid <span class="kw">in</span> (<span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>):</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                r <span class="op">=</span> cs.contrast(cid, m, <span class="ss">f"</span><span class="sc">{</span>by<span class="sc">}</span><span class="ss"> = '</span><span class="sc">{</span>g<span class="sc">}</span><span class="ss">'"</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                check(r, REF[key][g][m][cid], <span class="ss">f"</span><span class="sc">{</span>key<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>g<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>cid<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                rows.append(<span class="bu">dict</span>(by<span class="op">=</span>by, group<span class="op">=</span>g, measure<span class="op">=</span>m, contrast<span class="op">=</span>cid, <span class="op">**</span>r))</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>br <span class="op">=</span> pd.DataFrame(rows)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> br.assign(value<span class="op">=</span>[cs.fmt(r, <span class="dv">4</span>) <span class="cf">for</span> r <span class="kw">in</span> rows]).pivot_table(</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"by"</span>, <span class="st">"group"</span>], columns<span class="op">=</span>[<span class="st">"measure"</span>, <span class="st">"contrast"</span>], values<span class="op">=</span><span class="st">"value"</span>, aggfunc<span class="op">=</span><span class="st">"first"</span>, sort<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>display(wide)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="breakdowns" class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">measure</th>
+<th colspan="3" data-quarto-table-cell-role="th" data-halign="left">awake_frac_d1_14</th>
+<th colspan="3" data-quarto-table-cell-role="th" data-halign="left">time_well</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">contrast</th>
+<th data-quarto-table-cell-role="th">D1</th>
+<th data-quarto-table-cell-role="th">D2</th>
+<th data-quarto-table-cell-role="th">D3</th>
+<th data-quarto-table-cell-role="th">D1</th>
+<th data-quarto-table-cell-role="th">D2</th>
+<th data-quarto-table-cell-role="th">D3</th>
+</tr>
+<tr class="header">
+<th data-quarto-table-cell-role="th">by</th>
+<th data-quarto-table-cell-role="th">group</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th rowspan="4" data-quarto-table-cell-role="th" data-valign="top">owner</th>
+<th data-quarto-table-cell-role="th">attentive</th>
+<td>-0.0142 [-0.0150; -0.0134]</td>
+<td>+0.0149 [+0.0142; +0.0156]</td>
+<td>+0.0126 [+0.0120; +0.0132]</td>
+<td>+0.0252 [+0.0166; +0.0337]</td>
+<td>-0.0032 [-0.0116; +0.0051]</td>
+<td>-0.0033 [-0.0103; +0.0038]</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">neglectful</th>
+<td>-0.0098 [-0.0104; -0.0093]</td>
+<td>+0.0042 [+0.0036; +0.0047]</td>
+<td>+0.0010 [+0.0006; +0.0015]</td>
+<td>+0.0118 [+0.0079; +0.0158]</td>
+<td>+0.0089 [+0.0051; +0.0127]</td>
+<td>+0.0097 [+0.0061; +0.0134]</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">random</th>
+<td>-0.0055 [-0.0061; -0.0049]</td>
+<td>+0.0046 [+0.0040; +0.0052]</td>
+<td>+0.0014 [+0.0009; +0.0019]</td>
+<td>+0.0036 [+0.0005; +0.0068]</td>
+<td>-0.0020 [-0.0052; +0.0011]</td>
+<td>-0.0019 [-0.0047; +0.0009]</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">inconsistent</th>
+<td>-0.0141 [-0.0151; -0.0132]</td>
+<td>+0.0148 [+0.0142; +0.0155]</td>
+<td>+0.0128 [+0.0122; +0.0134]</td>
+<td>+0.0327 [+0.0254; +0.0400]</td>
+<td>+0.0062 [-0.0016; +0.0140]</td>
+<td>+0.0001 [-0.0067; +0.0069]</td>
+</tr>
+<tr class="odd">
+<th rowspan="3" data-quarto-table-cell-role="th" data-valign="top">place</th>
+<th data-quarto-table-cell-role="th">at_feeder</th>
+<td>-0.0091 [-0.0099; -0.0084]</td>
+<td>+0.0106 [+0.0099; +0.0113]</td>
+<td>+0.0091 [+0.0085; +0.0097]</td>
+<td>-0.0032 [-0.0057; -0.0006]</td>
+<td>-0.0070 [-0.0098; -0.0041]</td>
+<td>-0.0061 [-0.0086; -0.0035]</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">near</th>
+<td>-0.0078 [-0.0083; -0.0073]</td>
+<td>+0.0110 [+0.0106; +0.0114]</td>
+<td>+0.0088 [+0.0084; +0.0091]</td>
+<td>-0.0016 [-0.0025; -0.0007]</td>
+<td>-0.0041 [-0.0051; -0.0032]</td>
+<td>-0.0025 [-0.0035; -0.0016]</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">far</th>
+<td>-0.0158 [-0.0166; -0.0150]</td>
+<td>+0.0073 [+0.0067; +0.0080]</td>
+<td>+0.0030 [+0.0024; +0.0036]</td>
+<td>+0.0598 [+0.0506; +0.0690]</td>
+<td>+0.0185 [+0.0095; +0.0275]</td>
+<td>+0.0121 [+0.0047; +0.0195]</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-fig-breakdown" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Breakdown chart</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="fl">9.2</span>, <span class="fl">4.6</span>), sharex<span class="op">=</span><span class="st">"row"</span>,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                         gridspec_kw<span class="op">=</span>{<span class="st">"width_ratios"</span>: [<span class="dv">3</span>, <span class="dv">4</span>]})</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (m, title) <span class="kw">in</span> <span class="bu">enumerate</span>(((<span class="st">"awake_frac_d1_14"</span>, <span class="st">"Awake fraction, D1"</span>), (<span class="st">"time_well"</span>, <span class="st">"Time well, D1"</span>))):</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j, (by, groups) <span class="kw">in</span> <span class="bu">enumerate</span>(((<span class="st">"place"</span>, cs.PLACES), (<span class="st">"owner"</span>, cs.OWNERS))):</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> axes[i, j]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        sub <span class="op">=</span> br[(br.by <span class="op">==</span> by) <span class="op">&amp;</span> (br.measure <span class="op">==</span> m) <span class="op">&amp;</span> (br.contrast <span class="op">==</span> <span class="st">"D1"</span>)].set_index(<span class="st">"group"</span>).loc[groups]</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> np.arange(<span class="bu">len</span>(groups))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        ax.hlines(y, sub.ci_low, sub.ci_high, color<span class="op">=</span>style.ACCENT, lw<span class="op">=</span><span class="dv">2</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        ax.plot(sub[<span class="st">"mean"</span>], y, <span class="st">"o"</span>, ms<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span>style.ACCENT, mec<span class="op">=</span>style.SURFACE, mew<span class="op">=</span><span class="dv">2</span>, zorder<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        ax.axvline(<span class="dv">0</span>, color<span class="op">=</span>style.BASELINE, lw<span class="op">=</span><span class="dv">1</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> m <span class="op">==</span> <span class="st">"awake_frac_d1_14"</span>:</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>            ax.axvspan(<span class="op">-</span>cs.DELTA_A, cs.DELTA_A, color<span class="op">=</span>style.WASH, zorder<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        ax.set_yticks(y, groups)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        ax.set_ylim(<span class="bu">len</span>(groups) <span class="op">-</span> <span class="fl">0.4</span>, <span class="op">-</span><span class="fl">0.6</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        ax.grid(axis<span class="op">=</span><span class="st">"y"</span>, visible<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        ax.set_title(<span class="ss">f"</span><span class="sc">{</span>title<span class="sc">}</span><span class="ss">, by </span><span class="sc">{</span>by<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-breakdown" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-breakdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02_case_study_files/figure-html/fig-breakdown-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-breakdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: D1 (credit − none) by place and by owner type, with 95% CIs. Descriptive: no reading rule applies to subgroups.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-by-place-text" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pl_ <span class="op">=</span> br[(br.by <span class="op">==</span> <span class="st">"place"</span>) <span class="op">&amp;</span> (br.measure <span class="op">==</span> <span class="st">"time_well"</span>) <span class="op">&amp;</span> (br.contrast <span class="op">==</span> <span class="st">"D1"</span>)].set_index(<span class="st">"group"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>drops <span class="op">=</span> pl_.loc[[<span class="st">"at_feeder"</span>, <span class="st">"near"</span>]]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> pl_.loc[<span class="st">"far"</span>, <span class="st">"ci_low"</span>] <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> (drops.ci_high <span class="op">&lt;</span> <span class="dv">0</span>).<span class="bu">all</span>() <span class="kw">and</span> (drops.ci_low <span class="op">&gt;</span> <span class="op">-</span>cs.MARGIN_WELL).<span class="bu">all</span>()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>say(<span class="st">"On time well, the whole D1 gain sits in the `far` place "</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"(</span><span class="sc">{</span>cs<span class="sc">.</span>fmt(pl_.loc[<span class="st">'far'</span>])<span class="sc">}</span><span class="ss">). In `at_feeder` (</span><span class="sc">{</span>cs<span class="sc">.</span>fmt(pl_.loc[<span class="st">'at_feeder'</span>])<span class="sc">}</span><span class="ss">) and "</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"`near` (</span><span class="sc">{</span>cs<span class="sc">.</span>fmt(pl_.loc[<span class="st">'near'</span>])<span class="sc">}</span><span class="ss">) time well drops: both intervals exclude zero, and both drops are "</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"within the pre-registered margin of </span><span class="sc">{</span>cs<span class="sc">.</span>MARGIN_WELL<span class="sc">}</span><span class="ss">. "</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"This is descriptive: the plan did not set a rule for places."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="by-place-text" class="cell-output cell-output-display cell-output-markdown">
+<p>On time well, the whole D1 gain sits in the <code>far</code> place (+0.0598 [+0.0506; +0.0690]). In <code>at_feeder</code> (-0.0032 [-0.0057; -0.0006]) and <code>near</code> (-0.0016 [-0.0025; -0.0007]) time well drops: both intervals exclude zero, and both drops are within the pre-registered margin of 0.032. This is descriptive: the plan did not set a rule for places.</p>
+</div>
+</div>
+</section>
+<section id="the-bug-and-the-fix" class="level2">
+<h2 class="anchored" data-anchor-id="the-bug-and-the-fix">7. The bug and the fix</h2>
+<p><strong>What happened.</strong> All lives had been simulated, measured and saved when the analysis stopped with</p>
+<pre><code>KeyError: 'saude_media'</code></pre>
+<p>One pre-registered <strong>guard metric</strong> (the pet’s health over days 8–14) had never been recorded per life. The smoke test before the run exercised the simulation but <strong>not the analysis step</strong>, so the missing field only showed up at the end.</p>
+<p><strong>The fix</strong> (committed 2 minutes after the lives were saved, before any result number was read):</p>
+<ol type="1">
+<li>The guard was removed from the list of measured outcomes and is reported as <strong>NOT MEASURED</strong>, rather than silently dropped.</li>
+<li>A re-analysis mode (<code>--reanalisar</code>) reads the saved measurements and <strong>refuses to run</strong> if the number of lives or logs differs from the plan.</li>
+<li><strong>No life was re-run and no reading rule changed.</strong> Measuring the guard after the fact would have meant replaying the 9,600 logs (about 1 hour, estimated); it was not done.</li>
+</ol>
+<div id="cell-bug-facts" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> REF[<span class="st">"guards_not_measured"</span>] <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f"Guards reported as not measured in the official result: **</span><span class="sc">{</span>REF[<span class="st">'guards_not_measured'</span>]<span class="sc">}</span><span class="ss">**. "</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Lives analysed after the fix: **</span><span class="sc">{</span>n_lives<span class="sc">:,}</span><span class="ss">**, the planned number, which is what the "</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"`--reanalisar` mode checks before reading anything."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="bug-facts" class="cell-output cell-output-display cell-output-markdown">
+<p>Guards reported as not measured in the official result: <strong>1</strong>. Lives analysed after the fix: <strong>9,600</strong>, the planned number, which is what the <code>--reanalisar</code> mode checks before reading anything.</p>
+</div>
+</div>
+<p><strong>Why this matters.</strong> The result itself was not touched: same lives, same contrasts, same rules. But one safety question that was planned (<em>does this make the pet less healthy?</em>) has no answer. The honest report is that the guard is missing, not that it passed.</p>
+</section>
+<section id="exploratory-after-the-result" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-after-the-result">8. Exploratory, after the result</h2>
+<p>Nothing in this section was in the plan. It does not change or replace the official readings above.</p>
+<section id="a-the-body-effect-alone-body_only-no_petting" class="level3">
+<h3 class="anchored" data-anchor-id="a-the-body-effect-alone-body_only-no_petting">(a) The body effect alone: body_only − no_petting</h3>
+<p>L-WHY’s caveat says the body effect of petting pushes toward sleep. The plan had no contrast for that; here is its paired interval, computed the same way as D1–D3.</p>
+<div id="cell-body-only" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Paired CI for petting_body_only − no_petting</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>body <span class="op">=</span> cs.summarize(cs.paired_differences(<span class="st">"petting_body_only"</span>, <span class="st">"no_petting"</span>, <span class="st">"awake_frac_d1_14"</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>arm_diff <span class="op">=</span> REF[<span class="st">"arm_means"</span>][<span class="st">"petting_body_only"</span>][<span class="st">"awake_frac_d1_14"</span>] <span class="op">-</span> REF[<span class="st">"arm_means"</span>][<span class="st">"no_petting"</span>][<span class="st">"awake_frac_d1_14"</span>]</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">abs</span>(body[<span class="st">"mean"</span>] <span class="op">-</span> arm_diff) <span class="op">&lt;=</span> cs.TOL  <span class="co"># balanced pairing: mean of differences = difference of means</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f"**Exploratory, after the result.** petting_body_only − no_petting on the awake fraction: "</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"**</span><span class="sc">{</span>cs<span class="sc">.</span>fmt(body)<span class="sc">}</span><span class="ss">** (about </span><span class="sc">{</span><span class="bu">abs</span>(cs.minutes(body[<span class="st">'mean'</span>]))<span class="sc">:.0f}</span><span class="ss"> minutes less awake per day). "</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Petting that only acts on the body makes the pet sleep more, by more than the whole D1 "</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"(</span><span class="sc">{</span>a[<span class="st">'mean'</span>]<span class="sc">:+.4f}</span><span class="ss">); the credit wins part of it back (D3 </span><span class="sc">{</span>d3[<span class="st">'mean'</span>]<span class="sc">:+.4f}</span><span class="ss">). "</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Caveat: arms diverge after the first petting, so this split between body and credit is not perfect."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="body-only" class="cell-output cell-output-display cell-output-markdown">
+<p><strong>Exploratory, after the result.</strong> petting_body_only − no_petting on the awake fraction: <strong>-0.0179 [-0.0183; -0.0175]</strong> (about 26 minutes less awake per day). Petting that only acts on the body makes the pet sleep more, by more than the whole D1 (-0.0109); the credit wins part of it back (D3 +0.0070). Caveat: arms diverge after the first petting, so this split between body and credit is not perfect.</p>
+</div>
+</div>
+</section>
+<section id="b-a-predictive-model-of-the-awake-fraction" class="level3">
+<h3 class="anchored" data-anchor-id="b-a-predictive-model-of-the-awake-fraction">(b) A predictive model of the awake fraction</h3>
+<p><strong>Exploratory, after the result.</strong> How much of the variation in the awake fraction <em>across lives</em> can be predicted from the design (arm, owner, place) and from what else happened in the life (eat and play decisions)? <code>sleep_decisions</code> is left out: it is the outcome itself. The petting count <code>extra_pets</code> is left out too: it is 0 only in no_petting and its level differs by arm, so it would carry the arm’s information and shuffling <code>arm</code> alone would understate how much the arm matters.</p>
+<ul>
+<li>Cross-validation: <code>GroupKFold</code> with 5 folds, grouped by unit, so all 48 lives of a unit (4 arms × 12 cells) are held out together and paired seeds never leak between train and test.</li>
+<li>Two models: a ridge regression (one-hot design + standardized counts, α chosen by internal CV) and a <code>HistGradientBoostingRegressor</code> (<code>random_state=0</code>).</li>
+<li>Permutation importance on each held-out fold (R² drop, 5 repeats, <code>random_state=0</code>), with categorical variables permuted as whole columns.</li>
+</ul>
+<p>This is a description of this simulation, not a causal analysis: eat and play counts are themselves consequences of the arm, and they are measured over the same days as the outcome.</p>
+<div id="model" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>GroupKFold CV, ridge and gradient boosting, permutation importance</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> HistGradientBoostingRegressor</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> permutation_importance</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> RidgeCV</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GroupKFold</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder, StandardScaler</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> cs.lives()</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>CAT <span class="op">=</span> [<span class="st">"arm"</span>, <span class="st">"owner"</span>, <span class="st">"place"</span>]</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>NUM <span class="op">=</span> [<span class="st">"eat_decisions"</span>, <span class="st">"play_decisions"</span>]</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>X, y, groups <span class="op">=</span> df[CAT <span class="op">+</span> NUM], df[<span class="st">"awake_frac_d1_14"</span>].to_numpy(), df[<span class="st">"unit"</span>].to_numpy()</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="kw">not</span> {<span class="st">"sleep_decisions"</span>, <span class="st">"extra_pets"</span>} <span class="op">&amp;</span> <span class="bu">set</span>(X.columns)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ridge"</span>: <span class="kw">lambda</span>: make_pipeline(</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        ColumnTransformer([(<span class="st">"cat"</span>, OneHotEncoder(), CAT), (<span class="st">"num"</span>, StandardScaler(), NUM)]),</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>        RidgeCV(alphas<span class="op">=</span>np.logspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">13</span>))),</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gradient boosting"</span>: <span class="kw">lambda</span>: make_pipeline(</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        ColumnTransformer([(<span class="st">"cat"</span>, OneHotEncoder(sparse_output<span class="op">=</span><span class="va">False</span>), CAT), (<span class="st">"num"</span>, <span class="st">"passthrough"</span>, NUM)]),</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>        HistGradientBoostingRegressor(random_state<span class="op">=</span><span class="dv">0</span>)),</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>scores, imps <span class="op">=</span> {}, {}</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, make <span class="kw">in</span> models.items():</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    scores[name], imps[name] <span class="op">=</span> [], []</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> train, test <span class="kw">in</span> GroupKFold(n_splits<span class="op">=</span><span class="dv">5</span>).split(X, y, groups):</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> make().fit(X.iloc[train], y[train])</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>        scores[name].append(r2_score(y[test], model.predict(X.iloc[test])))</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>        pi <span class="op">=</span> permutation_importance(model, X.iloc[test], y[test], n_repeats<span class="op">=</span><span class="dv">5</span>, random_state<span class="op">=</span><span class="dv">0</span>, scoring<span class="op">=</span><span class="st">"r2"</span>)</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        imps[name].append(pi.importances_mean)</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> pd.DataFrame({n: <span class="bu">dict</span>(mean_R2<span class="op">=</span>np.mean(s), sd_R2<span class="op">=</span>np.std(s, ddof<span class="op">=</span><span class="dv">1</span>), min_R2<span class="op">=</span>np.<span class="bu">min</span>(s), max_R2<span class="op">=</span>np.<span class="bu">max</span>(s))</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>                   <span class="cf">for</span> n, s <span class="kw">in</span> scores.items()}).T</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>display(cv.<span class="bu">round</span>(<span class="dv">3</span>))</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>imp <span class="op">=</span> {n: pd.DataFrame(v, columns<span class="op">=</span>CAT <span class="op">+</span> NUM) <span class="cf">for</span> n, v <span class="kw">in</span> imps.items()}</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>best <span class="op">=</span> cv.mean_R2.idxmax()</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> imp[best].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">list</span>(order.index[:<span class="dv">3</span>]) <span class="op">==</span> [<span class="st">"place"</span>, <span class="st">"play_decisions"</span>, <span class="st">"arm"</span>]  <span class="co"># the reading below relies on this</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f"**Exploratory, after the result.** Held-out R² (mean ± sd over 5 folds): ridge "</span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>cv<span class="sc">.</span>loc[<span class="st">'ridge'</span>,<span class="st">'mean_R2'</span>]<span class="sc">:.3f}</span><span class="ss"> ± </span><span class="sc">{</span>cv<span class="sc">.</span>loc[<span class="st">'ridge'</span>,<span class="st">'sd_R2'</span>]<span class="sc">:.3f}</span><span class="ss">, gradient boosting "</span></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>cv<span class="sc">.</span>loc[<span class="st">'gradient boosting'</span>,<span class="st">'mean_R2'</span>]<span class="sc">:.3f}</span><span class="ss"> ± </span><span class="sc">{</span>cv<span class="sc">.</span>loc[<span class="st">'gradient boosting'</span>,<span class="st">'sd_R2'</span>]<span class="sc">:.3f}</span><span class="ss">. "</span></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"For </span><span class="sc">{</span>best<span class="sc">}</span><span class="ss">, the largest permutation importances are `</span><span class="sc">{</span>order<span class="sc">.</span>index[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">` (</span><span class="sc">{</span>order<span class="sc">.</span>iloc[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss">), "</span></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"`</span><span class="sc">{</span>order<span class="sc">.</span>index[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">` (</span><span class="sc">{</span>order<span class="sc">.</span>iloc[<span class="dv">1</span>]<span class="sc">:.2f}</span><span class="ss">) and `</span><span class="sc">{</span>order<span class="sc">.</span>index[<span class="dv">2</span>]<span class="sc">}</span><span class="ss">` (</span><span class="sc">{</span>order<span class="sc">.</span>iloc[<span class="dv">2</span>]<span class="sc">:.2f}</span><span class="ss">) in R² drop."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="model-1" class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mean_R2</th>
+<th data-quarto-table-cell-role="th">sd_R2</th>
+<th data-quarto-table-cell-role="th">min_R2</th>
+<th data-quarto-table-cell-role="th">max_R2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">ridge</th>
+<td>0.668</td>
+<td>0.012</td>
+<td>0.655</td>
+<td>0.686</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">gradient boosting</th>
+<td>0.874</td>
+<td>0.006</td>
+<td>0.867</td>
+<td>0.882</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div id="model-2" class="cell-output cell-output-display cell-output-markdown">
+<p><strong>Exploratory, after the result.</strong> Held-out R² (mean ± sd over 5 folds): ridge 0.668 ± 0.012, gradient boosting 0.874 ± 0.006. For gradient boosting, the largest permutation importances are <code>place</code> (0.82), <code>play_decisions</code> (0.74) and <code>arm</code> (0.39) in R² drop.</p>
+</div>
+</div>
+<div id="cell-fig-importance" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Importance chart</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> imp[best][order.index]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">7.2</span>, <span class="fl">3.0</span>))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>yy <span class="op">=</span> np.arange(<span class="bu">len</span>(order))</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>ax.barh(yy, m.mean(), height<span class="op">=</span><span class="fl">0.55</span>, color<span class="op">=</span>style.ACCENT, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>ax.hlines(yy, m.<span class="bu">min</span>(), m.<span class="bu">max</span>(), color<span class="op">=</span>style.INK_2, lw<span class="op">=</span><span class="dv">1</span>, zorder<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, v <span class="kw">in</span> <span class="bu">enumerate</span>(m.mean()):</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.2f}</span><span class="ss">"</span>, (m.<span class="bu">max</span>().iloc[k], k), xytext<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">0</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                va<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span>style.INK_2, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>ax.set_yticks(yy, order.index)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="bu">len</span>(order) <span class="op">-</span> <span class="fl">0.4</span>, <span class="op">-</span><span class="fl">0.6</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>ax.grid(axis<span class="op">=</span><span class="st">"y"</span>, visible<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"drop in held-out R² when the column is shuffled"</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"What predicts the awake fraction (</span><span class="sc">{</span>best<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-importance" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02_case_study_files/figure-html/fig-importance-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Exploratory, after the result. Permutation importance (drop in held-out R²) for the better model; bars are the mean over 5 folds, the thin line spans the fold minimum to maximum.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>How to read it.</strong> Where the food is and how often the pet chose to play explain the most variation between lives; the arm comes third, well ahead of eat decisions and owner type. The arm’s importance is not small, but it is not a measure of the effect’s size either: an R² drop says how reliably a column separates lives, and the paired design already showed that the arm difference is very consistent (large dz) while being only about 16 minutes a day. Play decisions are themselves partly a consequence of the arm, so the two share some of the same information. A high R² here says the simulation is fairly predictable from these columns. It does <strong>not</strong> say that changing any of them would cause the change, and it does not replace the pre-registered reading.</p>
+</section>
+</section>
+<section id="what-this-does-not-show-and-what-i-would-do-differently" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-does-not-show-and-what-i-would-do-differently">9. What this does not show, and what I would do differently</h2>
+<p><strong>What this does not show.</strong></p>
+<ul>
+<li>Nothing about real players: the simulated owner rewards every time, and immediately.</li>
+<li>Only one reward dose, and no other kinds of reward.</li>
+<li>Only 14 days and these 12 cells.</li>
+<li>Nothing about health: the guard was not measured.</li>
+<li>Not that the reward credit improves welfare: the time-well gain is shared by all three petting arms.</li>
+<li>The separation between credit and body effect is not perfect: the arms diverge after the first petting, and with owners that pet on their own, the credit also reaches the owner’s own petting.</li>
+<li>δ_A, the welfare margin and the premise floors have no external source, and were written after the 20-unit look at test seeds.</li>
+</ul>
+<p>After the result, the recommendation recorded was not to pursue this reward (at this dose) as the way to a more awake pet; another dose or reward would be a new question with its own plan.</p>
+<p><strong>What I would do differently.</strong></p>
+<ol type="1">
+<li><strong>Test the analysis in the smoke run</strong>, not only the simulation: run the full pipeline end to end on a handful of lives, so a missing field fails in minutes, not at the end of the whole run.</li>
+<li><strong>Write the “why” rule for both signs.</strong> L-WHY assumed D1 would move in the same direction as D2 and D3. A rule that names its sign assumptions would have produced a label that needs no caveat.</li>
+<li><strong>Justify δ_A and the margins with a source</strong> (a measured day-to-day variation, a design target or prior data) instead of a judgement call.</li>
+<li><strong>Plan the body-only vs control contrast.</strong> It turned out to be the key to interpreting the result, and here it can only be shown as exploratory.</li>
+<li><strong>Report absolute and standardized effects together</strong> from the start, so a large dz is never mistaken for a large effect.</li>
+</ol>
+</section>
+<section id="reproduce-it" class="level2">
+<h2 class="anchored" data-anchor-id="reproduce-it">10. Reproduce it</h2>
+<p>Everything on this site is rebuilt from the published data with one command (Python ≥ 3.12 and <a href="https://docs.astral.sh/uv/">uv</a>; all dependencies, including Quarto, are pinned in <code>uv.lock</code>):</p>
+<pre><code>uv sync
+uv run python scripts/reproduce.py</code></pre>
+<p>It runs the DuckDB integrity checks, executes both notebooks in place (each stops on a failed assertion) and renders this site into <code>docs/</code>. The <a href="../notebooks/01_reproduce_official_results.html">reproduction appendix</a> recomputes all 18 official contrast × measure values.</p>
+<div id="cell-gate" class="cell" data-execution_count="19">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>([c <span class="cf">for</span> c <span class="kw">in</span> CHECKS <span class="cf">if</span> c.startswith((<span class="st">"D1"</span>, <span class="st">"D2"</span>, <span class="st">"D3"</span>))]) <span class="op">==</span> <span class="dv">6</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>([c <span class="cf">for</span> c <span class="kw">in</span> CHECKS <span class="cf">if</span> c.startswith((<span class="st">"by_owner"</span>, <span class="st">"by_place"</span>))]) <span class="op">==</span> (<span class="dv">4</span> <span class="op">+</span> <span class="dv">3</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">3</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f"**Gate:** </span><span class="sc">{</span><span class="bu">len</span>(CHECKS)<span class="sc">}</span><span class="ss"> official values and labels on this page were recomputed and matched "</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"`reference.json` (tolerance </span><span class="sc">{</span>cs<span class="sc">.</span>TOL<span class="sc">:g}</span><span class="ss">)."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="gate" class="cell-output cell-output-display cell-output-markdown">
+<p><strong>Gate:</strong> 61 official values and labels on this page were recomputed and matched <code>reference.json</code> (tolerance 1e-09).</p>
+</div>
+</div>
+</section>
+<section id="appendix-the-pre-registration-entry" class="level2">
+<h2 class="anchored" data-anchor-id="appendix-the-pre-registration-entry">Appendix: the pre-registration entry</h2>
+<p>The study’s entry in the project’s pre-registration file, as committed in <code>455c6d61</code> (2026-11-20 14:06:26 UTC−3), before the plan was approved, the code merged and the run started. Only the lines about the question, the primary outcome, the reading rule with its margins and the stopping rule are quoted; the other lines of the entry are not reproduced, and “[…]” marks text left out inside a quoted line. Section numbers refer to the analysis plan, which is not published; its L-WHY and L-WELL rules are the ones in section 3 above.</p>
+<p><strong>Translated excerpt</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>field</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>hypothesis</td>
+<td>the questions Q-AWAKE, Q-WHY and Q-WELL. “The expected outcome is ‘no: sleeps more or stays the same’”, from the test seeds (sections 1 and 2.2)</td>
+</tr>
+<tr class="even">
+<td>primary contrast</td>
+<td>D1 = R-CB − R0 on T_AWAKE (the fraction of decisions without sleeping, days 1 to 14), on the mean of the 12 cells per unit, 95% CI by t, n 200; δ_A = 0.02, NO SOURCE. Alongside: D2 = R-CB − R-SORT, D3 = R-CB − R-CORPO and D1 on “Time well”, with the margin 0.032 (sections 6 and 7)</td>
+</tr>
+<tr class="odd">
+<td>reading rule</td>
+<td>L-AWAKE, in order: D1’s upper limit &lt; 0, “no: with the reward the pet sleeps more”; the CI within ±δ_A, “no: stays the same”; the lower limit &gt; δ_A, “yes, stays awake more”; otherwise “inconclusive”. L-WHY and L-WELL, in section 7. No measure is a gate</td>
+</tr>
+<tr class="even">
+<td>stopping rule</td>
+<td>runs once; the integrity checks […] fail loudly before any measurement; the premises […] are recorded and do not stop it; with the smoke test’s projection above 4 h the run does not go ahead […] (sections 5 and 9)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Original (Portuguese)</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>campo</th>
+<th>valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>hipótese</td>
+<td>as perguntas Q-ACORDADO, Q-PORQUÊ e Q-BEM. “O desfecho esperado é ‘não: dorme mais ou fica igual’”, pelas sementes dos testes (seções 1 e 2.2)</td>
+</tr>
+<tr class="even">
+<td>contraste primário</td>
+<td>D1 = R-CB − R0 no T_ACORDADO (a fração das decisões sem dormir, dias 1 a 14), na média das 12 células por unidade, IC95 pelo t, n 200; δ_A = 0,02, SEM FONTE. Ao lado: D2 = R-CB − R-SORT, D3 = R-CB − R-CORPO e o D1 no “Tempo bem”, com a margem 0,032 (seções 6 e 7)</td>
+</tr>
+<tr class="odd">
+<td>regra de leitura</td>
+<td>L-ACORDADO, em ordem: o limite de cima do D1 &lt; 0, “não: com a recompensa o pet dorme mais”; o IC dentro de ±δ_A, “não: fica igual”; o limite de baixo &gt; δ_A, “sim, fica mais tempo acordado”; senão “inconclusivo”. A L-PORQUÊ e a L-BEM, na seção 7. Nenhuma medida é gate</td>
+</tr>
+<tr class="even">
+<td>regra de parada</td>
+<td>roda uma vez; as conferências […] falham alto antes de qualquer medida; as premissas […] ficam registradas e não param; com a projeção da fumaça acima de 4 h a run não roda […] (seções 5 e 9)</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

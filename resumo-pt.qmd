@@ -1,0 +1,75 @@
+---
+title: "Resumo em português"
+subtitle: "O carinho com recompensa deixa o pet virtual mais acordado?"
+lang: pt
+jupyter: python3
+execute:
+  echo: false
+---
+
+```{python}
+#| include: false
+import casestudy as cs
+
+R = cs.REF
+res = {}
+for m in ("awake_frac_d1_14", "time_well"):
+    for c in ("D1", "D2", "D3"):
+        res[(m, c)] = cs.contrast(c, m)
+        cs.assert_matches(res[(m, c)], R["contrasts"][m][c], f"{c} {m}")
+a, w = res[("awake_frac_d1_14", "D1")], res[("time_well", "D1")]
+d2, d3 = res[("awake_frac_d1_14", "D2")], res[("awake_frac_d1_14", "D3")]
+l_awake = cs.read_awake(a["ci_low"], a["ci_high"])
+l_well = cs.read_well(w["ci_low"], w["ci_high"])
+l_why = cs.read_why(l_awake, d2["ci_low"], d3["ci_low"], R["dose_premise_held"])
+assert l_awake == R["readings"]["L-AWAKE"]["label"]
+assert l_well == R["readings"]["L-WELL"]["label"]
+assert l_why == R["readings"]["L-WHY"]["label"]
+n_lives = int(cs.sql("SELECT count(*) AS n FROM lives").n[0])
+assert n_lives == R["preregistered"]["lives"]
+body = cs.summarize(cs.paired_differences("petting_body_only", "no_petting", "awake_frac_d1_14"))
+far = cs.contrast("D1", "time_well", "place = 'far'")
+cs.assert_matches(far, R["by_place"]["far"]["time_well"]["D1"], "far")
+w2, w3 = res[("time_well", "D2")], res[("time_well", "D3")]
+assert all(r["ci_low"] < 0 < r["ci_high"] for r in (w2, w3))  # "não se separa do carinho no corpo"
+for g in ("at_feeder", "near"):  # "cai, com o IC abaixo de 0, dentro da margem"
+    r = cs.contrast("D1", "time_well", f"place = '{g}'")
+    assert r["ci_high"] < 0 and r["ci_low"] > -cs.MARGIN_WELL
+# the Portuguese labels quoted below are the official originals
+assert R["readings"]["L-AWAKE"]["label_original"] == "nao: com a recompensa o pet dorme mais"
+assert R["readings"]["L-WELL"]["label_original"] == "o pet fica melhor"
+assert R["readings"]["L-WHY"]["label_original"] == "pela recompensa na hora, e pelo que o pet aprende"
+assert abs(cs.minutes(a["mean"])) < cs.minutes(cs.DELTA_A) and a["ci_low"] >= -cs.DELTA_A
+
+
+def br(x, d=4):
+    return f"{x:+.{d}f}".replace(".", ",")
+
+
+def ci(r):
+    return f"{br(r['mean'])} [{br(r['ci_low'])}; {br(r['ci_high'])}]"
+
+
+def minutos(x):
+    return f"{abs(cs.minutes(x)):.0f}"
+```
+
+**A pergunta.** Um pet virtual dorme muito. Se o dono simulado fizer carinho logo depois de ele comer ou brincar, o pet fica mais acordado? O pet é guiado por um agente que aprende: quando recebe crédito de recompensa, a ação que acabou de fazer fica mais provável. Antes de rodar, a expectativa escrita era *"não: dorme mais ou fica igual"* (de uma olhada em 20 unidades de sementes de teste, fora dos dados da pesquisa).
+
+**O desenho, pré-registrado antes da rodada.** 4 braços × 4 tipos de dono (atencioso, relapso, aleatório, incoerente) × 3 lugares da comida × 200 unidades pareadas (a mesma semente nos quatro braços) = `{python} f"{n_lives:_}".replace("_", ".")` vidas de 14 dias simulados. Braços: sem carinho (controle); carinho só no corpo (sem crédito); carinho com crédito logo depois de comer/brincar; e o mesmo número de carinhos com crédito numa hora sorteada. Contrastes: D1 = com crédito − sem carinho (o efeito todo, primário); D2 = com crédito − hora sorteada (a hora); D3 = com crédito − só corpo (o crédito). Medida primária: a fração das decisões que não foram "dormir"; IC 95 % por t de Student sobre as 200 unidades. Cada vida tem 1.344 decisões (96 por dia, uma a cada 15 minutos simulados), e uma fração das decisões se lê como fração do dia. Tamanho relevante δ_A = 0,02 (cerca de `{python} minutos(cs.DELTA_A)` min do dia), sem fonte externa, escrito antes da rodada mas depois da olhada nas 20 unidades das sementes de teste (como a margem do tempo bem, 0,032). Regra de parada: rodar uma vez; custo projetado acima de 4 h → não roda.
+
+**O resultado oficial** (cada número abaixo é recalculado do parquet e conferido com o resultado oficial, tolerância 1e-9):
+
+- **L-ACORDADO: "não: com a recompensa o pet dorme mais".** D1 = `{python} ci(a)`, cerca de `{python} minutos(a["mean"])` minutos a menos acordado por dia simulado. O IC inteiro também cabe em ±0,02; a regra é lida em ordem e a primeira linha vale.
+- **L-BEM: "o pet fica melhor".** D1 no tempo bem = `{python} ci(w)`. Esse ganho não se separa do carinho no corpo: no tempo bem, o D2 é `{python} ci(w2)` e o D3 é `{python} ci(w3)`, os dois IC incluem 0; os três braços com carinho ficam perto uns dos outros, acima do sem carinho. Não mostra que o crédito da recompensa faça bem ao pet. Por lugar (descritivo), o ganho está todo no lugar longe (`{python} ci(far)`); nos outros dois o tempo bem cai, com o IC abaixo de 0, dentro da margem de 0,032.
+- **L-PORQUÊ** devolveu "pela recompensa na hora, e pelo que o pet aprende", mas o rótulo foi escrito supondo que D1 teria o mesmo sinal de D2 e D3. Saiu o oposto: D1 `{python} br(a["mean"])`, D2 `{python} br(d2["mean"])`, D3 `{python} br(d3["mean"])`. O que os números mostram: o efeito do carinho no corpo faz o pet dormir mais; o crédito (D3) e a hora certa (D2) puxam de volta para acordado, sem cobrir a perda.
+
+**O bug e o conserto.** Com as vidas já medidas e salvas, a análise parou com `KeyError: 'saude_media'`: uma métrica de guarda pré-registrada (saúde nos dias 8–14) nunca foi gravada por vida, e o teste de fumaça não exercitava a análise. O conserto, commitado antes de ler qualquer número: a guarda saiu da lista e é relatada como NÃO MEDIDA; um modo de reanálise (`--reanalisar`) relê as medidas salvas e se recusa a rodar se o número de vidas ou de logs difere do plano. Nenhuma vida foi rodada de novo; nenhuma regra de leitura mudou.
+
+**Exploratório, depois do resultado.** Só corpo − sem carinho: `{python} ci(body)` (cerca de `{python} minutos(body["mean"])` min/dia), um contraste que não estava no plano. O modelo preditivo da página principal descreve esta simulação; não é causal e não substitui a leitura pré-registrada.
+
+**O que isto não mostra.** Nada sobre jogadores reais (o dono simulado recompensa sempre e na hora); só uma dose de recompensa e nenhum outro tipo; só 14 dias e estas 12 células; nada sobre saúde (a guarda não foi medida); a separação entre crédito e corpo não é perfeita (os braços divergem depois do primeiro carinho, e o crédito alcança também os carinhos do próprio dono). Depois do resultado, a recomendação registrada foi não seguir com esta recompensa (nesta dose) como caminho para um pet mais acordado; outra dose ou recompensa seria uma pergunta nova, com plano próprio.
+
+**O que eu faria diferente.** Testar a análise no teste de fumaça; escrever a regra do "porquê" para os dois sinais; justificar δ_A e as margens com uma fonte; planejar o contraste só corpo × controle; relatar efeitos absolutos e padronizados juntos.
+
+[Estudo de caso completo (em inglês)](notebooks/02_case_study.ipynb)
