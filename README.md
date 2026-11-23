@@ -39,4 +39,4 @@ This runs the DuckDB integrity checks (`scripts/check_data.py`), executes both n
 
 ## License
 
-Code: MIT ([`LICENSE`](LICENSE)). Text, figures and data: CC BY 4.0 ([`LICENSE-CONTENT.md`](LICENSE-CONTENT.md)).
+Code (`casestudy/`, `scripts/`, `sql/`, the notebooks' code cells): MIT. The text, figures, data and rendered site: all rights reserved. Details in [`LICENSE`](LICENSE).
