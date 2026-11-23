@@ -36,3 +36,7 @@ This runs the DuckDB integrity checks (`scripts/check_data.py`), executes both n
 | `PROVENANCE.md` | where the published data comes from: checksums, sample size, dates and the commit timeline |
 | `scripts/build_lives.py`, `scripts/build_reference.py` | rebuild the extract and the reference from the private source files (not needed to reproduce) |
 | `_quarto.yml`, `index.qmd`, `docs/` | Quarto website config and the rendered site (for GitHub Pages) |
+
+## License
+
+Code: MIT ([`LICENSE`](LICENSE)). Text, figures and data: CC BY 4.0 ([`LICENSE-CONTENT.md`](LICENSE-CONTENT.md)).
