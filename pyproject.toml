@@ -1,7 +1,7 @@
 [project]
 name = "digilab-reward-case-study"
 version = "0.1.0"
-description = "Does reward keep a virtual pet awake? A pre-registered simulation study"
+description = "Two experiments on a virtual pet: data-science case studies"
 requires-python = ">=3.12"
 dependencies = [
     "duckdb==2.0.1",

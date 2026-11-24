@@ -1,4 +1,8 @@
-# Does reward keep a virtual pet awake? A pre-registered simulation study
+# Two experiments on a virtual pet
+
+Two data-science case studies on the same simulated virtual pet, each told as question → design → data → result → what I would do differently, with every official number recomputed from the published data. The site is rendered as a static site in `docs/` (entry point `docs/index.html`).
+
+## Case 1: does reward keep a virtual pet awake? A pre-registered simulation study
 
 - **Question:** if a virtual pet's simulated owner pets it right after it eats or plays (with reward credit for its learning agent), does the pet stay awake more?
 - **Design, written before the run:** 4 arms x 4 owner types x 3 food places x 200 paired units = 9,600 simulated lives of 14 days; paired contrasts with Student-t CIs and a reading rule fixed in advance.
@@ -6,7 +10,13 @@
 - **Also inside:** the analysis crashed after the lives were saved (a guard metric was never recorded); the fix, made before any result was read, and what I would do differently.
 - **Every official number** on the site is recomputed from `data/lives.parquet` and asserted against `data/reference.json` (tolerance 1e-9); exploratory extras are labelled as such.
 
-The case study is rendered as a static site in `docs/` (entry point `docs/index.html`).
+## Case 2: the effect that shrank
+
+- **Question:** a variant of the pet's body physiology raised its welfare measure ("time well") on an earlier version of the pet. Does it still do so on the current pet?
+- **Design:** a triage written and approved before it ran: 2 arms x 4 owner types x 3 food places x 20 paired units = 480 lives of 14 days, only to estimate the size of the effect. **It has no formal reading**: no confirm / not-confirm, no cut applied.
+- **Result:** +0.024 [+0.009; +0.038] on time well, against +0.062 [+0.058; +0.067] on the earlier pet (200 units). The two use different pets and seeds, so the pair is not a contrast. Alongside the estimates, without a reading, the official result describes that the current pet already starts higher, has little exhaustion (0.115 of its decisions), and near the feeder the measure is close to its maximum; these are the points the plan's prediction rested on, not a tested explanation.
+- **Decision:** the question was closed without the confirmatory run; the decision records no reason. For context, the official result laid out that with 200 units an effect near +0.024 would have read "does not confirm" against the plan's margin (which has no source).
+- **Every official number** is recomputed from `data/body_triage_lives.parquet` and asserted against `data/body_triage_reference.json` (tolerance 1e-9).
 
 ## Stack
 
@@ -19,22 +29,25 @@ uv sync
 uv run python scripts/reproduce.py
 ```
 
-This runs the DuckDB integrity checks (`scripts/check_data.py`), executes both notebooks in place (each stops on a failed assertion) and renders the site into `docs/`. A second run leaves `git status` clean.
+This runs the DuckDB integrity checks of both cases (`scripts/check_data.py`), executes the four notebooks in place (each stops on a failed assertion) and renders the site into `docs/`. A second run leaves `git status` clean.
 
 ## Repo map
 
 | path | what it is |
 |---|---|
-| `notebooks/02_case_study.ipynb` | the case study (single source of the main page) |
-| `notebooks/01_reproduce_official_results.ipynb` | reproduction appendix: all 18 official contrast x measure values |
-| `resumo-pt.qmd` | one-page summary in Portuguese (numbers computed at render time) |
-| `casestudy/` | shared helpers: DuckDB view, paired contrast, reading rules, chart style |
-| `data/lives.parquet` | the published extract, one row per life (see `data/SCHEMA.md`) |
-| `data/reference.json` | the official numbers and reading labels, copied from the study's result file |
-| `sql/checks.sql`, `scripts/check_data.py` | integrity checks run before anything else |
+| `notebooks/02_case_study.ipynb` | case 1: the case study (single source of its page) |
+| `notebooks/01_reproduce_official_results.ipynb` | case 1: reproduction appendix, all 18 official contrast x measure values |
+| `resumo-pt.qmd` | case 1: one-page summary in Portuguese (numbers computed at render time) |
+| `notebooks/04_body_triage_case_study.ipynb` | case 2: the case study |
+| `notebooks/03_reproduce_body_triage.ipynb` | case 2: reproduction appendix, every official estimate and descriptive table of the triage |
+| `resumo-pt-corpo.qmd` | case 2: one-page summary in Portuguese |
+| `casestudy/` | shared helpers: DuckDB views, paired contrasts, reading rules (case 1), triage estimates (`triage.py`), chart style |
+| `data/lives.parquet`, `data/reference.json` | case 1: the published extract and the official numbers (see `data/SCHEMA.md`) |
+| `data/body_triage_lives.parquet`, `data/body_triage_reference.json` | case 2: the published extract and the official numbers, including the earlier study's quoted values |
+| `sql/checks.sql`, `sql/checks_body_triage.sql`, `scripts/check_data.py` | integrity checks run before anything else |
 | `scripts/reproduce.py` | the one command above |
-| `PROVENANCE.md` | where the published data comes from: checksums, sample size, dates and the commit timeline |
-| `scripts/build_lives.py`, `scripts/build_reference.py` | rebuild the extract and the reference from the private source files (not needed to reproduce) |
+| `PROVENANCE.md` | where the published data comes from: checksums, sample sizes, dates and the commit timelines |
+| `scripts/build_lives.py`, `scripts/build_reference.py`, `scripts/build_triage_lives.py`, `scripts/build_triage_reference.py` | rebuild the extracts and the references from the private source files (not needed to reproduce) |
 | `_quarto.yml`, `index.qmd`, `docs/` | Quarto website config and the rendered site (for GitHub Pages) |
 
 ## License

@@ -27,7 +27,7 @@ This repository contains two kinds of material under different terms.
 
 2. EVERYTHING ELSE: all rights reserved
 
-   The text of the case study (the prose of the notebooks, `resumo-pt.qmd`, `PROVENANCE.md`, `README.md`, `index.qmd`), the
+   The text of the case studies (the prose of the notebooks, `resumo-pt.qmd`, `resumo-pt-corpo.qmd`, `PROVENANCE.md`, `README.md`, `index.qmd`, `data/SCHEMA.md`), the
    figures, the data in `data/` and the rendered site in `docs/` are
    Copyright (c) 2026 Matheus de Medeiros Pereira. All rights reserved.
    They may be read and linked to; no license to copy, modify or redistribute them is granted.

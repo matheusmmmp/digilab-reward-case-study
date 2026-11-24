@@ -1,5 +1,5 @@
 """One command to rebuild everything that needs no private data:
-check the data extract, execute every notebook in place, render the site into docs/.
+check the data extracts, execute every notebook in place, render the site into docs/.
 
 Execution timing metadata is not recorded and cell metadata is kept stable, so a second
 run leaves the committed notebooks (and docs/) unchanged."""
@@ -11,16 +11,20 @@ import nbformat
 
 ROOT = Path(__file__).resolve().parent.parent
 NOTEBOOKS = ["notebooks/01_reproduce_official_results.ipynb",
-             "notebooks/02_case_study.ipynb"]
+             "notebooks/02_case_study.ipynb",
+             "notebooks/03_reproduce_body_triage.ipynb",
+             "notebooks/04_body_triage_case_study.ipynb"]
 QUARTO = Path(sys.executable).with_name("quarto.exe" if sys.platform == "win32" else "quarto")
 
 
 def strip_volatile(path):
-    """Drop per-cell execution timestamps (left by older runs) so commits stay clean."""
+    """Drop per-cell execution timestamps (left by older runs) and write LF line endings
+    (nbconvert writes the platform's), so commits stay clean."""
     nb = nbformat.read(ROOT / path, as_version=4)
     for cell in nb.cells:
         cell.metadata.pop("execution", None)
-    nbformat.write(nb, ROOT / path)
+    with open(ROOT / path, "w", encoding="utf-8", newline="\n") as f:
+        nbformat.write(nb, f)
 
 
 def run(cmd):

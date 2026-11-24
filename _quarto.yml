@@ -6,19 +6,32 @@ project:
     - notebooks/02_case_study.ipynb
     - notebooks/01_reproduce_official_results.ipynb
     - resumo-pt.qmd
+    - notebooks/04_body_triage_case_study.ipynb
+    - notebooks/03_reproduce_body_triage.ipynb
+    - resumo-pt-corpo.qmd
     - data/SCHEMA.md
     - PROVENANCE.md
 
 website:
-  title: "Reward and a virtual pet"
+  title: "Two experiments on a virtual pet"
   navbar:
     left:
-      - href: notebooks/02_case_study.ipynb
-        text: Case study
-      - href: notebooks/01_reproduce_official_results.ipynb
-        text: Reproduction appendix
-      - href: resumo-pt.qmd
-        text: Resumo em português
+      - text: "Case 1: reward"
+        menu:
+          - href: notebooks/02_case_study.ipynb
+            text: Case study
+          - href: notebooks/01_reproduce_official_results.ipynb
+            text: Reproduction appendix
+          - href: resumo-pt.qmd
+            text: Resumo em português
+      - text: "Case 2: the effect that shrank"
+        menu:
+          - href: notebooks/04_body_triage_case_study.ipynb
+            text: Case study
+          - href: notebooks/03_reproduce_body_triage.ipynb
+            text: Reproduction appendix
+          - href: resumo-pt-corpo.qmd
+            text: Resumo em português
       - href: data/SCHEMA.md
         text: Data schema
       - href: PROVENANCE.md

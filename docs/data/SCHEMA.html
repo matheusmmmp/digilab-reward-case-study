@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>schema – Reward and a virtual pet</title>
+<title>Data dictionary – Two experiments on a virtual pet</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -86,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Reward and a virtual pet</span>
+    <span class="navbar-title">Two experiments on a virtual pet</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -94,18 +94,44 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../notebooks/02_case_study.html"> 
-<span class="menu-text">Case study</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-case-1-reward" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Case 1: reward</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-case-1-reward">    
+        <li>
+    <a class="dropdown-item" href="../notebooks/02_case_study.html">
+ <span class="dropdown-text">Case study</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../notebooks/01_reproduce_official_results.html"> 
-<span class="menu-text">Reproduction appendix</span></a>
+        <li>
+    <a class="dropdown-item" href="../notebooks/01_reproduce_official_results.html">
+ <span class="dropdown-text">Reproduction appendix</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../resumo-pt.html"> 
-<span class="menu-text">Resumo em português</span></a>
+        <li>
+    <a class="dropdown-item" href="../resumo-pt.html">
+ <span class="dropdown-text">Resumo em português</span></a>
   </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-case-2-the-effect-that-shrank" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Case 2: the effect that shrank</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-case-2-the-effect-that-shrank">    
+        <li>
+    <a class="dropdown-item" href="../notebooks/04_body_triage_case_study.html">
+ <span class="dropdown-text">Case study</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../notebooks/03_reproduce_body_triage.html">
+ <span class="dropdown-text">Reproduction appendix</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../resumo-pt-corpo.html">
+ <span class="dropdown-text">Resumo em português</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link active" href="../data/SCHEMA.html" aria-current="page"> 
 <span class="menu-text">Data schema</span></a>
@@ -131,27 +157,51 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-dictionary-datalives.parquet" id="toc-data-dictionary-datalives.parquet" class="nav-link active" data-scroll-target="#data-dictionary-datalives.parquet">Data dictionary: <code>data/lives.parquet</code></a>
+  <li><a href="#case-1" id="toc-case-1" class="nav-link active" data-scroll-target="#case-1">Case 1: <code>data/lives.parquet</code></a>
   <ul class="collapse">
   <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a></li>
   <li><a href="#columns" id="toc-columns" class="nav-link" data-scroll-target="#columns">Columns</a></li>
   <li><a href="#deliberately-not-exported" id="toc-deliberately-not-exported" class="nav-link" data-scroll-target="#deliberately-not-exported">Deliberately not exported</a></li>
   <li><a href="#reference-numbers" id="toc-reference-numbers" class="nav-link" data-scroll-target="#reference-numbers">Reference numbers</a></li>
   </ul></li>
+  <li><a href="#case-2" id="toc-case-2" class="nav-link" data-scroll-target="#case-2">Case 2: <code>data/body_triage_lives.parquet</code></a>
+  <ul class="collapse">
+  <li><a href="#design-1" id="toc-design-1" class="nav-link" data-scroll-target="#design-1">Design</a></li>
+  <li><a href="#columns-1" id="toc-columns-1" class="nav-link" data-scroll-target="#columns-1">Columns</a></li>
+  <li><a href="#deliberately-not-exported-1" id="toc-deliberately-not-exported-1" class="nav-link" data-scroll-target="#deliberately-not-exported-1">Deliberately not exported</a></li>
+  <li><a href="#reference-numbers-1" id="toc-reference-numbers-1" class="nav-link" data-scroll-target="#reference-numbers-1">Reference numbers</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data dictionary</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="data-dictionary-datalives.parquet" class="level1">
-<h1>Data dictionary: <code>data/lives.parquet</code></h1>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Two published tables, one per case study. Both have one row per simulated pet life.</p>
+<section id="case-1" class="level2">
+<h2 class="anchored" data-anchor-id="case-1">Case 1: <code>data/lives.parquet</code></h2>
 <p>One row per simulated pet life: 9,600 rows, 13 columns. Each life lasts 14 simulated days and has 1,344 decisions (96 a day, one every 15 simulated minutes), so a fraction of decisions can be read as a fraction of the pet’s day.</p>
-<section id="design" class="level2">
-<h2 class="anchored" data-anchor-id="design">Design</h2>
+<section id="design" class="level3">
+<h3 class="anchored" data-anchor-id="design">Design</h3>
 <ul>
 <li><strong>Arms (4):</strong> what happens when the owner pets the pet right after it eats or plays.
 <ul>
@@ -166,8 +216,8 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Units:</strong> 200 per cell, numbered 1..200. A unit is paired across arms: the same (unit, owner, place) appears once in each of the 4 arms. 4 arms x 12 cells x 200 units = 9,600 lives.</li>
 </ul>
 </section>
-<section id="columns" class="level2">
-<h2 class="anchored" data-anchor-id="columns">Columns</h2>
+<section id="columns" class="level3">
+<h3 class="anchored" data-anchor-id="columns">Columns</h3>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -265,13 +315,140 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 </section>
-<section id="deliberately-not-exported" class="level2">
-<h2 class="anchored" data-anchor-id="deliberately-not-exported">Deliberately not exported</h2>
+<section id="deliberately-not-exported" class="level3">
+<h3 class="anchored" data-anchor-id="deliberately-not-exported">Deliberately not exported</h3>
 <p>Internal agent state, per-decision logs and seeds are not published. Only the outcome measures above are published. The agent is described only as a learning agent that can receive reward credit.</p>
 </section>
-<section id="reference-numbers" class="level2">
-<h2 class="anchored" data-anchor-id="reference-numbers">Reference numbers</h2>
+<section id="reference-numbers" class="level3">
+<h3 class="anchored" data-anchor-id="reference-numbers">Reference numbers</h3>
 <p><code>data/reference.json</code> holds the official per-arm means and the paired contrasts (D1 = petting_with_credit vs no_petting, D2 = petting_with_credit vs petting_with_credit_random_time, D3 = petting_with_credit vs petting_body_only; mean and confidence interval) computed in the original study, plus the sha256 of the source results file. It also holds the official breakdowns by owner (<code>by_owner</code>) and by place (<code>by_place</code>) for <code>awake_frac_d1_14</code> and <code>time_well</code>, the official reading labels (<code>readings</code>, with the original wording), the number of pre-registered guards that were not measured, whether the pre-registered dose premise held (<code>dose_premise_held</code>), and the pre-registered constants (<code>preregistered</code>). <code>scripts/check_data.py</code> verifies that the parquet reproduces the arm means to within 1e-9.</p>
+</section>
+</section>
+<section id="case-2" class="level2">
+<h2 class="anchored" data-anchor-id="case-2">Case 2: <code>data/body_triage_lives.parquet</code></h2>
+<p>One row per simulated pet life of the body-variant triage: 480 rows, 14 columns. Each life lasts 14 simulated days of the current version of the pet; the pet takes a decision every 15 simulated minutes.</p>
+<section id="design-1" class="level3">
+<h3 class="anchored" data-anchor-id="design-1">Design</h3>
+<ul>
+<li><strong>Arms (2):</strong> <code>control</code> (the pet as it is) and <code>body_variant</code> (the same pet with a variant of its body physiology). The variant is not described further.</li>
+<li><strong>Owners (4):</strong> <code>attentive</code>, <code>neglectful</code>, <code>random</code>, <code>inconsistent</code>. <code>neglectful</code> and <code>random</code> are the two that let the food run out.</li>
+<li><strong>Places (3):</strong> where the owner puts the food. <code>at_feeder</code>: at the pet’s feeder. <code>far</code>: far from the pet, at a direction and distance drawn anew at every feeding. <code>far_fixed</code>: at one of three fixed spots far from the feeder, drawn once per life; each feeding lands on one of the three at random.</li>
+<li><strong>Cells:</strong> 4 owners x 3 places = 12 cells. In every life, (<code>inconsistent</code>, <code>at_feeder</code>) is identical to (<code>attentive</code>, <code>at_feeder</code>), so the official result also reports estimates over the 11 distinct cells.</li>
+<li><strong>Units:</strong> 20 per cell, numbered 1..20. A unit is paired across arms: the same (unit, owner, place) appears once in each arm. 2 arms x 12 cells x 20 units = 480 lives.</li>
+</ul>
+</section>
+<section id="columns-1" class="level3">
+<h3 class="anchored" data-anchor-id="columns-1">Columns</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>column</th>
+<th>type</th>
+<th>unit</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>arm</code></td>
+<td>string</td>
+<td>-</td>
+<td><code>control</code> or <code>body_variant</code>.</td>
+</tr>
+<tr class="even">
+<td><code>owner</code></td>
+<td>string</td>
+<td>-</td>
+<td>Owner type.</td>
+</tr>
+<tr class="odd">
+<td><code>place</code></td>
+<td>string</td>
+<td>-</td>
+<td>Place type.</td>
+</tr>
+<tr class="even">
+<td><code>unit</code></td>
+<td>int</td>
+<td>-</td>
+<td>Paired unit index, 1..20.</td>
+</tr>
+<tr class="odd">
+<td><code>time_well</code></td>
+<td>float</td>
+<td>fraction 0-1</td>
+<td>Fraction of the pet’s decisions over days 1-14 taken while it was neither deprived nor exhausted (fixed thresholds). The primary measure.</td>
+</tr>
+<tr class="even">
+<td><code>time_well_d8_14</code></td>
+<td>float</td>
+<td>fraction 0-1</td>
+<td>The same over days 8-14 only.</td>
+</tr>
+<tr class="odd">
+<td><code>health_d8_14</code></td>
+<td>float</td>
+<td>0-1 scale</td>
+<td>The pet’s mean health level over the decisions of days 8-14.</td>
+</tr>
+<tr class="even">
+<td><code>deprivation</code></td>
+<td>float</td>
+<td>fraction 0-1</td>
+<td>Fraction of the decisions over days 1-14 taken while food, hygiene or energy was below the deprivation threshold.</td>
+</tr>
+<tr class="odd">
+<td><code>exhaustion</code></td>
+<td>float</td>
+<td>fraction 0-1</td>
+<td>Fraction of the decisions over days 1-14 taken while energy was below the exhaustion threshold. A decision counts in <code>time_well</code> exactly when it counts in neither of these two.</td>
+</tr>
+<tr class="even">
+<td><code>episode_rate</code></td>
+<td>float</td>
+<td>fraction 0-1</td>
+<td>Share of hunger episodes the pet closed, within the episode’s time window, by eating a ripe ration from the owner that lowered its hunger. Eating a spoiled ration does not close an episode, and an episode in which the pet was sated by other food counts as not closed.</td>
+</tr>
+<tr class="odd">
+<td><code>meals_per_day</code></td>
+<td>float</td>
+<td>count per day</td>
+<td>Rations from the owner eaten (spoiled ones included), divided by the 14 days.</td>
+</tr>
+<tr class="even">
+<td><code>sleep_frac_ticks</code></td>
+<td>float</td>
+<td>fraction 0-1</td>
+<td>Fraction of the simulation’s time steps in which the pet was asleep.</td>
+</tr>
+<tr class="odd">
+<td><code>kicks</code></td>
+<td>int</td>
+<td>count</td>
+<td>Decisions in which the pet kicked the ball.</td>
+</tr>
+<tr class="even">
+<td><code>play_decisions</code></td>
+<td>int</td>
+<td>count</td>
+<td>Decisions in which the pet chose “play” (with or without the ball).</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="deliberately-not-exported-1" class="level3">
+<h3 class="anchored" data-anchor-id="deliberately-not-exported-1">Deliberately not exported</h3>
+<p>The body variant’s definition, the pet’s internal state, per-decision logs and seeds are not published. Every source measure whose official numbers this table reproduces is included; no measure that was requested was dropped. Of the earlier study (C4), only the values that the triage’s official result quotes are published, in the reference file; none of its per-life data.</p>
+</section>
+<section id="reference-numbers-1" class="level3">
+<h3 class="anchored" data-anchor-id="reference-numbers-1">Reference numbers</h3>
+<p><code>data/body_triage_reference.json</code> holds the triage’s official estimates (<code>estimates</code>: arm levels, mean, sd and 95% CI of <code>body_variant − control</code> over the 20 units, for time well over 12 cells, 11 cells and each place, health over 12 cells, over the 6 neglectful/random cells and in each of them, and the episode rate in <code>far_fixed</code>), the time-well estimate divided by the plan’s margin (<code>effect_over_margin</code>), the descriptive values by set of cells for every published measure plus the share of lives with <code>time_well</code> above 0.99 (<code>by_group</code>), time well in each cell (<code>time_well_by_cell</code>), the per-arm means (<code>arm_means</code>), the count behind the 11 distinct cells (<code>inconsistent_equals_attentive</code>), the plan’s margin, the sizes, <code>formal_reading: false</code>, the run’s start, end, duration and process count (<code>run</code>, from its metadata file), and the earlier study’s values as quoted by the official result (<code>c4_quoted</code>, with the checksum of the C4 result they come from), plus the sha256 of the source results file. <code>scripts/check_data.py</code> verifies that the parquet reproduces the arm means to within 1e-9.</p>
 
 
 </section>

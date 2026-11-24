@@ -1,7 +1,8 @@
 ---
-title: "Does reward keep a virtual pet awake?"
+title: "Two experiments on a virtual pet"
 ---
 
-<meta http-equiv="refresh" content="0; url=notebooks/02_case_study.html">
+Two case studies from the same simulated virtual pet, each told as question, design, data, result and what I would do differently. Every official number is recomputed from the published data.
 
-The case study is at [notebooks/02_case_study.html](notebooks/02_case_study.ipynb).
+1. **[Does reward keep a virtual pet awake?](notebooks/02_case_study.ipynb)** A pre-registered simulation experiment with 9,600 lives, and the bug that hit the analysis after the lives were saved. ([Resumo em português](resumo-pt.qmd))
+2. **[The effect that shrank](notebooks/04_body_triage_case_study.ipynb)** The same body change, re-measured on the current version of the pet: a 20-unit triage with no formal reading, next to the earlier, larger estimate, and the decision not to run the confirmatory study. ([Resumo em português](resumo-pt-corpo.qmd))

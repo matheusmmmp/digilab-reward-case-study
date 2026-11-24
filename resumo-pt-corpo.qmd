@@ -1,0 +1,75 @@
+---
+title: "Resumo em português: caso 2"
+subtitle: "O efeito que encolheu: a mesma mudança no corpo, medida de novo no pet atual"
+lang: pt
+jupyter: python3
+execute:
+  echo: false
+---
+
+```{python}
+#| include: false
+from casestudy import triage as tr
+
+R = tr.REF
+C4 = R["c4_quoted"]["values"]
+E = {}
+for name, ref in R["estimates"].items():
+    E[name] = tr.estimate(*tr.split(name))
+    tr.assert_matches(E[name], ref, name)
+G = R["by_group"]
+exh = tr.estimate("exhaustion", "12_cells")
+tr.assert_matches(exh, G["12_cells"]["exhaustion"], "exaustao")
+near = tr.estimate(f"CAST(time_well > {tr.NEAR_CEILING} AS DOUBLE)", "12_cells")
+tr.assert_matches(near, G["12_cells"]["share_time_well_above_0_99"], "acima de 0,99")
+feed = tr.estimate("time_well", "attentive|at_feeder")
+tr.assert_matches(feed, R["time_well_by_cell"]["attentive|at_feeder"], "atencioso no comedouro")
+t12, c12 = E["time_well|12_cells"], C4["time_well|12_cells"]
+t11, fe, c4fe = E["time_well|11_cells"], E["time_well|at_feeder"], C4["time_well|at_feeder"]
+assert R["formal_reading"] is False and c12["mean"] / t12["mean"] > 2
+assert fe["ci_high"] < 0 < c4fe["ci_low"] and t12["control"] > c12["control"]
+hw = tr.half_width(t12["sd"], tr.N_UNITS_PLANNED)
+assert -tr.MARGIN < t12["mean"] - hw and t12["mean"] + hw < tr.MARGIN  # "≈ 0" -> "não confirma"
+assert t12["ci_high"] < tr.CUT_PROPOSED
+n_lives = int(tr.sql("SELECT count(*) AS n FROM triage").n[0])
+assert n_lives == R["lives"]
+
+
+def br(x, d=3):
+    return f"{x:+.{d}f}".replace(".", ",").replace("-", "−")
+
+
+def nv(x, d=3):
+    return f"{x:.{d}f}".replace(".", ",")
+
+
+def ci(r):
+    return f"{br(r['mean'])} [{br(r['ci_low'])}; {br(r['ci_high'])}]"
+
+
+def pct(x):
+    return f"{x:.0%}".replace("%", " %")
+```
+
+**A pergunta.** Uma variante da fisiologia do corpo do pet virtual tinha passado numa validação pré-registrada de `{python} R["c4_quoted"]["units"]` unidades numa versão anterior do pet (o estudo que o projeto chama de "C4"): o "Tempo bem" (a fração das decisões sem privação e sem exaustão) subiu `{python} ci(c12)`. O pet mudou depois disso, e uma das mecânicas novas mexe no cansaço, de onde veio a maior parte daquele ganho. A pergunta do plano: no pet atual, a variante ainda faz o pet passar mais tempo bem, sem perder saúde nem forrageio?
+
+**A triagem.** Uma decisão do projeto tinha pausado as runs confirmatórias das frentes do cérebro do pet: cada ideia ali passa antes por uma triagem de 10 a 20 unidades, só para estimar o tamanho do efeito. Este estudo é do corpo, não do cérebro; eu escolhi à parte fazer uma triagem antes da run confirmatória de `{python} tr.N_UNITS_PLANNED` unidades. Uma unidade é uma semente aleatória, rodada uma vez em cada braço e em cada célula (cada combinação de tipo de dono e lugar da comida). A triagem teve `{python} n_lives` vidas de 14 dias: 2 braços (o pet atual e o mesmo pet com a variante) × 12 células (4 donos × 3 lugares da comida) × `{python} R["units"]` unidades pareadas. O adendo que a montou foi aprovado antes de ela rodar e diz que ela **não tem leitura formal**: nem classe, nem p, nem "confirma" ou "não confirma", e nenhum corte é aplicado.
+
+**As estimativas** (cada número recalculado do parquet e conferido com o resultado oficial, tolerância 1e-9):
+
+- **"Tempo bem", 12 células: `{python} ci(t12)`**; nas 11 distintas, `{python} ci(t11)`. Na C4, no pet anterior: `{python} ci(c12)`. A estimativa é menos da metade.
+- **Não é um contraste.** A C4 e a triagem usam pets diferentes e sementes diferentes: os dois números vão lado a lado, nunca subtraídos.
+- **As 11 células distintas:** o dono incoerente no comedouro sai igual ao atencioso no comedouro em todas as vidas, nos dois braços.
+
+**Por que encolheu?** O que segue não é uma explicação: é o que o resultado oficial descreve ao lado das estimativas, sem leitura, e são os mesmos pontos que o plano tinha escrito na previsão, antes da triagem. A triagem não testa isso.
+
+- **O pet atual já parte mais alto:** `{python} nv(t12["control"])` sem a variante, contra `{python} nv(c12["control"])` no pet anterior.
+- **Ele tem pouca exaustão (`{python} nv(exh["control"])` das decisões):** a exaustão ainda cai com a variante (`{python} ci(exh)`), a partir de um nível que já é baixo.
+- **A medida chega perto do máximo:** com os donos que alimentam no comedouro, o "Tempo bem" já é `{python} nv(feed["control"])`; nas 12 células, `{python} pct(near["control"])` das vidas sem a variante e `{python} pct(near["body_variant"])` das com ela ficam acima de 0,99.
+- **No comedouro o sinal vira:** `{python} ci(fe)`, pequeno e negativo; na C4 era `{python} ci(c4fe)`.
+
+**A decisão de não rodar as 200.** Com `{python} tr.N_UNITS_PLANNED` unidades e o desvio-padrão da triagem (`{python} nv(t12["sd"])`), a meia largura do IC95 seria cerca de `{python} nv(hw)`. O δ = `{python} nv(tr.MARGIN)` é a margem do plano: o tamanho a partir do qual um ganho no "Tempo bem" contaria; ele não tem fonte externa (o plano o marca "SEM FONTE": é um julgamento, não um valor tirado de dados ou da literatura). Um efeito perto de `{python} br(t12["mean"])` sairia com o intervalo inteiro dentro de ±δ, a classe "≈ 0", que a regra do plano lê como "não confirma", mesmo com o sinal positivo. É uma conta, não um resultado. Um corte de 2δ, para decidir se a run de 200 unidades rodava, tinha sido proposto e nunca foi decidido. O resultado oficial pôs essa conta para a decisão; a decisão em si não registra motivo, e a conta é contexto, não o motivo. Eu fechei a pergunta sem a run: a variante fica como chave de pesquisa, desligada, e o pet do jogo fica como está.
+
+**O que eu faria diferente.** Decidir o corte antes da triagem; dar uma fonte à margem, que sozinha decidiria a leitura; escolher uma medida de bem-estar com folga perto do máximo; e medir de novo o tamanho do efeito sempre que o sistema muda.
+
+[Estudo de caso completo (em inglês)](notebooks/04_body_triage_case_study.ipynb)

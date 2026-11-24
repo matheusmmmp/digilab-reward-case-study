@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The effect that shrank – Two experiments on a virtual pet</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-1f2952ac8752d868b0aa618cc118742e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Two experiments on a virtual pet</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-case-1-reward" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Case 1: reward</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-case-1-reward">    
+        <li>
+    <a class="dropdown-item" href="../notebooks/02_case_study.html">
+ <span class="dropdown-text">Case study</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../notebooks/01_reproduce_official_results.html">
+ <span class="dropdown-text">Reproduction appendix</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../resumo-pt.html">
+ <span class="dropdown-text">Resumo em português</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-case-2-the-effect-that-shrank" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Case 2: the effect that shrank</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-case-2-the-effect-that-shrank">    
+        <li>
+    <a class="dropdown-item" href="../notebooks/04_body_triage_case_study.html">
+ <span class="dropdown-text">Case study</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../notebooks/03_reproduce_body_triage.html">
+ <span class="dropdown-text">Reproduction appendix</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../resumo-pt-corpo.html">
+ <span class="dropdown-text">Resumo em português</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../data/SCHEMA.html"> 
+<span class="menu-text">Data schema</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../PROVENANCE.html"> 
+<span class="menu-text">Provenance</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-question" id="toc-the-question" class="nav-link active" data-scroll-target="#the-question">1. The question</a></li>
+  <li><a href="#two-measurements-not-a-contrast" id="toc-two-measurements-not-a-contrast" class="nav-link" data-scroll-target="#two-measurements-not-a-contrast">2. Two measurements, not a contrast</a></li>
+  <li><a href="#the-design-of-the-triage" id="toc-the-design-of-the-triage" class="nav-link" data-scroll-target="#the-design-of-the-triage">3. The design of the triage</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">4. The data</a></li>
+  <li><a href="#the-estimates" id="toc-the-estimates" class="nav-link" data-scroll-target="#the-estimates">5. The estimates</a></li>
+  <li><a href="#why-it-shrank-what-the-official-result-describes" id="toc-why-it-shrank-what-the-official-result-describes" class="nav-link" data-scroll-target="#why-it-shrank-what-the-official-result-describes">6. Why it shrank? What the official result describes</a></li>
+  <li><a href="#what-the-triage-cannot-show" id="toc-what-the-triage-cannot-show" class="nav-link" data-scroll-target="#what-the-triage-cannot-show">7. What the triage cannot show</a></li>
+  <li><a href="#the-decision-not-to-run-the-200-units" id="toc-the-decision-not-to-run-the-200-units" class="nav-link" data-scroll-target="#the-decision-not-to-run-the-200-units">8. The decision not to run the 200 units</a></li>
+  <li><a href="#what-i-would-do-differently" id="toc-what-i-would-do-differently" class="nav-link" data-scroll-target="#what-i-would-do-differently">9. What I would do differently</a></li>
+  <li><a href="#reproduce-it" id="toc-reproduce-it" class="nav-link" data-scroll-target="#reproduce-it">10. Reproduce it</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The effect that shrank</h1>
+<p class="subtitle lead">Case 2: the same body change, re-measured on the current version of a virtual pet. A 20-unit triage with no formal reading</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="setup" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Setup: imports, data, shared helpers, every official estimate</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ROOT <span class="op">=</span> Path.cwd().parent <span class="cf">if</span> Path.cwd().name <span class="op">==</span> <span class="st">"notebooks"</span> <span class="cf">else</span> Path.cwd()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="bu">str</span>(ROOT))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> HTML, Markdown, display</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> casestudy <span class="im">import</span> style</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> casestudy <span class="im">import</span> triage <span class="im">as</span> tr</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>style.<span class="bu">apply</span>()</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>REF <span class="op">=</span> tr.REF</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>C4 <span class="op">=</span> REF[<span class="st">"c4_quoted"</span>][<span class="st">"values"</span>]  <span class="co"># quoted from the official result; no C4 per-life data is used</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>CHECKS <span class="op">=</span> []  <span class="co"># every official number shown below is asserted and logged here</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check(got, ref, what):</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    tr.assert_matches(got, ref, what)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    CHECKS.append(what)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> say(text):</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    display(Markdown(text))</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> show(df):</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    display(HTML(df.to_html(index<span class="op">=</span><span class="va">False</span>, border<span class="op">=</span><span class="dv">0</span>, classes<span class="op">=</span><span class="st">"table table-sm"</span>)))</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>E <span class="op">=</span> {}</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, ref <span class="kw">in</span> REF[<span class="st">"estimates"</span>].items():</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    E[name] <span class="op">=</span> tr.estimate(<span class="op">*</span>tr.split(name))</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    check(E[name], ref, name)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> REF[<span class="st">"formal_reading"</span>] <span class="kw">is</span> <span class="va">False</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="kw">lambda</span> r: tr.fmt(r)  <span class="co"># "+0.024 [+0.009; +0.038]"</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>t12, c12 <span class="op">=</span> E[<span class="st">"time_well|12_cells"</span>], C4[<span class="st">"time_well|12_cells"</span>]</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> c12[<span class="st">"mean"</span>] <span class="op">/</span> t12[<span class="st">"mean"</span>] <span class="op">&gt;</span> <span class="dv">2</span>  <span class="co"># "less than half"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-in-short" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f'''**In short.** A variant of the pet's body physiology had passed a pre-registered validation of</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="sc">{</span>REF[<span class="st">"c4_quoted"</span>][<span class="st">"units"</span>]<span class="sc">}</span><span class="ss"> units on an earlier version of the pet: the share of the pet's life spent "well"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ss">(neither deprived nor exhausted) rose by **</span><span class="sc">{</span>q(c12)<span class="sc">}</span><span class="ss">**. The pet changed after that, so I re-measured the same</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ss">change on the current pet, starting with a cheap triage of </span><span class="sc">{</span>REF[<span class="st">"units"</span>]<span class="sc">}</span><span class="ss"> units (a unit is one random seed,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ss">run once in each arm and in each of the 12 cells, the owner-type × food-place combinations). The triage gives **</span><span class="sc">{</span>q(t12)<span class="sc">}</span><span class="ss">**:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ss">less than half.</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ss">Three things to keep in mind. The triage was planned to **estimate the size of the effect only: it has no formal</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ss">reading** (no "confirms" or "does not confirm", and no cut was applied). The two numbers come from **different pets</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ss">and different seeds, so the pair is not a contrast**: it is shown side by side, never subtracted. And the reasons given below for why it shrank are not an explanation: they are what the official result describes</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ss">alongside the estimates, without a reading (the current pet already starts higher, it has little exhaustion, and near</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ss">the feeder the measure has almost no room left), and the same points the plan wrote down for its prediction before</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ss">the triage; the triage does not test them. After the triage I closed the question without the planned </span><span class="sc">{</span>tr<span class="sc">.</span>N_UNITS_PLANNED<span class="sc">}</span><span class="ss">-unit run.</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ss">Every number on this page is recomputed in a code cell from the published data</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ss">(`data/body_triage_lives.parquet`) and asserted against the official values (`data/body_triage_reference.json`)</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ss">to within 1e-9, or read from that file. Code is folded; click "Code" to see it.'''</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="in-short" class="cell-output cell-output-display cell-output-markdown">
+<p><strong>In short.</strong> A variant of the pet’s body physiology had passed a pre-registered validation of 200 units on an earlier version of the pet: the share of the pet’s life spent “well” (neither deprived nor exhausted) rose by <strong>+0.062 [+0.058; +0.067]</strong>. The pet changed after that, so I re-measured the same change on the current pet, starting with a cheap triage of 20 units (a unit is one random seed, run once in each arm and in each of the 12 cells, the owner-type × food-place combinations). The triage gives <strong>+0.024 [+0.009; +0.038]</strong>: less than half.</p>
+<p>Three things to keep in mind. The triage was planned to <strong>estimate the size of the effect only: it has no formal reading</strong> (no “confirms” or “does not confirm”, and no cut was applied). The two numbers come from <strong>different pets and different seeds, so the pair is not a contrast</strong>: it is shown side by side, never subtracted. And the reasons given below for why it shrank are not an explanation: they are what the official result describes alongside the estimates, without a reading (the current pet already starts higher, it has little exhaustion, and near the feeder the measure has almost no room left), and the same points the plan wrote down for its prediction before the triage; the triage does not test them. After the triage I closed the question without the planned 200-unit run.</p>
+<p>Every number on this page is recomputed in a code cell from the published data (<code>data/body_triage_lives.parquet</code>) and asserted against the official values (<code>data/body_triage_reference.json</code>) to within 1e-9, or read from that file. Code is folded; click “Code” to see it.</p>
+</div>
+</div>
+<section id="the-question" class="level2">
+<h2 class="anchored" data-anchor-id="the-question">1. The question</h2>
+<p>The pet is a small simulated animal. Its body has a simple physiology: food, hygiene and energy run down over the day and are restored by eating, being cleaned and sleeping. The project’s welfare measure, <strong>time well</strong>, is the fraction of the pet’s decisions taken while it was neither <em>deprived</em> (food, hygiene or energy below a fixed threshold) nor <em>exhausted</em> (energy below another fixed threshold).</p>
+<p>An earlier study had tested <strong>a variant of the pet’s body physiology</strong> (on this page it is only “the body variant”) and found that it raised time well. That study used an earlier version of the pet, the one kept on the research bench. The current pet, the one in the game, has mechanics the bench pet lacks; one of them changes how tired the pet gets, and according to the analysis plan most of the earlier gain came from less exhaustion.</p>
+<p>So the plan asked, in plain words: <strong>on the current pet, does the body variant still make the pet spend more time well, without costing it health or its ability to find food?</strong></p>
+</section>
+<section id="two-measurements-not-a-contrast" class="level2">
+<h2 class="anchored" data-anchor-id="two-measurements-not-a-contrast">2. Two measurements, not a contrast</h2>
+<p>“C4” is the project’s label for the earlier study; it is kept here because the official result uses it.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>earlier study (“C4”)</th>
+<th>this triage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>pet</td>
+<td>the earlier, research-bench version</td>
+<td>the current version, as simulated in the research code</td>
+</tr>
+<tr class="even">
+<td>units</td>
+<td>200</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td>seeds</td>
+<td>its own reserved range</td>
+<td>a different reserved range</td>
+</tr>
+<tr class="even">
+<td>reading</td>
+<td>a pre-registered rule, applied: it passed, with a caveat on one cell</td>
+<td><strong>none</strong>: estimates only</td>
+</tr>
+</tbody>
+</table>
+<p>The two studies use the same arms, the same 12 cells, the same analysis and the same measure. But the pet is different and so are the random seeds, so <strong>the difference between the two estimates is not an estimate of anything</strong>: no interval exists for it and none is computed. The earlier study’s numbers enter this page only as values quoted from the comparison section of the triage’s official result; no per-life data of the earlier study is used.</p>
+</section>
+<section id="the-design-of-the-triage" class="level2">
+<h2 class="anchored" data-anchor-id="the-design-of-the-triage">3. The design of the triage</h2>
+<p>Two <strong>arms</strong>: <code>control</code> (the current pet as it is) and <code>body_variant</code> (the same pet with the body variant). Four simulated <strong>owner types</strong>: <code>attentive</code>, <code>neglectful</code>, <code>random</code>, <code>inconsistent</code>; <code>neglectful</code> and <code>random</code> are the two that let the food run out. Three <strong>places</strong> where the owner puts the food:</p>
+<ul>
+<li><code>at_feeder</code>: at the pet’s feeder, always the same spot.</li>
+<li><code>far</code>: far from the pet, at a direction and distance drawn anew at every feeding.</li>
+<li><code>far_fixed</code>: each life draws three fixed spots far from the feeder once, at the start; every feeding lands on one of the three at random. The food is far, but where it appears is regular, so the pet can learn it.</li>
+</ul>
+<p>The 4 × 3 owner/place combinations are the 12 <strong>cells</strong>. A <strong>unit</strong> is one random seed, given to both arms in every cell, so every comparison is paired. Each life lasts 14 simulated days.</p>
+<p><strong>Analysis</strong> (the plan’s, unchanged): for each unit, take <code>body_variant − control</code> in each cell and average over the cells; the estimate is the mean of the unit numbers and the 95% interval is Student t over the units. It is reported over the 12 cells and over the <strong>11 distinct cells</strong>: (<code>inconsistent</code>, <code>at_feeder</code>) comes out identical to (<code>attentive</code>, <code>at_feeder</code>) in every life, so it counts the same cell twice.</p>
+<p><strong>What a triage is here.</strong> The plan had a confirmatory run of 200 units with a pre-registered reading rule. Before that run, a decision paused the project’s confirmatory runs on the pet’s brain: every idea there first gets a triage of 10–20 units, <em>only to estimate the size of the effect</em>. This study is about the body, not the brain; I chose separately to give it a triage first too. The addendum that set up this triage was written and approved before it ran, and it states that the triage gives no class, no p-value, no “confirms” or “does not confirm”, and that no cut is applied to it.</p>
+<div id="timeline" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Timeline from the commit history and the run’s metadata</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>timeline <span class="op">=</span> pd.DataFrame([</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"11-20 14:04"</span>, <span class="st">"Earlier study (C4) result committed"</span>, <span class="st">"4e5f4f64"</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"11-20 15:59"</span>, <span class="st">"Analysis plan proposed, with its prediction written down"</span>, <span class="st">"51f02fe9"</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"11-21 00:42"</span>, <span class="st">"Analysis plan approved"</span>, <span class="st">"3c223667"</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"11-21 00:54"</span>, <span class="st">"Simulation code merged"</span>, <span class="st">"bc0d3b43"</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"11-21 11:35"</span>, <span class="st">"Addendum proposed: a 20-unit triage first (and the code's triage mode)"</span>, <span class="st">"715f889c"</span>),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"11-21 11:37"</span>, <span class="st">"Addendum approved"</span>, <span class="st">"d69a2500"</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"11-21 13:49:12"</span>, <span class="st">"Triage started"</span>, <span class="st">"e5d95bfc"</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"11-21 13:58:24"</span>, <span class="st">"Triage finished: all lives measured and saved"</span>, <span class="st">""</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"11-21 14:01"</span>, <span class="st">"Triage result committed"</span>, <span class="st">"f5d6a7cd"</span>),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"11-21 16:55"</span>, <span class="st">"Question closed without the 200-unit run"</span>, <span class="st">"23733ac3"</span>),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>], columns<span class="op">=</span>[<span class="st">"2026, UTC−3"</span>, <span class="st">"event"</span>, <span class="st">"commit"</span>])</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>run <span class="op">=</span> REF[<span class="st">"run"</span>]</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (<span class="st">"2026-"</span> <span class="op">+</span> timeline.iloc[<span class="dv">6</span>, <span class="dv">0</span>].replace(<span class="st">" "</span>, <span class="st">"T"</span>), <span class="st">"2026-"</span> <span class="op">+</span> timeline.iloc[<span class="dv">7</span>, <span class="dv">0</span>].replace(<span class="st">" "</span>, <span class="st">"T"</span>)) <span class="op">==</span> (run[<span class="st">"start"</span>], run[<span class="st">"end"</span>])</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>show(timeline)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>secs <span class="op">=</span> run[<span class="st">"duration_s"</span>]</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>n_lives <span class="op">=</span> <span class="bu">int</span>(tr.sql(<span class="st">"SELECT count(*) AS n FROM triage"</span>).n[<span class="dv">0</span>])</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>say(<span class="st">"Commit times are commit dates from the repository history (for `715f889c` the author date is earlier, "</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"11:21); the start and end of the triage come from the run's metadata file.</span><span class="ch">\n\n</span><span class="st">"</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"The triage ran once, </span><span class="sc">{</span>n_lives<span class="sc">}</span><span class="ss"> lives with </span><span class="sc">{</span>run[<span class="st">'processes'</span>]<span class="sc">}</span><span class="ss"> processes, in **</span><span class="sc">{</span><span class="bu">int</span>(secs <span class="op">//</span> <span class="dv">60</span>)<span class="sc">}</span><span class="ss"> min "</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span><span class="bu">int</span>(secs <span class="op">%</span> <span class="dv">60</span>)<span class="sc">}</span><span class="ss"> s** of wall time (the run's recorded duration), on the main branch as it was then (`e5d95bfc`), "</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"which carried the approved plan and addendum unchanged."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="timeline-1" class="cell-output cell-output-display">
+<table class="dataframe table table-sm caption-top table-striped small">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">2026, UTC−3</th>
+<th data-quarto-table-cell-role="th">event</th>
+<th data-quarto-table-cell-role="th">commit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>11-20 14:04</td>
+<td>Earlier study (C4) result committed</td>
+<td>4e5f4f64</td>
+</tr>
+<tr class="even">
+<td>11-20 15:59</td>
+<td>Analysis plan proposed, with its prediction written down</td>
+<td>51f02fe9</td>
+</tr>
+<tr class="odd">
+<td>11-21 00:42</td>
+<td>Analysis plan approved</td>
+<td>3c223667</td>
+</tr>
+<tr class="even">
+<td>11-21 00:54</td>
+<td>Simulation code merged</td>
+<td>bc0d3b43</td>
+</tr>
+<tr class="odd">
+<td>11-21 11:35</td>
+<td>Addendum proposed: a 20-unit triage first (and the code's triage mode)</td>
+<td>715f889c</td>
+</tr>
+<tr class="even">
+<td>11-21 11:37</td>
+<td>Addendum approved</td>
+<td>d69a2500</td>
+</tr>
+<tr class="odd">
+<td>11-21 13:49:12</td>
+<td>Triage started</td>
+<td>e5d95bfc</td>
+</tr>
+<tr class="even">
+<td>11-21 13:58:24</td>
+<td>Triage finished: all lives measured and saved</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>11-21 14:01</td>
+<td>Triage result committed</td>
+<td>f5d6a7cd</td>
+</tr>
+<tr class="even">
+<td>11-21 16:55</td>
+<td>Question closed without the 200-unit run</td>
+<td>23733ac3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="timeline-2" class="cell-output cell-output-display cell-output-markdown">
+<p>Commit times are commit dates from the repository history (for <code>715f889c</code> the author date is earlier, 11:21); the start and end of the triage come from the run’s metadata file.</p>
+<p>The triage ran once, 480 lives with 4 processes, in <strong>9 min 11 s</strong> of wall time (the run’s recorded duration), on the main branch as it was then (<code>e5d95bfc</code>), which carried the approved plan and addendum unchanged.</p>
+</div>
+</div>
+<p>The plan was written before any life of this study existed, but after a count made for it: 120 lives of the current pet (5 units, both arms, the 12 cells) run with the seeds reserved for software tests, which are not research data. From that count the plan predicted that the 200-unit run would read “does not confirm”: the 5 units had suggested a gain smaller than the plan’s margin. The 200-unit run never happened (section 8), so that prediction was never tested.</p>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">4. The data</h2>
+<p>One row per simulated life, 14 columns; the dictionary is on the <a href="../data/SCHEMA.html#case-2">data schema</a> page. Only outcome measures are published; the body variant is not described beyond its name, and the pet’s internal state is not published. The checks are plain DuckDB SQL over the parquet (the same run in <code>scripts/check_data.py</code>).</p>
+<div id="data-counts" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>DuckDB: counts, pairing and arm means</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>per_arm <span class="op">=</span> tr.sql(<span class="st">"SELECT arm, count(*) AS lives, count(DISTINCT owner || place) AS cells, count(DISTINCT unit) AS units, "</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"avg(time_well) AS time_well FROM triage GROUP BY arm ORDER BY arm DESC"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>pairing <span class="op">=</span> tr.sql(<span class="st">"SELECT count(*) AS unit_cells, min(k) AS min_arms, max(k) AS max_arms FROM "</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"(SELECT unit, owner, place, count(DISTINCT arm) AS k FROM triage GROUP BY ALL)"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> n_lives <span class="op">==</span> REF[<span class="st">"lives"</span>] <span class="op">==</span> <span class="dv">480</span> <span class="kw">and</span> (per_arm.lives <span class="op">==</span> <span class="dv">240</span>).<span class="bu">all</span>()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (per_arm.cells <span class="op">==</span> <span class="dv">12</span>).<span class="bu">all</span>() <span class="kw">and</span> (per_arm.units <span class="op">==</span> tr.N_UNITS).<span class="bu">all</span>()</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> pairing.unit_cells[<span class="dv">0</span>] <span class="op">==</span> <span class="dv">240</span> <span class="kw">and</span> pairing.min_arms[<span class="dv">0</span>] <span class="op">==</span> pairing.max_arms[<span class="dv">0</span>] <span class="op">==</span> <span class="dv">2</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r <span class="kw">in</span> per_arm.itertuples():</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">abs</span>(r.time_well <span class="op">-</span> REF[<span class="st">"arm_means"</span>][r.arm][<span class="st">"time_well"</span>]) <span class="op">&lt;=</span> <span class="fl">1e-9</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    CHECKS.append(<span class="ss">f"arm mean </span><span class="sc">{</span>r<span class="sc">.</span>arm<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>show(per_arm.<span class="bu">round</span>(<span class="dv">3</span>))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f"**</span><span class="sc">{</span>n_lives<span class="sc">}</span><span class="ss"> lives** = </span><span class="sc">{</span><span class="bu">len</span>(per_arm)<span class="sc">}</span><span class="ss"> arms × </span><span class="sc">{</span>per_arm<span class="sc">.</span>cells[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> cells × </span><span class="sc">{</span>per_arm<span class="sc">.</span>units[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> units; each of the "</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>pairing<span class="sc">.</span>unit_cells[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> unit-cells appears in both arms."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="data-counts-1" class="cell-output cell-output-display">
+<table class="dataframe table table-sm caption-top table-striped small">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">arm</th>
+<th data-quarto-table-cell-role="th">lives</th>
+<th data-quarto-table-cell-role="th">cells</th>
+<th data-quarto-table-cell-role="th">units</th>
+<th data-quarto-table-cell-role="th">time_well</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>control</td>
+<td>240</td>
+<td>12</td>
+<td>20</td>
+<td>0.728</td>
+</tr>
+<tr class="even">
+<td>body_variant</td>
+<td>240</td>
+<td>12</td>
+<td>20</td>
+<td>0.752</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="data-counts-2" class="cell-output cell-output-display cell-output-markdown">
+<p><strong>480 lives</strong> = 2 arms × 12 cells × 20 units; each of the 240 unit-cells appears in both arms.</p>
+</div>
+</div>
+</section>
+<section id="the-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="the-estimates">5. The estimates</h2>
+<p>The triage’s official estimates, recomputed and asserted, next to the values the official result quotes from the earlier study. The last column is context, not a comparison.</p>
+<div id="cell-estimates" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>The 14 official estimates, with the quoted C4 values</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>MEAS <span class="op">=</span> {<span class="st">"time_well"</span>: <span class="st">"time well"</span>, <span class="st">"health_d8_14"</span>: <span class="st">"health, days 8–14"</span>, <span class="st">"episode_rate"</span>: <span class="st">"episode rate"</span>}</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>GROUP <span class="op">=</span> {<span class="st">"12_cells"</span>: <span class="st">"12 cells"</span>, <span class="st">"11_cells"</span>: <span class="st">"11 distinct cells"</span>, <span class="st">"at_feeder"</span>: <span class="st">"at_feeder"</span>, <span class="st">"far"</span>: <span class="st">"far"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">"far_fixed"</span>: <span class="st">"far_fixed"</span>, <span class="st">"neglectful_and_random"</span>: <span class="st">"neglectful + random (6 cells)"</span>}</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> <span class="kw">lambda</span> g: GROUP.get(g, g.replace(<span class="st">"|"</span>, <span class="st">", "</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> [<span class="st">"time_well|12_cells"</span>, <span class="st">"time_well|11_cells"</span>, <span class="st">"time_well|at_feeder"</span>, <span class="st">"time_well|far"</span>, <span class="st">"time_well|far_fixed"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">"health_d8_14|12_cells"</span>, <span class="st">"health_d8_14|neglectful_and_random"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>         <span class="op">*</span>[<span class="ss">f"health_d8_14|</span><span class="sc">{</span>o<span class="sc">}</span><span class="ss">|</span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> o <span class="kw">in</span> (<span class="st">"neglectful"</span>, <span class="st">"random"</span>) <span class="cf">for</span> p <span class="kw">in</span> tr.PLACES], <span class="st">"episode_rate|far_fixed"</span>]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">sorted</span>(order) <span class="op">==</span> <span class="bu">sorted</span>(E) <span class="kw">and</span> <span class="bu">sorted</span>(order) <span class="op">==</span> <span class="bu">sorted</span>(C4)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> pd.DataFrame([<span class="bu">dict</span>(measure<span class="op">=</span>MEAS[tr.split(n)[<span class="dv">0</span>]], cells<span class="op">=</span>label(tr.split(n)[<span class="dv">1</span>]),</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                         control<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>E[n][<span class="st">'control'</span>]<span class="sc">:.3f}</span><span class="ss">"</span>, body_variant<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>E[n][<span class="st">'body_variant'</span>]<span class="sc">:.3f}</span><span class="ss">"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                         difference<span class="op">=</span>q(E[n]), sd<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>E[n][<span class="st">'sd'</span>]<span class="sc">:.3f}</span><span class="ss">"</span>, C4_earlier_pet_quoted<span class="op">=</span>q(C4[n])) <span class="cf">for</span> n <span class="kw">in</span> order])</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>show(tab)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="estimates" class="cell-output cell-output-display">
+<table class="dataframe table table-sm caption-top table-striped small">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">measure</th>
+<th data-quarto-table-cell-role="th">cells</th>
+<th data-quarto-table-cell-role="th">control</th>
+<th data-quarto-table-cell-role="th">body_variant</th>
+<th data-quarto-table-cell-role="th">difference</th>
+<th data-quarto-table-cell-role="th">sd</th>
+<th data-quarto-table-cell-role="th">C4_earlier_pet_quoted</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>time well</td>
+<td>12 cells</td>
+<td>0.728</td>
+<td>0.752</td>
+<td>+0.024 [+0.009; +0.038]</td>
+<td>0.031</td>
+<td>+0.062 [+0.058; +0.067]</td>
+</tr>
+<tr class="even">
+<td>time well</td>
+<td>11 distinct cells</td>
+<td>0.705</td>
+<td>0.730</td>
+<td>+0.025 [+0.009; +0.041]</td>
+<td>0.034</td>
+<td>+0.064 [+0.059; +0.068]</td>
+</tr>
+<tr class="odd">
+<td>time well</td>
+<td>at_feeder</td>
+<td>0.843</td>
+<td>0.838</td>
+<td>-0.005 [-0.009; -0.001]</td>
+<td>0.009</td>
+<td>+0.029 [+0.027; +0.031]</td>
+</tr>
+<tr class="even">
+<td>time well</td>
+<td>far</td>
+<td>0.611</td>
+<td>0.646</td>
+<td>+0.036 [+0.008; +0.064]</td>
+<td>0.060</td>
+<td>+0.070 [+0.062; +0.078]</td>
+</tr>
+<tr class="odd">
+<td>time well</td>
+<td>far_fixed</td>
+<td>0.730</td>
+<td>0.770</td>
+<td>+0.041 [+0.008; +0.073]</td>
+<td>0.070</td>
+<td>+0.088 [+0.078; +0.098]</td>
+</tr>
+<tr class="even">
+<td>health, days 8–14</td>
+<td>12 cells</td>
+<td>0.655</td>
+<td>0.691</td>
+<td>+0.036 [+0.005; +0.067]</td>
+<td>0.066</td>
+<td>+0.056 [+0.049; +0.064]</td>
+</tr>
+<tr class="odd">
+<td>health, days 8–14</td>
+<td>neglectful + random (6 cells)</td>
+<td>0.479</td>
+<td>0.501</td>
+<td>+0.022 [-0.004; +0.048]</td>
+<td>0.056</td>
+<td>+0.013 [+0.005; +0.022]</td>
+</tr>
+<tr class="even">
+<td>health, days 8–14</td>
+<td>neglectful, at_feeder</td>
+<td>0.971</td>
+<td>0.960</td>
+<td>-0.011 [-0.016; -0.005]</td>
+<td>0.011</td>
+<td>-0.008 [-0.010; -0.006]</td>
+</tr>
+<tr class="odd">
+<td>health, days 8–14</td>
+<td>neglectful, far</td>
+<td>0.430</td>
+<td>0.520</td>
+<td>+0.090 [-0.045; +0.225]</td>
+<td>0.288</td>
+<td>+0.089 [+0.051; +0.126]</td>
+</tr>
+<tr class="even">
+<td>health, days 8–14</td>
+<td>neglectful, far_fixed</td>
+<td>0.788</td>
+<td>0.832</td>
+<td>+0.044 [-0.034; +0.121]</td>
+<td>0.166</td>
+<td>+0.039 [+0.020; +0.059]</td>
+</tr>
+<tr class="odd">
+<td>health, days 8–14</td>
+<td>random, at_feeder</td>
+<td>0.333</td>
+<td>0.304</td>
+<td>-0.030 [-0.047; -0.013]</td>
+<td>0.037</td>
+<td>-0.049 [-0.061; -0.038]</td>
+</tr>
+<tr class="even">
+<td>health, days 8–14</td>
+<td>random, far</td>
+<td>0.148</td>
+<td>0.146</td>
+<td>-0.001 [-0.055; +0.053]</td>
+<td>0.115</td>
+<td>+0.015 [-0.001; +0.032]</td>
+</tr>
+<tr class="odd">
+<td>health, days 8–14</td>
+<td>random, far_fixed</td>
+<td>0.206</td>
+<td>0.246</td>
+<td>+0.040 [-0.024; +0.105]</td>
+<td>0.139</td>
+<td>-0.006 [-0.022; +0.010]</td>
+</tr>
+<tr class="even">
+<td>episode rate</td>
+<td>far_fixed</td>
+<td>0.528</td>
+<td>0.641</td>
+<td>+0.113 [+0.062; +0.163]</td>
+<td>0.108</td>
+<td>+0.126 [+0.112; +0.140]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-fig-forest" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Forest plot</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> [(<span class="st">"Time well, 12 cells"</span>, <span class="st">"time_well|12_cells"</span>), (<span class="st">"Time well, 11 distinct cells"</span>, <span class="st">"time_well|11_cells"</span>),</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"Time well, at_feeder"</span>, <span class="st">"time_well|at_feeder"</span>), (<span class="st">"Time well, far"</span>, <span class="st">"time_well|far"</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"Time well, far_fixed"</span>, <span class="st">"time_well|far_fixed"</span>), (<span class="st">"Health, 12 cells"</span>, <span class="st">"health_d8_14|12_cells"</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"Health, neglectful + random"</span>, <span class="st">"health_d8_14|neglectful_and_random"</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"Episode rate, far_fixed"</span>, <span class="st">"episode_rate|far_fixed"</span>)]</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">9.2</span>, <span class="fl">5.4</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>off <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (lab, n) <span class="kw">in</span> <span class="bu">enumerate</span>(rows):</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    r, c <span class="op">=</span> E[n], C4[n]</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    ax.plot([c[<span class="st">"ci_low"</span>], c[<span class="st">"ci_high"</span>]], [i <span class="op">+</span> off] <span class="op">*</span> <span class="dv">2</span>, color<span class="op">=</span>style.CONTEXT, lw<span class="op">=</span><span class="dv">2</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    ax.plot(c[<span class="st">"mean"</span>], i <span class="op">+</span> off, <span class="st">"o"</span>, ms<span class="op">=</span><span class="dv">8</span>, mfc<span class="op">=</span>style.SURFACE, mec<span class="op">=</span>style.CONTEXT, mew<span class="op">=</span><span class="dv">2</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    ax.plot([r[<span class="st">"ci_low"</span>], r[<span class="st">"ci_high"</span>]], [i <span class="op">-</span> off] <span class="op">*</span> <span class="dv">2</span>, color<span class="op">=</span>style.ACCENT, lw<span class="op">=</span><span class="dv">2</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    ax.plot(r[<span class="st">"mean"</span>], i <span class="op">-</span> off, <span class="st">"o"</span>, ms<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span>style.ACCENT, mec<span class="op">=</span>style.SURFACE, mew<span class="op">=</span><span class="dv">2</span>, zorder<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="ss">f"</span><span class="sc">{</span>r[<span class="st">'mean'</span>]<span class="sc">:+.3f}</span><span class="ss">"</span>, (r[<span class="st">"ci_high"</span>], i <span class="op">-</span> off), xytext<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">0</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                va<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span>style.INK_2, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="dv">0</span>, color<span class="op">=</span>style.BASELINE, lw<span class="op">=</span><span class="dv">1</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>ax.axvline(tr.MARGIN, color<span class="op">=</span>style.MUTED, lw<span class="op">=</span><span class="dv">1</span>, ls<span class="op">=</span>(<span class="dv">0</span>, (<span class="dv">1</span>, <span class="dv">2</span>)), zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>ax.text(tr.MARGIN, <span class="op">-</span><span class="fl">0.55</span>, <span class="ss">f" δ = </span><span class="sc">{</span>tr<span class="sc">.</span>MARGIN<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span>style.MUTED, fontsize<span class="op">=</span><span class="fl">8.5</span>, va<span class="op">=</span><span class="st">"top"</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>ax.plot([], [], <span class="st">"o-"</span>, color<span class="op">=</span>style.ACCENT, ms<span class="op">=</span><span class="dv">8</span>, mec<span class="op">=</span>style.SURFACE, mew<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"this triage: current pet, 20 units"</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>ax.plot([], [], <span class="st">"o-"</span>, color<span class="op">=</span>style.CONTEXT, ms<span class="op">=</span><span class="dv">8</span>, mfc<span class="op">=</span>style.SURFACE, mew<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">"C4, quoted: earlier pet, other seeds, 200 units (not a contrast)"</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"upper center"</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.42</span>, <span class="op">-</span><span class="fl">0.13</span>), ncol<span class="op">=</span><span class="dv">2</span>, fontsize<span class="op">=</span><span class="fl">8.5</span>)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>ax.set_yticks(<span class="bu">range</span>(<span class="bu">len</span>(rows)), [lab <span class="cf">for</span> lab, _ <span class="kw">in</span> rows])</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="bu">len</span>(rows) <span class="op">-</span> <span class="fl">0.4</span>, <span class="op">-</span><span class="fl">0.6</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="op">-</span><span class="fl">0.03</span>, <span class="fl">0.18</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>ax.grid(axis<span class="op">=</span><span class="st">"y"</span>, visible<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"body_variant − control (fraction for time well and episode rate; health on a 0–1 scale)"</span>)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"The same body change on two versions of the pet"</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-forest" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-forest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04_body_triage_case_study_files/figure-html/fig-forest-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-forest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: body_variant − control with 95% CIs. Filled: this triage (current pet, 20 units). Hollow: the earlier study’s values (earlier pet, other seeds, 200 units), quoted from the official result; the two are not a contrast. The dotted line marks the plan’s margin δ (no external source); the triage applies no rule to it.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-vs-margin" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>eom <span class="op">=</span> REF[<span class="st">"effect_over_margin"</span>][<span class="st">"time_well|12_cells"</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">abs</span>(t12[<span class="st">"mean"</span>] <span class="op">/</span> tr.MARGIN <span class="op">-</span> eom) <span class="op">&lt;=</span> <span class="fl">1e-9</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>lo_d, hi_d <span class="op">=</span> t12[<span class="st">"ci_low"</span>] <span class="op">/</span> tr.MARGIN, t12[<span class="st">"ci_high"</span>] <span class="op">/</span> tr.MARGIN</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f'''**Read as sizes, not as a verdict.** Over the 12 cells the estimate is </span><span class="sc">{</span>q(t12)<span class="sc">}</span><span class="ss">, which is</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ss">**</span><span class="sc">{</span>eom<span class="sc">:.2f}</span><span class="ss"> δ**, with the interval running from </span><span class="sc">{</span>lo_d<span class="sc">:.2f}</span><span class="ss"> δ to </span><span class="sc">{</span>hi_d<span class="sc">:.2f}</span><span class="ss"> δ (δ = </span><span class="sc">{</span>tr<span class="sc">.</span>MARGIN<span class="sc">}</span><span class="ss">, the plan's margin,</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ss">which has no external source). Over the 11 distinct cells it is </span><span class="sc">{</span>q(E[<span class="st">'time_well|11_cells'</span>])<span class="sc">}</span><span class="ss">. With</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="sc">{</span>tr<span class="sc">.</span>N_UNITS<span class="sc">}</span><span class="ss"> units the half-width of the 12-cell interval is </span><span class="sc">{</span>(t12[<span class="st">'ci_high'</span>] <span class="op">-</span> t12[<span class="st">'ci_low'</span>]) <span class="op">/</span> <span class="dv">2</span><span class="sc">:.3f}</span><span class="ss">: wide enough</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ss">that the triage cannot say whether the effect is above or below δ, but narrow enough for what the addendum asked of</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ss">it: to tell an effect of the earlier pet's size from a much smaller one.'''</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="vs-margin" class="cell-output cell-output-display cell-output-markdown">
+<p><strong>Read as sizes, not as a verdict.</strong> Over the 12 cells the estimate is +0.024 [+0.009; +0.038], which is <strong>0.74 δ</strong>, with the interval running from 0.30 δ to 1.19 δ (δ = 0.032, the plan’s margin, which has no external source). Over the 11 distinct cells it is +0.025 [+0.009; +0.041]. With 20 units the half-width of the 12-cell interval is 0.014: wide enough that the triage cannot say whether the effect is above or below δ, but narrow enough for what the addendum asked of it: to tell an effect of the earlier pet’s size from a much smaller one.</p>
+</div>
+</div>
+</section>
+<section id="why-it-shrank-what-the-official-result-describes" class="level2">
+<h2 class="anchored" data-anchor-id="why-it-shrank-what-the-official-result-describes">6. Why it shrank? What the official result describes</h2>
+<p>The triage cannot test why the effect is smaller; it was not designed to. What follows is not an explanation: it is what the official result describes alongside the estimates, without a reading, with each number recomputed. The plan had written the same points before the triage, as the grounds of its prediction. Nothing here is a decomposition of the gap between the two studies.</p>
+<div id="cell-why" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Starting level, exhaustion, the ceiling of the measure, the sign at the feeder</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> REF[<span class="st">"by_group"</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>lev <span class="op">=</span> {m: tr.estimate(m, <span class="st">"12_cells"</span>) <span class="cf">for</span> m <span class="kw">in</span> (<span class="st">"exhaustion"</span>, <span class="st">"deprivation"</span>, <span class="st">"sleep_frac_ticks"</span>, <span class="st">"meals_per_day"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">"kicks"</span>, <span class="st">"play_decisions"</span>)}</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m, r <span class="kw">in</span> lev.items():</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    check(r, G[<span class="st">"12_cells"</span>][m], <span class="ss">f"12 cells </span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>near <span class="op">=</span> tr.estimate(<span class="ss">f"CAST(time_well &gt; </span><span class="sc">{</span>tr<span class="sc">.</span>NEAR_CEILING<span class="sc">}</span><span class="ss"> AS DOUBLE)"</span>, <span class="st">"12_cells"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>check(near, G[<span class="st">"12_cells"</span>][<span class="st">"share_time_well_above_0_99"</span>], <span class="st">"share above 0.99"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>cell <span class="op">=</span> {c: tr.estimate(<span class="st">"time_well"</span>, c) <span class="cf">for</span> c <span class="kw">in</span> REF[<span class="st">"time_well_by_cell"</span>]}</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c, r <span class="kw">in</span> cell.items():</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    check(r, REF[<span class="st">"time_well_by_cell"</span>][c], <span class="ss">f"cell </span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>feeding <span class="op">=</span> [cell[<span class="ss">f"</span><span class="sc">{</span>o<span class="sc">}</span><span class="ss">|at_feeder"</span>][<span class="st">"control"</span>] <span class="cf">for</span> o <span class="kw">in</span> (<span class="st">"attentive"</span>, <span class="st">"inconsistent"</span>)]</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> feeding[<span class="dv">0</span>] <span class="op">==</span> feeding[<span class="dv">1</span>]</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>feeder, c4_feeder <span class="op">=</span> E[<span class="st">"time_well|at_feeder"</span>], C4[<span class="st">"time_well|at_feeder"</span>]</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> t12[<span class="st">"control"</span>] <span class="op">&gt;</span> c12[<span class="st">"control"</span>] <span class="kw">and</span> lev[<span class="st">"exhaustion"</span>][<span class="st">"ci_high"</span>] <span class="op">&lt;</span> <span class="dv">0</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> feeder[<span class="st">"ci_high"</span>] <span class="op">&lt;</span> <span class="dv">0</span> <span class="op">&lt;</span> c4_feeder[<span class="st">"ci_low"</span>]</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f'''</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- **The current pet already starts higher.** Its time well without the variant is **</span><span class="sc">{</span>t12[<span class="st">'control'</span>]<span class="sc">:.3f}</span><span class="ss">**; the earlier</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="ss">  pet's was </span><span class="sc">{</span>c12[<span class="st">'control'</span>]<span class="sc">:.3f}</span><span class="ss">. There is less room to gain.</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- **It has little exhaustion (</span><span class="sc">{</span>lev[<span class="st">'exhaustion'</span>][<span class="st">'control'</span>]<span class="sc">:.3f}</span><span class="ss"> of its decisions).** The variant still lowers</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="ss">  exhaustion over the 12 cells (</span><span class="sc">{</span>q(lev[<span class="st">'exhaustion'</span>])<span class="sc">}</span><span class="ss">), from a level that is already low. The official</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="ss">  result compares this with the earlier pet's level; that level is not part of the comparison values the result</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="ss">  publishes, so it is not quoted here.</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- **The measure hits its ceiling.** With the owners who feed at the feeder (`attentive` and `inconsistent`), the</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="ss">  current pet's time well is already **</span><span class="sc">{</span>feeding[<span class="dv">0</span>]<span class="sc">:.3f}</span><span class="ss">** without the variant. Over the 12 cells,</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="ss">  **</span><span class="sc">{</span>near[<span class="st">'control'</span>]<span class="sc">:.0%}</span><span class="ss">** of the control lives and **</span><span class="sc">{</span>near[<span class="st">'body_variant'</span>]<span class="sc">:.0%}</span><span class="ss">** of the variant lives are above</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="sc">{</span>tr<span class="sc">.</span>NEAR_CEILING<span class="sc">}</span><span class="ss">.</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- **At the feeder the sign flips.** There the triage gives </span><span class="sc">{</span>q(feeder)<span class="sc">}</span><span class="ss">, small and negative; the earlier pet's value</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="ss">  there was </span><span class="sc">{</span>q(c4_feeder)<span class="sc">}</span><span class="ss">.</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="ss">'''</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="why" class="cell-output cell-output-display cell-output-markdown">
+<ul>
+<li><strong>The current pet already starts higher.</strong> Its time well without the variant is <strong>0.728</strong>; the earlier pet’s was 0.633. There is less room to gain.</li>
+<li><strong>It has little exhaustion (0.115 of its decisions).</strong> The variant still lowers exhaustion over the 12 cells (-0.046 [-0.054; -0.038]), from a level that is already low. The official result compares this with the earlier pet’s level; that level is not part of the comparison values the result publishes, so it is not quoted here.</li>
+<li><strong>The measure hits its ceiling.</strong> With the owners who feed at the feeder (<code>attentive</code> and <code>inconsistent</code>), the current pet’s time well is already <strong>0.983</strong> without the variant. Over the 12 cells, <strong>19%</strong> of the control lives and <strong>28%</strong> of the variant lives are above 0.99.</li>
+<li><strong>At the feeder the sign flips.</strong> There the triage gives -0.005 [-0.009; -0.001], small and negative; the earlier pet’s value there was +0.029 [+0.027; +0.031].</li>
+</ul>
+</div>
+</div>
+<div id="cell-fig-cells" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Chart: time well by cell</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cells_order <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>o<span class="sc">}</span><span class="ss">|</span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> p <span class="kw">in</span> tr.PLACES <span class="cf">for</span> o <span class="kw">in</span> tr.OWNERS]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">8.4</span>, <span class="fl">4.8</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, c <span class="kw">in</span> <span class="bu">enumerate</span>(cells_order):</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> cell[c]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    ax.plot([r[<span class="st">"control"</span>], r[<span class="st">"body_variant"</span>]], [i, i], color<span class="op">=</span>style.BASELINE, lw<span class="op">=</span><span class="dv">2</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    ax.plot(r[<span class="st">"control"</span>], i, <span class="st">"o"</span>, ms<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span>style.CONTEXT, mec<span class="op">=</span>style.SURFACE, mew<span class="op">=</span><span class="dv">2</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    ax.plot(r[<span class="st">"body_variant"</span>], i, <span class="st">"o"</span>, ms<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span>style.ACCENT, mec<span class="op">=</span>style.SURFACE, mew<span class="op">=</span><span class="dv">2</span>, zorder<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>ax.axvline(tr.NEAR_CEILING, color<span class="op">=</span>style.MUTED, lw<span class="op">=</span><span class="dv">1</span>, ls<span class="op">=</span>(<span class="dv">0</span>, (<span class="dv">1</span>, <span class="dv">2</span>)))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="dv">1</span>, color<span class="op">=</span>style.BASELINE, lw<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>ax.text(tr.NEAR_CEILING, <span class="op">-</span><span class="fl">0.55</span>, <span class="ss">f"</span><span class="sc">{</span>tr<span class="sc">.</span>NEAR_CEILING<span class="sc">}</span><span class="ss"> "</span>, ha<span class="op">=</span><span class="st">"right"</span>, va<span class="op">=</span><span class="st">"top"</span>, color<span class="op">=</span>style.MUTED, fontsize<span class="op">=</span><span class="fl">8.5</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>ax.plot([], [], <span class="st">"o"</span>, color<span class="op">=</span>style.CONTEXT, ms<span class="op">=</span><span class="dv">8</span>, label<span class="op">=</span><span class="st">"control"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>ax.plot([], [], <span class="st">"o"</span>, color<span class="op">=</span>style.ACCENT, ms<span class="op">=</span><span class="dv">8</span>, label<span class="op">=</span><span class="st">"body variant"</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"lower left"</span>, fontsize<span class="op">=</span><span class="fl">8.5</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>ax.set_yticks(<span class="bu">range</span>(<span class="bu">len</span>(cells_order)), [c.replace(<span class="st">"|"</span>, <span class="st">", "</span>) <span class="cf">for</span> c <span class="kw">in</span> cells_order])</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="bu">len</span>(cells_order) <span class="op">-</span> <span class="fl">0.4</span>, <span class="op">-</span><span class="fl">0.6</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="fl">0.3</span>, <span class="fl">1.02</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>ax.grid(axis<span class="op">=</span><span class="st">"y"</span>, visible<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"time well (fraction of decisions)"</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Where there is room to gain"</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-cells" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cells-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04_body_triage_case_study_files/figure-html/fig-cells-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cells-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Time well by cell, mean over the 20 units, without (gray) and with (blue) the body variant. Descriptive. At the feeder, the attentive and inconsistent rows are the same lives.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="by-place" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>The descriptive table by place (official, recomputed)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>SHOW <span class="op">=</span> {<span class="st">"time_well_d8_14"</span>: <span class="st">"time well, days 8–14"</span>, <span class="st">"deprivation"</span>: <span class="st">"deprivation, days 1–14"</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">"exhaustion"</span>: <span class="st">"exhaustion, days 1–14"</span>, <span class="st">"health_d8_14"</span>: <span class="st">"health, days 8–14"</span>, <span class="st">"episode_rate"</span>: <span class="st">"episode rate"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"meals_per_day"</span>: <span class="st">"meals per day"</span>, <span class="st">"sleep_frac_ticks"</span>: <span class="st">"share of time asleep"</span>, <span class="st">"kicks"</span>: <span class="st">"ball kicks per life"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"play_decisions"</span>: <span class="st">"'play' decisions per life"</span>}</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>rows_ <span class="op">=</span> []</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m, lab <span class="kw">in</span> SHOW.items():</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    row <span class="op">=</span> {<span class="st">"body_variant − control [95% CI]"</span>: lab}</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> g <span class="kw">in</span> (<span class="st">"at_feeder"</span>, <span class="st">"far"</span>, <span class="st">"far_fixed"</span>, <span class="st">"12_cells"</span>):</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> tr.estimate(m, g)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        check(r, G[g][m], <span class="ss">f"</span><span class="sc">{</span>g<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        d <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> m <span class="kw">in</span> (<span class="st">"meals_per_day"</span>, <span class="st">"kicks"</span>, <span class="st">"play_decisions"</span>) <span class="cf">else</span> <span class="dv">3</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        row[g.replace(<span class="st">"_cells"</span>, <span class="st">" cells"</span>)] <span class="op">=</span> tr.fmt(r, d)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    rows_.append(row)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(rows_))</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> lev[<span class="st">"kicks"</span>]</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> lev[<span class="st">"sleep_frac_ticks"</span>][<span class="st">"ci_high"</span>] <span class="op">&lt;</span> <span class="dv">0</span> <span class="kw">and</span> lev[<span class="st">"meals_per_day"</span>][<span class="st">"ci_low"</span>] <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> k[<span class="st">"ci_high"</span>] <span class="op">&lt;</span> <span class="dv">0</span> <span class="kw">and</span> lev[<span class="st">"play_decisions"</span>][<span class="st">"ci_low"</span>] <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f'''As with the earlier pet, the variant pet sleeps less and eats more. One thing differs: it kicks the ball less,</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="sc">{</span>tr<span class="sc">.</span>fmt(k, <span class="dv">1</span>)<span class="sc">}</span><span class="ss"> kicks per life over the 12 cells (from </span><span class="sc">{</span>k[<span class="st">'control'</span>]<span class="sc">:.1f}</span><span class="ss"> to </span><span class="sc">{</span>k[<span class="st">'body_variant'</span>]<span class="sc">:.1f}</span><span class="ss">), although it</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="ss">chooses "play" more often; the earlier pet with the variant kicked more. The episode rate (the share of hunger episodes</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="ss">the pet closes in time by eating a ripe ration from the owner) rises almost as much as on the earlier pet.'''</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="by-place-1" class="cell-output cell-output-display">
+<table class="dataframe table table-sm caption-top table-striped small">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">body_variant − control [95% CI]</th>
+<th data-quarto-table-cell-role="th">at_feeder</th>
+<th data-quarto-table-cell-role="th">far</th>
+<th data-quarto-table-cell-role="th">far_fixed</th>
+<th data-quarto-table-cell-role="th">12 cells</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>time well, days 8–14</td>
+<td>-0.002 [-0.011; +0.007]</td>
+<td>+0.059 [+0.008; +0.110]</td>
+<td>+0.051 [-0.007; +0.110]</td>
+<td>+0.036 [+0.007; +0.065]</td>
+</tr>
+<tr class="even">
+<td>deprivation, days 1–14</td>
+<td>+0.008 [+0.004; +0.012]</td>
+<td>-0.033 [-0.061; -0.005]</td>
+<td>-0.038 [-0.070; -0.005]</td>
+<td>-0.021 [-0.035; -0.007]</td>
+</tr>
+<tr class="odd">
+<td>exhaustion, days 1–14</td>
+<td>-0.018 [-0.021; -0.015]</td>
+<td>-0.071 [-0.084; -0.058]</td>
+<td>-0.049 [-0.066; -0.033]</td>
+<td>-0.046 [-0.054; -0.038]</td>
+</tr>
+<tr class="even">
+<td>health, days 8–14</td>
+<td>-0.008 [-0.013; -0.004]</td>
+<td>+0.057 [-0.003; +0.116]</td>
+<td>+0.060 [+0.002; +0.117]</td>
+<td>+0.036 [+0.005; +0.067]</td>
+</tr>
+<tr class="odd">
+<td>episode rate</td>
+<td>+0.120 [+0.085; +0.155]</td>
+<td>+0.080 [+0.040; +0.120]</td>
+<td>+0.113 [+0.062; +0.163]</td>
+<td>+0.104 [+0.081; +0.127]</td>
+</tr>
+<tr class="even">
+<td>meals per day</td>
+<td>+0.6 [+0.5; +0.7]</td>
+<td>+0.3 [+0.2; +0.4]</td>
+<td>+0.6 [+0.4; +0.7]</td>
+<td>+0.5 [+0.4; +0.6]</td>
+</tr>
+<tr class="odd">
+<td>share of time asleep</td>
+<td>-0.079 [-0.081; -0.077]</td>
+<td>-0.090 [-0.093; -0.088]</td>
+<td>-0.084 [-0.088; -0.080]</td>
+<td>-0.085 [-0.087; -0.083]</td>
+</tr>
+<tr class="even">
+<td>ball kicks per life</td>
+<td>-4.6 [-6.5; -2.7]</td>
+<td>-1.5 [-3.4; +0.4]</td>
+<td>-2.4 [-4.0; -0.8]</td>
+<td>-2.8 [-3.8; -1.9]</td>
+</tr>
+<tr class="odd">
+<td>'play' decisions per life</td>
+<td>+5.8 [+3.3; +8.2]</td>
+<td>+5.8 [+1.7; +10.0]</td>
+<td>+12.5 [+8.2; +16.8]</td>
+<td>+8.0 [+5.8; +10.2]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="by-place-2" class="cell-output cell-output-display cell-output-markdown">
+<p>As with the earlier pet, the variant pet sleeps less and eats more. One thing differs: it kicks the ball less, -2.8 [-3.8; -1.9] kicks per life over the 12 cells (from 22.8 to 19.9), although it chooses “play” more often; the earlier pet with the variant kicked more. The episode rate (the share of hunger episodes the pet closes in time by eating a ripe ration from the owner) rises almost as much as on the earlier pet.</p>
+</div>
+</div>
+</section>
+<section id="what-the-triage-cannot-show" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-triage-cannot-show">7. What the triage cannot show</h2>
+<div id="cell-cannot" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> E[<span class="st">"health_d8_14|neglectful|far"</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>drop <span class="op">=</span> E[<span class="st">"health_d8_14|random|at_feeder"</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> drop[<span class="st">"ci_high"</span>] <span class="op">&lt;</span> <span class="dv">0</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f'''</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- **No verdict.** </span><span class="sc">{</span>REF[<span class="st">'units'</span>]<span class="sc">}</span><span class="ss"> units and no reading rule: the estimates are sizes, not a confirmation or a rejection.</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- **Not a contrast with the earlier study.** Different pets, different seeds; the gap between the two estimates has no</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="ss">  interval.</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- **Wide intervals per cell.** Health for the `neglectful` owner in `far` runs from </span><span class="sc">{</span>wide[<span class="st">'ci_low'</span>]<span class="sc">:+.3f}</span><span class="ss"> to</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="sc">{</span>wide[<span class="st">'ci_high'</span>]<span class="sc">:+.3f}</span><span class="ss">. Health falls for the `random` owner at the feeder (</span><span class="sc">{</span>q(drop)<span class="sc">}</span><span class="ss">), as it did on the earlier pet;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="ss">  with no rule applied, that is a description, not a failed guard.</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- **Nothing about the game itself.** The current pet is simulated in the research code; a few features of the game's</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="ss">  version are not in that simulation.</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- **Nothing about other versions of the body change,** and nothing about two pets living together.</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- **Nothing about why the effect shrank,** beyond the description in section 6.</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="ss">'''</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="cannot" class="cell-output cell-output-display cell-output-markdown">
+<ul>
+<li><strong>No verdict.</strong> 20 units and no reading rule: the estimates are sizes, not a confirmation or a rejection.</li>
+<li><strong>Not a contrast with the earlier study.</strong> Different pets, different seeds; the gap between the two estimates has no interval.</li>
+<li><strong>Wide intervals per cell.</strong> Health for the <code>neglectful</code> owner in <code>far</code> runs from -0.045 to +0.225. Health falls for the <code>random</code> owner at the feeder (-0.030 [-0.047; -0.013]), as it did on the earlier pet; with no rule applied, that is a description, not a failed guard.</li>
+<li><strong>Nothing about the game itself.</strong> The current pet is simulated in the research code; a few features of the game’s version are not in that simulation.</li>
+<li><strong>Nothing about other versions of the body change,</strong> and nothing about two pets living together.</li>
+<li><strong>Nothing about why the effect shrank,</strong> beyond the description in section 6.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="the-decision-not-to-run-the-200-units" class="level2">
+<h2 class="anchored" data-anchor-id="the-decision-not-to-run-the-200-units">8. The decision not to run the 200 units</h2>
+<p>The plan had computed its precision beforehand: with 200 units the 95% interval of the primary measure would be very narrow, so its reading would depend on where the effect falls relative to δ, not on noise. The official result redoes that arithmetic with the triage’s own spread:</p>
+<div id="cell-precision" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>hw <span class="op">=</span> tr.half_width(t12[<span class="st">"sd"</span>], tr.N_UNITS_PLANNED)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>lo, hi <span class="op">=</span> t12[<span class="st">"mean"</span>] <span class="op">-</span> hw, t12[<span class="st">"mean"</span>] <span class="op">+</span> hw</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>inside <span class="op">=</span> <span class="op">-</span>tr.MARGIN <span class="op">&lt;</span> lo <span class="kw">and</span> hi <span class="op">&lt;</span> tr.MARGIN</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> inside <span class="kw">and</span> <span class="bu">round</span>(hw, <span class="dv">3</span>) <span class="op">==</span> <span class="fl">0.004</span> <span class="kw">and</span> <span class="bu">round</span>(t12[<span class="st">"sd"</span>], <span class="dv">3</span>) <span class="op">==</span> <span class="fl">0.031</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> t12[<span class="st">"ci_high"</span>] <span class="op">&lt;</span> tr.CUT_PROPOSED <span class="kw">and</span> c12[<span class="st">"mean"</span>] <span class="op">&lt;</span> tr.CUT_PROPOSED</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f'''With n = </span><span class="sc">{</span>tr<span class="sc">.</span>N_UNITS_PLANNED<span class="sc">}</span><span class="ss"> and sd = </span><span class="sc">{</span>t12[<span class="st">'sd'</span>]<span class="sc">:.3f}</span><span class="ss">, the half-width would be about **</span><span class="sc">{</span>hw<span class="sc">:.3f}</span><span class="ss">**. A true</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="ss">effect near </span><span class="sc">{</span>t12[<span class="st">'mean'</span>]<span class="sc">:+.3f}</span><span class="ss"> would then give an interval of about [</span><span class="sc">{</span>lo<span class="sc">:+.3f}</span><span class="ss">; </span><span class="sc">{</span>hi<span class="sc">:+.3f}</span><span class="ss">], entirely inside ±δ: the</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ss">plan's class "≈ 0", which its rule reads as **"does not confirm"**, even with a positive sign. δ = </span><span class="sc">{</span>tr<span class="sc">.</span>MARGIN<span class="sc">}</span><span class="ss"> has **no</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="ss">external source**. This is arithmetic with the triage's estimate, not a result.</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="ss">No cut was applied to the triage. A cut of 2δ = </span><span class="sc">{</span>tr<span class="sc">.</span>CUT_PROPOSED<span class="sc">:.3f}</span><span class="ss">, to decide whether the 200-unit run would go</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="ss">ahead, had been proposed before the triage ran and was never decided; the triage's upper limit (</span><span class="sc">{</span>t12[<span class="st">'ci_high'</span>]<span class="sc">:+.3f}</span><span class="ss">) is below it, and so is the earlier pet's own</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="ss">estimate (</span><span class="sc">{</span>c12[<span class="st">'mean'</span>]<span class="sc">:+.3f}</span><span class="ss">).</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="ss">The official result laid this arithmetic out for the decision; the decision itself records no reason. The</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="ss">arithmetic is context, not the motive.</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="ss">**I closed the question without the run.** The variant stays a switched-off research option, the game's pet stays as</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="ss">it is, and the plan's prediction ("does not confirm") stays untested. The triage's units are not reused in any later</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="ss">confirmatory run.'''</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="precision" class="cell-output cell-output-display cell-output-markdown">
+<p>With n = 200 and sd = 0.031, the half-width would be about <strong>0.004</strong>. A true effect near +0.024 would then give an interval of about [+0.020; +0.028], entirely inside ±δ: the plan’s class “≈ 0”, which its rule reads as <strong>“does not confirm”</strong>, even with a positive sign. δ = 0.032 has <strong>no external source</strong>. This is arithmetic with the triage’s estimate, not a result.</p>
+<p>No cut was applied to the triage. A cut of 2δ = 0.064, to decide whether the 200-unit run would go ahead, had been proposed before the triage ran and was never decided; the triage’s upper limit (+0.038) is below it, and so is the earlier pet’s own estimate (+0.062).</p>
+<p>The official result laid this arithmetic out for the decision; the decision itself records no reason. The arithmetic is context, not the motive.</p>
+<p><strong>I closed the question without the run.</strong> The variant stays a switched-off research option, the game’s pet stays as it is, and the plan’s prediction (“does not confirm”) stays untested. The triage’s units are not reused in any later confirmatory run.</p>
+</div>
+</div>
+</section>
+<section id="what-i-would-do-differently" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-would-do-differently">9. What I would do differently</h2>
+<ol type="1">
+<li><strong>Decide the go/no-go cut before the triage.</strong> The addendum itself recommended it: a cut chosen after seeing the number is a decision made looking at the number. Here the cut was never decided, and the decision to stop was taken with the estimate in hand.</li>
+<li><strong>Give the margin a source.</strong> δ is a judgement call with no external source, and the plan’s own precision arithmetic showed that, with 200 units, δ alone would decide the reading. The number that decides should be the best-justified one.</li>
+<li><strong>Pick a welfare measure with headroom.</strong> Near the feeder, time well is already close to its maximum, so gains there are invisible by construction. A measure that saturates hides exactly the cells where a change could look neutral or slightly negative.</li>
+<li><strong>Re-measure effect sizes whenever the system under test changes.</strong> The earlier estimate was precise, but precise about a pet that no longer exists. A cheap re-measurement on the current version showed that the current estimate is less than half the earlier one (the two are not a contrast).</li>
+</ol>
+</section>
+<section id="reproduce-it" class="level2">
+<h2 class="anchored" data-anchor-id="reproduce-it">10. Reproduce it</h2>
+<p>Everything on this site is rebuilt from the published data with one command (Python ≥ 3.12 and <a href="https://docs.astral.sh/uv/">uv</a>; all dependencies, including Quarto, are pinned in <code>uv.lock</code>):</p>
+<pre><code>uv sync
+uv run python scripts/reproduce.py</code></pre>
+<p>It runs the DuckDB integrity checks of both cases, executes every notebook in place (each stops on a failed assertion) and renders the site into <code>docs/</code>. The <a href="../notebooks/03_reproduce_body_triage.html">reproduction appendix</a> recomputes every official estimate and descriptive table of the triage.</p>
+<div id="cell-gate" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>([c <span class="cf">for</span> c <span class="kw">in</span> CHECKS <span class="cf">if</span> <span class="st">"|"</span> <span class="kw">in</span> c <span class="kw">and</span> <span class="kw">not</span> c.startswith(<span class="st">"cell"</span>)]) <span class="op">==</span> <span class="bu">len</span>(REF[<span class="st">"estimates"</span>]) <span class="op">==</span> <span class="dv">14</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>([c <span class="cf">for</span> c <span class="kw">in</span> CHECKS <span class="cf">if</span> c.startswith(<span class="st">"cell"</span>)]) <span class="op">==</span> <span class="dv">12</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>say(<span class="ss">f"**Gate:** </span><span class="sc">{</span><span class="bu">len</span>(CHECKS)<span class="sc">}</span><span class="ss"> checks of official values on this page (some values are checked more than once) recomputed and matched "</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"`body_triage_reference.json` (tolerance 1e-9); the earlier study's values are read from the same file."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="gate" class="cell-output cell-output-display cell-output-markdown">
+<p><strong>Gate:</strong> 71 checks of official values on this page (some values are checked more than once) recomputed and matched <code>body_triage_reference.json</code> (tolerance 1e-9); the earlier study’s values are read from the same file.</p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
