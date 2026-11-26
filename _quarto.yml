@@ -62,7 +62,10 @@ format:
     code-fold: true
     code-tools: false
     fig-format: png
+    fig-dpi: 100  # matplotlib's own default: Quarto would otherwise set 96 for figures that do not apply casestudy.style
     mainfont: system-ui, -apple-system, "Segoe UI", sans-serif
 
 execute:
+  enabled: true   # the notebooks too (Quarto's default is to execute .qmd only); outputs go back into the .ipynb
+  freeze: auto    # plain `quarto render`/`preview` reuse _freeze/ (not committed); reproduce.py clears it first
   warning: false

@@ -10,3 +10,6 @@ __pycache__/
 
 # Explorer data: exported from data/ by scripts/build_explorer_data.py
 /explorer/data/
+
+# Quarto execution cache (freeze: auto): local only, cleared by scripts/reproduce.py
+/_freeze/
