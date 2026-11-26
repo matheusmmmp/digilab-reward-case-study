@@ -31,7 +31,7 @@ uv sync
 uv run python scripts/reproduce.py
 ```
 
-This runs the DuckDB integrity checks of both cases (`scripts/check_data.py`), executes the four notebooks in place (each stops on a failed assertion) and renders the site into `docs/` (ignored by git; open `docs/index.html`). A second run leaves `git status` clean.
+This runs the DuckDB integrity checks of both cases (`scripts/check_data.py`), executes the four notebooks in place (each stops on a failed assertion), exports the explorers' data (checked against both references; the page's JavaScript too when `node` is installed) and renders the site into `docs/` (ignored by git; open `docs/index.html`). A second run leaves `git status` clean.
 
 On every push and pull request, GitHub Actions (`.github/workflows/site.yml`) runs the same command on Linux, so any number that no longer matches the official reference fails the build; on `main` the rendered site is deployed to GitHub Pages.
 
@@ -45,11 +45,13 @@ On every push and pull request, GitHub Actions (`.github/workflows/site.yml`) ru
 | `notebooks/04_body_triage_case_study.ipynb` | case 2: the case study |
 | `notebooks/03_reproduce_body_triage.ipynb` | case 2: reproduction appendix, every official estimate and descriptive table of the triage |
 | `resumo-pt-corpo.qmd` | case 2: one-page summary in Portuguese |
+| `explorer/reward.qmd`, `explorer/triage.qmd`, `explorer/paired.js` | interactive explorers (Observable JS, in the browser): the paired estimate and its 95% CI for any subset of owner types and places; exploratory |
 | `casestudy/` | shared helpers: DuckDB views, paired contrasts, reading rules (case 1), triage estimates (`triage.py`), chart style |
 | `data/lives.parquet`, `data/reference.json` | case 1: the published extract and the official numbers (see `data/SCHEMA.md`) |
 | `data/body_triage_lives.parquet`, `data/body_triage_reference.json` | case 2: the published extract and the official numbers, including the earlier study's quoted values |
 | `sql/checks.sql`, `sql/checks_body_triage.sql`, `scripts/check_data.py` | integrity checks run before anything else |
 | `scripts/reproduce.py` | the one command above |
+| `scripts/build_explorer_data.py`, `scripts/check_explorer_js.mjs` | export the explorers' data (`explorer/data/`, not committed) and check, in Python and in the page's own JavaScript, that they reproduce every official value of both references |
 | `PROVENANCE.md` | where the published data comes from: checksums, sample sizes, dates and the commit timelines |
 | `scripts/build_lives.py`, `scripts/build_reference.py`, `scripts/build_triage_lives.py`, `scripts/build_triage_reference.py` | rebuild the extracts and the references from the private source files (not needed to reproduce) |
 | `_quarto.yml`, `index.qmd` | Quarto website config and landing page; the site renders into `docs/` (not committed) |
