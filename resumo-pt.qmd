@@ -68,6 +68,8 @@ def minutos(x):
 
 **Exploratório, depois do resultado.** Só corpo − sem carinho: `{python} ci(body)` (cerca de `{python} minutos(body["mean"])` min/dia), um contraste que não estava no plano. O modelo preditivo da página principal descreve esta simulação; não é causal e não substitui a leitura pré-registrada.
 
+*Também exploratório, depois do resultado (seção 8 da página principal):* a regra L-ACORDADO vista como teste de equivalência (TOST), intervalos por bootstrap e por modelo misto, e a dependência parcial do modelo preditivo; nada disso muda a leitura oficial.
+
 **O que isto não mostra.** Nada sobre jogadores reais (o dono simulado recompensa sempre e na hora); só uma dose de recompensa e nenhum outro tipo; só 14 dias e estas 12 células; nada sobre saúde (a guarda não foi medida); a separação entre crédito e corpo não é perfeita (os braços divergem depois do primeiro carinho, e o crédito alcança também os carinhos do próprio dono). Depois do resultado, a recomendação registrada foi não seguir com esta recompensa (nesta dose) como caminho para um pet mais acordado; outra dose ou recompensa seria uma pergunta nova, com plano próprio.
 
 **O que eu faria diferente.** Testar a análise no teste de fumaça; escrever a regra do "porquê" para os dois sinais; justificar δ_A e as margens com uma fonte; planejar o contraste só corpo × controle; relatar efeitos absolutos e padronizados juntos.

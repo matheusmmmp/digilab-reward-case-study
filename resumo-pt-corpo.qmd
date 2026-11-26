@@ -70,6 +70,8 @@ def pct(x):
 
 **A decisão de não rodar as 200.** Com `{python} tr.N_UNITS_PLANNED` unidades e o desvio-padrão da triagem (`{python} nv(t12["sd"])`), a meia largura do IC95 seria cerca de `{python} nv(hw)`. O δ = `{python} nv(tr.MARGIN)` é a margem do plano: o tamanho a partir do qual um ganho no "Tempo bem" contaria; ele não tem fonte externa (o plano o marca "SEM FONTE": é um julgamento, não um valor tirado de dados ou da literatura). Um efeito perto de `{python} br(t12["mean"])` sairia com o intervalo inteiro dentro de ±δ, a classe "≈ 0", que a regra do plano lê como "não confirma", mesmo com o sinal positivo. É uma conta, não um resultado. Um corte de 2δ, para decidir se a run de 200 unidades rodava, tinha sido proposto e nunca foi decidido. O resultado oficial pôs essa conta para a decisão; a decisão em si não registra motivo, e a conta é contexto, não o motivo. Eu fechei a pergunta sem a run: a variante fica como chave de pesquisa, desligada, e o pet do jogo fica como está.
 
+*Exploratório, depois do resultado (página principal):* a conta da precisão desenhada para todo n, com a chance de um IC de 200 unidades cair inteiro dentro de ±δ; é uma conta sobre a estimativa da triagem, não um resultado nem uma leitura.
+
 **O que eu faria diferente.** Decidir o corte antes da triagem; dar uma fonte à margem, que sozinha decidiria a leitura; escolher uma medida de bem-estar com folga perto do máximo; e medir de novo o tamanho do efeito sempre que o sistema muda.
 
 [Estudo de caso completo (em inglês)](notebooks/04_body_triage_case_study.ipynb)

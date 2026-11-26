@@ -22,7 +22,7 @@ Two data-science case studies on the same simulated virtual pet, each told as qu
 
 ## Stack
 
-uv (pinned environment, `uv.lock`) · DuckDB SQL and pandas over Parquet (pyarrow) · Jupyter notebooks rendered with Quarto (pinned as `quarto-cli` from PyPI) · matplotlib · scikit-learn · scipy.
+uv (pinned environment, `uv.lock`) · DuckDB SQL and pandas over Parquet (pyarrow) · Jupyter notebooks rendered with Quarto (pinned as `quarto-cli` from PyPI) · matplotlib · scikit-learn · scipy · statsmodels (exploratory sections only).
 
 ## Reproduce
 
@@ -58,7 +58,7 @@ uvx pre-commit install       # optional: run ruff on every commit (.pre-commit-c
 | `notebooks/03_reproduce_body_triage.ipynb` | case 2: reproduction appendix, every official estimate and descriptive table of the triage |
 | `resumo-pt-corpo.qmd` | case 2: one-page summary in Portuguese |
 | `explorer/reward.qmd`, `explorer/triage.qmd`, `explorer/paired.js` | interactive explorers (Observable JS, in the browser): the paired estimate and its 95% CI for any subset of owner types and places; exploratory |
-| `casestudy/` | shared helpers: DuckDB views, paired contrasts, reading rules (case 1), triage estimates (`triage.py`), chart style |
+| `casestudy/` | shared helpers: DuckDB views, paired contrasts, reading rules (case 1), triage estimates (`triage.py`), exploratory statistics after the results (`explore.py`: TOST, bootstrap, precision arithmetic), chart style |
 | `data/lives.parquet`, `data/reference.json` | case 1: the published extract and the official numbers (see `data/SCHEMA.md`) |
 | `data/body_triage_lives.parquet`, `data/body_triage_reference.json` | case 2: the published extract and the official numbers, including the earlier study's quoted values |
 | `sql/checks.sql`, `sql/checks_body_triage.sql`, `scripts/check_data.py` | integrity checks run before anything else |
