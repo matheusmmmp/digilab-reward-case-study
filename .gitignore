@@ -7,3 +7,6 @@ __pycache__/
 
 # Rendered site: built by scripts/reproduce.py and deployed by GitHub Actions
 /docs/
+
+# Explorer data: exported from data/ by scripts/build_explorer_data.py
+/explorer/data/

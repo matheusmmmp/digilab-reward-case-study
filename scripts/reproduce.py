@@ -1,6 +1,7 @@
 """One command to rebuild everything that needs no private data:
-check the data extracts, execute every notebook in place, draw the cover image, render the
-site into docs/ (not committed: CI renders it and deploys it to GitHub Pages).
+check the data extracts, execute every notebook in place, draw the cover image, export the
+explorer data (checked against the references), render the site into docs/ (not committed:
+CI renders it and deploys it to GitHub Pages).
 
 Execution timing metadata is not recorded and cell metadata is kept stable, so a second
 run leaves the committed notebooks unchanged. Works on Windows, Linux and macOS."""
@@ -58,6 +59,11 @@ for nb in NOTEBOOKS:
          "--inplace", "--ExecutePreprocessor.record_timing=False", nb])
     strip_volatile(nb)
 run([sys.executable, "scripts/make_cover.py"])
+run([sys.executable, "scripts/build_explorer_data.py"])  # explorer/data/*.json, parity asserted
+if shutil.which("node"):  # the explorer's own JS against the references (node is on CI runners)
+    run(["node", "scripts/check_explorer_js.mjs"])
+else:
+    print("reproduce: node not found, skipped the explorer JS check (the Python parity check ran)")
 run([find_quarto(), "render"])
 (ROOT / "docs" / ".nojekyll").touch()  # GitHub Pages: serve site_libs/ as is
 print("reproduce: OK")
