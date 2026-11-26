@@ -1,5 +1,6 @@
 """summarize, paired_differences (case 1) and the triage helpers (case 2) on tiny synthetic
 tables, against a hand calculation; then each against one official value of the published data."""
+
 import math
 
 import duckdb
@@ -46,11 +47,16 @@ def _lives_view(rows):
 def test_paired_differences_by_hand(monkeypatch):
     # 2 units x 2 cells x 2 arms; the per-unit difference is the mean over the cells of (A - B)
     rows = [
-        ("A", "o1", "p1", 1, 0.50), ("B", "o1", "p1", 1, 0.40),  # cell diff 0.10
-        ("A", "o2", "p1", 1, 0.20), ("B", "o2", "p1", 1, 0.50),  # cell diff -0.30
-        ("A", "o1", "p1", 2, 0.90), ("B", "o1", "p1", 2, 0.60),  # cell diff 0.30
-        ("A", "o2", "p1", 2, 0.70), ("B", "o2", "p1", 2, 0.60),  # cell diff 0.10
-        ("C", "o1", "p1", 1, 9.00), ("C", "o1", "p1", 2, 9.00),  # a third arm, ignored
+        ("A", "o1", "p1", 1, 0.50),
+        ("B", "o1", "p1", 1, 0.40),  # cell diff 0.10
+        ("A", "o2", "p1", 1, 0.20),
+        ("B", "o2", "p1", 1, 0.50),  # cell diff -0.30
+        ("A", "o1", "p1", 2, 0.90),
+        ("B", "o1", "p1", 2, 0.60),  # cell diff 0.30
+        ("A", "o2", "p1", 2, 0.70),
+        ("B", "o2", "p1", 2, 0.60),  # cell diff 0.10
+        ("C", "o1", "p1", 1, 9.00),
+        ("C", "o1", "p1", 2, 9.00),  # a third arm, ignored
     ]
     monkeypatch.setattr(cs, "_con", _lives_view(rows))
     d = cs.paired_differences("A", "B", "m")

@@ -20,8 +20,20 @@ package = false
 [dependency-groups]
 dev = [
     "pytest==9.2.0",
+    "ruff==0.17.6",
 ]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+
+[tool.ruff]
+line-length = 130
+target-version = "py312"
+# The notebooks' code is shown on the site (code-fold) and their outputs are committed: linting
+# or formatting them would change the rendered pages, so ruff covers the .py files only.
+extend-exclude = ["*.ipynb"]
+force-exclude = true  # the exclusion holds also for files passed by name (pre-commit)
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

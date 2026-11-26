@@ -1,0 +1,12 @@
+# Lint and format the .py files before each commit (the notebooks are excluded: see [tool.ruff]
+# in pyproject.toml). Install once with `uvx pre-commit install`; the rev matches the ruff pin
+# in pyproject.toml.
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.6
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+        types_or: [python, pyi]
+      - id: ruff-format
+        types_or: [python, pyi]

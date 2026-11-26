@@ -1,6 +1,7 @@
 """The explorer's algorithm (scripts/build_explorer_data.py, a line-by-line mirror of
 explorer/paired.js) reproduces every official value of both references. The page's own
 JavaScript is checked by scripts/check_explorer_js.mjs inside scripts/reproduce.py."""
+
 import importlib.util
 import json
 

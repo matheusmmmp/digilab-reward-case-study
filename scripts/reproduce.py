@@ -9,6 +9,7 @@ GitHub shows them) and stops on the first failed assertion. `_quarto.yml` sets
 has not changed; this script clears that cache first, so it always executes everything, as CI
 does. Line endings are written back as LF, so a second run leaves the committed notebooks
 unchanged. Works on Windows, Linux and macOS."""
+
 import importlib.util
 import shutil
 import subprocess

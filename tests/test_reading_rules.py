@@ -1,5 +1,6 @@
 """The pre-registered reading rules of case 1 (casestudy.read_awake, read_well, read_why),
 checked line by line, including the boundaries where a CI bound touches a cut exactly."""
+
 import pytest
 
 import casestudy as cs

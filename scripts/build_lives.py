@@ -6,6 +6,7 @@ source is touched or written.
 The committed file was written by an earlier version of this script that used polars 2.1.0;
 this one writes it with pyarrow: the same schema, values (bit for bit) and row order, but not
 the same bytes (the writer name and page layout inside the file differ)."""
+
 import argparse
 import gzip
 import hashlib
@@ -16,10 +17,13 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 SHA = "e8333972cc635f366ef7ae41b1e767adaa192858168d0a44310e3e7e3ad0e413"
-ARM = {"R0": "no_petting", "R-CORPO": "petting_body_only",
-       "R-CB": "petting_with_credit", "R-SORT": "petting_with_credit_random_time"}
-OWNER = {"atencioso": "attentive", "relapso": "neglectful",
-         "aleatorio": "random", "incoerente": "inconsistent"}
+ARM = {
+    "R0": "no_petting",
+    "R-CORPO": "petting_body_only",
+    "R-CB": "petting_with_credit",
+    "R-SORT": "petting_with_credit_random_time",
+}
+OWNER = {"atencioso": "attentive", "relapso": "neglectful", "aleatorio": "random", "incoerente": "inconsistent"}
 PLACE = {"comedouro": "at_feeder", "perto": "near", "longe": "far"}
 N = 9600
 N_UNITS = 200
@@ -28,8 +32,10 @@ DESIGN = ["arm_code", "arm", "owner", "place", "unit"]
 
 def row(r):
     return {
-        "arm_code": r["braco"], "arm": ARM[r["braco"]],
-        "owner": OWNER[r["dono"]], "place": PLACE[r["lugar"]],
+        "arm_code": r["braco"],
+        "arm": ARM[r["braco"]],
+        "owner": OWNER[r["dono"]],
+        "place": PLACE[r["lugar"]],
         "_unit_key": int(r["base"]),  # replaced by its dense rank below, never written
         "awake_frac_d1_14": float(r["t_acordado"]),
         "awake_frac_d8_14": float(r["t_acordado_8_14"]),
@@ -70,9 +76,12 @@ def main():
         raise ValueError("unit outside 1..200")
     # strings as large_string, integers as int64, measures as double: the published schema
     types = {c: pa.large_string() for c in DESIGN if c != "unit"}
-    table = pa.table({c: pa.array([r[c] for r in rows],
-                                  types.get(c, pa.float64() if isinstance(rows[0][c], float) else pa.int64()))
-                      for c in DESIGN + measures})
+    table = pa.table(
+        {
+            c: pa.array([r[c] for r in rows], types.get(c, pa.float64() if isinstance(rows[0][c], float) else pa.int64()))
+            for c in DESIGN + measures
+        }
+    )
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     pq.write_table(table, a.out, compression="zstd", write_statistics=False)
     print(f"wrote {a.out}: {table.num_rows} rows, {table.num_columns} columns")

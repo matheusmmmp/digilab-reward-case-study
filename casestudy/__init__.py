@@ -1,5 +1,6 @@
 """Shared helpers for the case-study notebooks: data loading, the pre-registered
 paired contrast, and the pre-registered reading rules. No numbers live here."""
+
 import json
 from pathlib import Path
 
@@ -14,14 +15,13 @@ REF = json.loads((ROOT / "data" / "reference.json").read_text())
 TOL = 1e-9
 
 # Pre-registered constants (quoted from the analysis plan, also stored in reference.json).
-DELTA_A = 0.02        # relevant size for the awake fraction
-MARGIN_WELL = 0.032   # non-inferiority margin for time_well
+DELTA_A = 0.02  # relevant size for the awake fraction
+MARGIN_WELL = 0.032  # non-inferiority margin for time_well
 N_UNITS = 200
 DECISIONS_PER_DAY = 96  # one decision every 15 simulated minutes: 1,344 decisions in 14 days
 MIN_PER_DAY = 24 * 60  # so a fraction of the pet's decisions reads as the same fraction of its day
 
-ARMS = ["no_petting", "petting_body_only", "petting_with_credit",
-        "petting_with_credit_random_time"]
+ARMS = ["no_petting", "petting_body_only", "petting_with_credit", "petting_with_credit_random_time"]
 OWNERS = ["attentive", "neglectful", "random", "inconsistent"]
 PLACES = ["at_feeder", "near", "far"]
 CONTRASTS = REF["contrast_definitions"]  # D1, D2, D3 -> {a, b}
@@ -73,6 +73,7 @@ def assert_matches(got: dict, ref: dict, what: str) -> None:
 
 
 # ---- pre-registered reading rules, applied in the order written in the plan ----
+
 
 def read_awake(lo: float, hi: float, delta: float = DELTA_A) -> str:
     if hi < 0:

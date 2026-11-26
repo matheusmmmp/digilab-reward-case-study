@@ -1,5 +1,6 @@
 """Helpers for case 2 (the body-variant triage): data loading, the paired estimate over
 a set of cells, and the plan's constants. No result numbers live here."""
+
 import json
 
 import duckdb
@@ -12,19 +13,29 @@ LIVES = (ROOT / "data" / "body_triage_lives.parquet").as_posix()
 REF = json.loads((ROOT / "data" / "body_triage_reference.json").read_text())
 
 # Constants quoted from the analysis plan (also checked against the reference where it holds them).
-MARGIN = 0.032          # the plan's margin delta for "time well" (no external source)
+MARGIN = 0.032  # the plan's margin delta for "time well" (no external source)
 CUT_PROPOSED = 2 * MARGIN  # a go/no-go cut proposed before the triage and never decided
-NEAR_CEILING = 0.99     # descriptive cut: lives with time_well above it are "near the ceiling"
-N_UNITS = 20            # the triage
-N_UNITS_PLANNED = 200   # the confirmatory run that was planned and not run
+NEAR_CEILING = 0.99  # descriptive cut: lives with time_well above it are "near the ceiling"
+N_UNITS = 20  # the triage
+N_UNITS_PLANNED = 200  # the confirmatory run that was planned and not run
 assert REF["margin"] == MARGIN and REF["units"] == N_UNITS
 
 ARMS = ["control", "body_variant"]
 OWNERS = ["attentive", "neglectful", "random", "inconsistent"]
 PLACES = ["at_feeder", "far", "far_fixed"]
 COPY_CELL = ("inconsistent", "at_feeder")  # identical to (attentive, at_feeder) in every life
-MEASURES = ["time_well", "time_well_d8_14", "health_d8_14", "deprivation", "exhaustion",
-            "episode_rate", "meals_per_day", "sleep_frac_ticks", "kicks", "play_decisions"]
+MEASURES = [
+    "time_well",
+    "time_well_d8_14",
+    "health_d8_14",
+    "deprivation",
+    "exhaustion",
+    "episode_rate",
+    "meals_per_day",
+    "sleep_frac_ticks",
+    "kicks",
+    "play_decisions",
+]
 
 # A "group" is the set of cells a per-unit difference is averaged over.
 GROUPS = {
@@ -71,8 +82,7 @@ def estimate(measure: str, group: str) -> dict:
     """Levels by arm and the paired estimate (mean, Student-t 95% CI over the 20 units, sd)."""
     u = per_unit(measure, group)
     assert len(u) == N_UNITS and u.cells.nunique() == 1
-    return dict(control=float(u.control.mean()), body_variant=float(u.body_variant.mean()),
-                **summarize(u["diff"].to_numpy()))
+    return dict(control=float(u.control.mean()), body_variant=float(u.body_variant.mean()), **summarize(u["diff"].to_numpy()))
 
 
 def max_diff(got: dict, ref: dict, keys=("control", "body_variant", "mean", "sd", "ci_low", "ci_high")) -> float:
@@ -97,4 +107,5 @@ def fmt(r: dict, digits: int = 3) -> str:
 
 def half_width(sd: float, n: int) -> float:
     from scipy import stats
+
     return float(stats.t.ppf(0.975, n - 1)) * sd / np.sqrt(n)

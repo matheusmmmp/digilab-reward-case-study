@@ -8,6 +8,7 @@ names no other part of that record.
 The committed file was written by an earlier version of this script that used polars 2.1.0;
 this one writes it with pyarrow: the same schema, values (bit for bit) and row order, but not
 the same bytes (the writer name and page layout inside the file differ)."""
+
 import argparse
 import hashlib
 import json
@@ -18,8 +19,7 @@ import pyarrow.parquet as pq
 
 SHA = "937dad3e7e997e0454191b6f1d0d7b607ac38d7b478ed06ba5b2ca429aa401be"
 ARM = {"CTRL": "control", "DTB": "body_variant"}
-OWNER = {"atencioso": "attentive", "relapso": "neglectful",
-         "aleatorio": "random", "incoerente": "inconsistent"}
+OWNER = {"atencioso": "attentive", "relapso": "neglectful", "aleatorio": "random", "incoerente": "inconsistent"}
 PLACE = {"comedouro": "at_feeder", "longe": "far", "longe_fixo": "far_fixed"}
 N = 480
 N_UNITS = 20
@@ -48,7 +48,9 @@ def leaf(record, name):
 
 def row(r):
     return {
-        "arm": ARM[r["braco"]], "owner": OWNER[r["dono"]], "place": PLACE[r["lugar"]],
+        "arm": ARM[r["braco"]],
+        "owner": OWNER[r["dono"]],
+        "place": PLACE[r["lugar"]],
         "_unit_key": int(r["base"]),  # replaced by its dense rank below, never written
         "time_well": float(r["tempo_bem"]),
         "time_well_d8_14": float(r["tempo_bem_8_14"]),
@@ -89,9 +91,12 @@ def main():
         raise ValueError("row count or unit range changed")
     # strings as large_string, integers as int64, measures as double: the published schema
     types = {c: pa.large_string() for c in DESIGN if c != "unit"}
-    table = pa.table({c: pa.array([r[c] for r in rows],
-                                  types.get(c, pa.float64() if isinstance(rows[0][c], float) else pa.int64()))
-                      for c in DESIGN + measures})
+    table = pa.table(
+        {
+            c: pa.array([r[c] for r in rows], types.get(c, pa.float64() if isinstance(rows[0][c], float) else pa.int64()))
+            for c in DESIGN + measures
+        }
+    )
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     pq.write_table(table, a.out, compression="zstd", write_statistics=False)
     print(f"wrote {a.out}: {table.num_rows} rows, {table.num_columns} columns")

@@ -13,6 +13,7 @@ arm difference; estimate = mean over units; sd with ddof=1; CI = mean +/- t * sd
 `estimate()` below is the same algorithm as explorer/paired.js, run over the exported JSON;
 it must match data/reference.json and data/body_triage_reference.json within 1e-9 for every
 selection those files hold."""
+
 import json
 import math
 from pathlib import Path
@@ -28,18 +29,32 @@ DENOMINATORS = [1, 14, 672, 1344]  # counts, per-day counts, decisions of days 8
 
 CASES = {
     "reward": dict(
-        parquet="lives.parquet", reference="reference.json", n_units=200,
+        parquet="lives.parquet",
+        reference="reference.json",
+        n_units=200,
         owners=["attentive", "neglectful", "random", "inconsistent"],
         places=["at_feeder", "near", "far"],
         measures=["awake_frac_d1_14", "awake_frac_d8_14", "time_well", "episode_rate"],
         contrasts=None,  # read from the reference: D1, D2, D3
     ),
     "triage": dict(
-        parquet="body_triage_lives.parquet", reference="body_triage_reference.json", n_units=20,
+        parquet="body_triage_lives.parquet",
+        reference="body_triage_reference.json",
+        n_units=20,
         owners=["attentive", "neglectful", "random", "inconsistent"],
         places=["at_feeder", "far", "far_fixed"],
-        measures=["time_well", "time_well_d8_14", "health_d8_14", "deprivation", "exhaustion",
-                  "episode_rate", "meals_per_day", "sleep_frac_ticks", "kicks", "play_decisions"],
+        measures=[
+            "time_well",
+            "time_well_d8_14",
+            "health_d8_14",
+            "deprivation",
+            "exhaustion",
+            "episode_rate",
+            "meals_per_day",
+            "sleep_frac_ticks",
+            "kicks",
+            "play_decisions",
+        ],
         contrasts={"V": {"a": "body_variant", "b": "control"}},
     ),
 }
@@ -64,14 +79,19 @@ def build(name: str, spec: dict) -> dict:
     assert sorted(lives.unit.unique()) == units
     assert set(map(tuple, lives[["owner", "place"]].drop_duplicates().to_numpy())) == set(cells)
 
-    out = dict(case=name, n_units=n, owners=owners, places=places,
-               cells=[f"{o}|{p}" for o, p in cells],
-               t975=float(stats.t.ppf(0.975, n - 1)),
-               contrasts=contrasts, data={})
+    out = dict(
+        case=name,
+        n_units=n,
+        owners=owners,
+        places=places,
+        cells=[f"{o}|{p}" for o, p in cells],
+        t975=float(stats.t.ppf(0.975, n - 1)),
+        contrasts=contrasts,
+        data={},
+    )
     for m in spec["measures"]:
         den = denominator(lives[m].to_numpy(dtype=float))
-        wide = lives.pivot_table(index=["unit", "owner", "place"], columns="arm", values=m,
-                                 aggfunc="first")
+        wide = lives.pivot_table(index=["unit", "owner", "place"], columns="arm", values=m, aggfunc="first")
         # rows in [unit][cell] order: index = (unit - 1) * len(cells) + cell
         order = pd.MultiIndex.from_tuples([(u, o, p) for u in units for o, p in cells])
         wide = wide.reindex(order)
@@ -89,6 +109,7 @@ def build(name: str, spec: dict) -> dict:
 
 
 # ---- the explorer's algorithm (mirrors explorer/paired.js line by line) ----
+
 
 def estimate(case: dict, measure: str, contrast: str, selected_cells: list[str]) -> dict | None:
     if not selected_cells:
@@ -144,9 +165,12 @@ def verify_reward(case: dict) -> int:
 def verify_triage(case: dict) -> int:
     ref = json.loads((ROOT / "data" / CASES["triage"]["reference"]).read_text())
     copy = "inconsistent|at_feeder"  # identical to attentive|at_feeder in every life
-    groups = {"12_cells": select(case), "11_cells": select(case, drop=[copy]),
-              "neglectful_and_random": select(case, owners=["neglectful", "random"]),
-              **{p: select(case, places=[p]) for p in case["places"]}}
+    groups = {
+        "12_cells": select(case),
+        "11_cells": select(case, drop=[copy]),
+        "neglectful_and_random": select(case, owners=["neglectful", "random"]),
+        **{p: select(case, places=[p]) for p in case["places"]},
+    }
 
     def cells_of(group):
         return groups[group] if group in groups else [group]  # a single cell 'owner|place'
