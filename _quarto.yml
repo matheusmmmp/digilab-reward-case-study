@@ -11,9 +11,19 @@ project:
     - resumo-pt-corpo.qmd
     - data/SCHEMA.md
     - PROVENANCE.md
+  resources:
+    - assets/cover.png
 
 website:
   title: "Two experiments on a virtual pet"
+  description: "Two data-science case studies on a simulated virtual pet: a pre-registered experiment and an effect that shrank, every number recomputed from the published data."
+  site-url: https://matheusmmmp.github.io/digilab-reward-case-study/
+  repo-url: https://github.com/matheusmmmp/digilab-reward-case-study
+  repo-actions: [source, issue]
+  image: assets/cover.png
+  favicon: assets/favicon.svg
+  open-graph: true
+  twitter-card: true
   navbar:
     left:
       - text: "Case 1: reward"
@@ -40,6 +50,7 @@ website:
 format:
   html:
     theme: cosmo
+    css: assets/site.css
     toc: true
     code-fold: true
     code-tools: false

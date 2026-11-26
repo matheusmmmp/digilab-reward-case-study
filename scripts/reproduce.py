@@ -1,5 +1,5 @@
 """One command to rebuild everything that needs no private data:
-check the data extracts, execute every notebook in place, render the
+check the data extracts, execute every notebook in place, draw the cover image, render the
 site into docs/ (not committed: CI renders it and deploys it to GitHub Pages).
 
 Execution timing metadata is not recorded and cell metadata is kept stable, so a second
@@ -57,6 +57,7 @@ for nb in NOTEBOOKS:
     run([sys.executable, "-m", "jupyter", "nbconvert", "--to", "notebook", "--execute",
          "--inplace", "--ExecutePreprocessor.record_timing=False", nb])
     strip_volatile(nb)
+run([sys.executable, "scripts/make_cover.py"])
 run([find_quarto(), "render"])
 (ROOT / "docs" / ".nojekyll").touch()  # GitHub Pages: serve site_libs/ as is
 print("reproduce: OK")
