@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: >-
+  If you refer to this work, please cite it as below. The code is MIT-licensed; the text, figures,
+  data and rendered site are all rights reserved (see LICENSE).
+title: "Two experiments on a virtual pet"
+abstract: >-
+  Two data-science case studies on the same simulated virtual pet, each told as question, design,
+  data, result and what I would do differently, with every official number recomputed from the
+  published data.
+authors:
+  - given-names: Matheus
+    name-particle: de
+    family-names: Medeiros Pereira
+repository-code: "https://github.com/matheusmmmp/digilab-reward-case-study"
+url: "https://matheusmmmp.github.io/digilab-reward-case-study/"
+date-released: 2026-11-23
+keywords:
+  - pre-registration
+  - simulation experiment
+  - paired design
+  - reproducibility
+  - DuckDB
+  - Quarto

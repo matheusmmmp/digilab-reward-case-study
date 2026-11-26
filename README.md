@@ -55,6 +55,8 @@ On every push and pull request, GitHub Actions (`.github/workflows/site.yml`) ru
 | `_quarto.yml`, `index.qmd` | Quarto website config and landing page; the site renders into `docs/` (not committed) |
 | `.github/workflows/site.yml` | CI: reproduce everything on Linux, then deploy the site to GitHub Pages from `main` |
 | `.python-version` | the Python version the lock was built with |
+| `scripts/make_cover.py`, `assets/` | the site's social-preview cover (drawn from the two reference files), favicon and stylesheet |
+| `CITATION.cff` | how to cite this work (also shown as BibTeX on the site's landing page) |
 
 ## License
 
