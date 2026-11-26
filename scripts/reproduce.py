@@ -11,6 +11,7 @@ does. Line endings are written back as LF, so a second run leaves the committed 
 unchanged. Works on Windows, Linux and macOS."""
 
 import importlib.util
+import json
 import shutil
 import subprocess
 import sys
@@ -55,7 +56,14 @@ run([find_quarto(), "render"])  # executes the notebooks in place (execute.enabl
 for nb in sorted((ROOT / "notebooks").glob("*.ipynb")):  # Quarto writes the platform's line endings
     raw = nb.read_bytes()
     if b"\r\n" in raw:
-        nb.write_bytes(raw.replace(b"\r\n", b"\n"))
+        raw = raw.replace(b"\r\n", b"\n")
+        nb.write_bytes(raw)
+    # A progress bar shown during execution (tqdm with ipywidgets) leaves widget state in the notebook
+    # metadata; it is not part of the analysis, so drop it to keep the committed notebooks stable.
+    doc = json.loads(raw)
+    if doc.get("metadata", {}).pop("widgets", None) is not None:
+        raw = (json.dumps(doc, indent=1, ensure_ascii=False) + "\n").encode("utf-8")
+        nb.write_bytes(raw)
     # The two case studies also render a PDF (format typst, SVG figures), listed before html so that
     # the outputs written back into the .ipynb are the HTML ones (PNG): fail if that ever changes.
     if b'"image/svg+xml"' in raw:
