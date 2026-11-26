@@ -4,6 +4,8 @@
 
 Two data-science case studies on the same simulated virtual pet, each told as question → design → data → result → what I would do differently, with every official number recomputed from the published data. The site is published at <https://matheusmmmp.github.io/digilab-reward-case-study/>; each case study is also there as a PDF report ([case 1](https://matheusmmmp.github.io/digilab-reward-case-study/notebooks/02_case_study.pdf), [case 2](https://matheusmmmp.github.io/digilab-reward-case-study/notebooks/04_body_triage_case_study.pdf)).
 
+Hugging Face mirror: (pending)
+
 ## Case 1: does reward keep a virtual pet awake? A pre-registered simulation study
 
 - **Question:** if a virtual pet's simulated owner pets it right after it eats or plays (with reward credit for its learning agent), does the pet stay awake more?
@@ -72,6 +74,7 @@ uvx pre-commit install       # optional: run ruff on every commit (.pre-commit-c
 | `.pre-commit-config.yaml` | ruff hooks for pre-commit (not installed by default) |
 | `.python-version` | the Python version the lock was built with |
 | `scripts/make_cover.py`, `assets/` | the site's social-preview cover (drawn from the two reference files), favicon and stylesheet; `assets/pdf-*.typ` and `assets/pdf-links.lua` set up the PDF reports (header and footer, links to the site) |
+| `huggingface/README.md`, `scripts/stage_hf_dataset.py` | the Hugging Face dataset card of the two tables, and the script that stages the card and the tables (checked against the checksums in `PROVENANCE.md`) in `build/hf_dataset/` for upload |
 | `CITATION.cff` | how to cite this work (also shown as BibTeX on the site's landing page) |
 
 ## License

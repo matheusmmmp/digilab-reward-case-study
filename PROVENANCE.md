@@ -73,3 +73,12 @@ The checksums of `resultado.json`, `medidas.json` and `vidas.tar.gz` are the one
 | 2026-11-21 16:55:16 | question closed without the 200-unit run | `23733ac3` |
 
 The commit times are the commits' commit dates from the repository history (for `715f889c` the author date is earlier, 11:21:35; for the other commits the two dates coincide); the run times, the duration and the commit the run used are from the run's metadata file.
+
+## Published extracts (sha256) {#extracts}
+
+The two tables published in `data/`, as committed; the case studies recompute every official number from them.
+
+| file | rows | sha256 |
+|---|---|---|
+| `data/lives.parquet` | 9,600 | `f4de55cc0f63ca27760eac88b4c7141756ff4441f4644a14ff8d8847ec198df8` |
+| `data/body_triage_lives.parquet` | 480 | `a76f651fb899ca19eeff27cb9303d739129aa6a777791292d08d97618fbba1fe` |

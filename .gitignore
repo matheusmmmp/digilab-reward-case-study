@@ -13,3 +13,6 @@ __pycache__/
 
 # Quarto execution cache (freeze: auto): local only, cleared by scripts/reproduce.py
 /_freeze/
+
+# Hugging Face staging folder: written by scripts/stage_hf_dataset.py
+/build/
