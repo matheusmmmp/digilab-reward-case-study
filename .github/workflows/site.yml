@@ -19,11 +19,21 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Install the pinned environment
+      - name: Install the pinned environment, with the dev group (pytest, ruff)
         run: uv sync --frozen
 
-      # Integrity checks, every notebook executed (their asserts are the gate: any number that
-      # differs from the official reference fails the job), then the site rendered into docs/.
+      - name: Lint
+        run: uv run --frozen ruff check
+
+      - name: Check formatting
+        run: uv run --frozen ruff format --check
+
+      - name: Unit tests
+        run: uv run --frozen pytest -q
+
+      # Integrity checks, then Quarto executes every notebook (their asserts are the gate: any
+      # number that differs from the official reference fails the job; _freeze/ is not committed,
+      # so nothing is reused) and renders the site into docs/.
       - name: Reproduce and render
         run: uv run --frozen python scripts/reproduce.py
 
