@@ -1,0 +1,84 @@
+---
+title: "Explorer: case 1"
+subtitle: "The paired contrasts of the reward study, recomputed in your browser for any subset of owner types and places"
+echo: false
+toc: false
+---
+
+::: {.case-links}
+[<i class="bi bi-journal-text"></i> Case study](../notebooks/02_case_study.ipynb){.btn .btn-outline-secondary .btn-sm}
+[<i class="bi bi-github"></i> Code](https://github.com/matheusmmmp/digilab-reward-case-study/blob/main/explorer/paired.js){.btn .btn-outline-secondary .btn-sm}
+[<i class="bi bi-table"></i> Data](../data/SCHEMA.md#case-1){.btn .btn-outline-secondary .btn-sm}
+:::
+
+::: {.callout-warning .explorer-label appearance="simple" icon="false"}
+**Exploratory.** Subsets are descriptive; the pre-registered reading uses all 12 cells and is on the [case page](../notebooks/02_case_study.ipynb).
+:::
+
+Each contrast compares two arms on the same paired units: for every unit, the difference between the two arms is averaged over the selected cells (owner type × place), and the estimate is the mean of those 200 per-unit differences with a Student-t 95% CI over the units. With every cell selected (the default) this is the official, pre-registered estimate. The computation runs in your browser over a small export of `data/lives.parquet`; the build checks that it reproduces the official values to within 1e-9.
+
+```{ojs}
+//| label: inputs
+import {estimate, selectCells, group, fmt, signed} from "./paired.js"
+data = FileAttachment("data/reward.json").json()
+contrastLabels = new Map([
+  ["D1: petting with credit vs no petting", "D1"],
+  ["D2: petting with credit vs the same credit at a random time", "D2"],
+  ["D3: petting with credit vs petting on the body only", "D3"]
+])
+measureLabels = new Map([
+  ["Awake fraction, days 1-14 (primary)", "awake_frac_d1_14"],
+  ["Awake fraction, days 8-14", "awake_frac_d8_14"],
+  ["Time well", "time_well"],
+  ["Episode rate", "episode_rate"]
+])
+viewof contrast = Inputs.select(contrastLabels, {label: "Contrast", width: 440})
+viewof measure = Inputs.select(measureLabels, {label: "Measure", width: 440})
+viewof owners = group(Inputs.checkbox(data.owners, {label: "Owner types", value: data.owners}), "Owner types")
+viewof places = group(Inputs.checkbox(data.places, {label: "Places", value: data.places}), "Places")
+```
+
+```{ojs}
+//| label: result
+cells = selectCells(data, owners, places)
+r = estimate(data, measure, contrast, cells)
+arms = data.contrasts[contrast]
+minutesNote = (r && measure === "awake_frac_d1_14")
+  ? html`<p>About <strong>${Math.abs(r.mean * 1440).toFixed(0)} minutes ${r.mean < 0 ? "less" : "more"} awake per simulated day</strong>
+      (95% CI ${signed(r.ci_low * 1440, 1)} to ${signed(r.ci_high * 1440, 1)} min/day; a fraction of the pet's decisions reads as the same fraction of its 1,440-minute day).</p>`
+  : html``
+r === null
+  ? html`<div class="explorer-result explorer-empty" role="status">Select at least one owner type and one place.</div>`
+  : html`<div class="explorer-result" role="status" aria-live="polite">
+      <p class="explorer-estimate"><span class="explorer-what">${contrast}, ${measure}</span><br>
+      <strong>${fmt(r, 4)}</strong></p>
+      <p class="explorer-meta">${arms.a} − ${arms.b}; mean of ${r.n} per-unit differences over ${r.cells} of 12 cells; sd ${r.sd.toFixed(4)}; 95% CI with t = ${data.t975.toFixed(4)} (n − 1 = ${r.n - 1}).</p>
+      ${minutesNote}
+    </div>`
+```
+
+```{ojs}
+//| label: chart
+//| fig-cap: "Each dot is one unit's paired difference, averaged over the selected cells (spread vertically only so the dots do not overlap). The black bar below them is the 95% CI of the mean, the dot on it the estimate; the dashed line is zero."
+chart = r === null ? html`` : Plot.plot({
+  width,
+  height: 250,
+  marginLeft: 10,
+  marginRight: 16,
+  marginBottom: 44,
+  ariaLabel: "Per-unit paired differences and the 95% confidence interval",
+  ariaDescription: `${r.n} per-unit differences for ${contrast} on ${measure}; estimate ${fmt(r, 4)}.`,
+  x: {label: `${arms.a} − ${arms.b}`, tickFormat: "+.3~f", nice: true, labelAnchor: "center", labelOffset: 38, ticks: Math.max(3, Math.floor(width / 110))},
+  y: {axis: null, domain: [-0.35, 1]},
+  marks: [
+    Plot.ruleX([0], {strokeDasharray: "4,3", stroke: "#888"}),
+    Plot.dot(r.diffs.map((d, i) => ({d, j: ((i * 0.6180339887) % 1) * 0.9 + 0.08})),
+      {x: "d", y: "j", r: 2.2, fill: "#2c7fb8", fillOpacity: 0.45, stroke: null}),
+    Plot.ruleY([-0.17], {x1: r.ci_low, x2: r.ci_high, stroke: "black", strokeWidth: 4}),
+    Plot.dot([r.mean], {x: d => d, y: -0.17, r: 4, fill: "black"}),
+    Plot.text([r.mean], {x: d => d, y: -0.17, dy: 14, text: () => "95% CI", fontSize: 11})
+  ]
+})
+```
+
+The bar is much narrower than the spread of the dots: it is the uncertainty of the mean over 200 paired units, not the spread of single units. The contrasts: D1 = petting_with_credit − no_petting, D2 = petting_with_credit − petting_with_credit_random_time, D3 = petting_with_credit − petting_body_only (see the [data dictionary](../data/SCHEMA.md#case-1)).

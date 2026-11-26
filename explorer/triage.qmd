@@ -1,0 +1,84 @@
+---
+title: "Explorer: case 2"
+subtitle: "The body-variant triage, recomputed in your browser for any subset of owner types and places"
+echo: false
+toc: false
+---
+
+::: {.case-links}
+[<i class="bi bi-journal-text"></i> Case study](../notebooks/04_body_triage_case_study.ipynb){.btn .btn-outline-secondary .btn-sm}
+[<i class="bi bi-github"></i> Code](https://github.com/matheusmmmp/digilab-reward-case-study/blob/main/explorer/paired.js){.btn .btn-outline-secondary .btn-sm}
+[<i class="bi bi-table"></i> Data](../data/SCHEMA.md#case-2){.btn .btn-outline-secondary .btn-sm}
+:::
+
+::: {.callout-warning .explorer-label appearance="simple" icon="false"}
+**The triage has no formal reading; these are estimates only.** The case study is on the [case page](../notebooks/04_body_triage_case_study.ipynb).
+:::
+
+For every one of the 20 paired units, the difference body_variant − control is averaged over the selected cells (owner type × place); the estimate is the mean of those 20 per-unit differences with a Student-t 95% CI over the units. With every cell selected (the default) this is the official 12-cell estimate. The computation runs in your browser over a small export of `data/body_triage_lives.parquet`; the build checks that it reproduces the official values to within 1e-9.
+
+```{ojs}
+//| label: inputs
+import {estimate, selectCells, group, fmt} from "./paired.js"
+data = FileAttachment("data/triage.json").json()
+measureLabels = new Map([
+  ["Time well, days 1-14 (primary)", "time_well"],
+  ["Time well, days 8-14", "time_well_d8_14"],
+  ["Health, days 8-14", "health_d8_14"],
+  ["Deprivation", "deprivation"],
+  ["Exhaustion", "exhaustion"],
+  ["Episode rate", "episode_rate"],
+  ["Meals per day", "meals_per_day"],
+  ["Sleep fraction (time steps)", "sleep_frac_ticks"],
+  ["Kicks", "kicks"],
+  ["Play decisions", "play_decisions"]
+])
+viewof measure = Inputs.select(measureLabels, {label: "Measure", width: 440})
+viewof owners = group(Inputs.checkbox(data.owners, {label: "Owner types", value: data.owners}), "Owner types")
+viewof places = group(Inputs.checkbox(data.places, {label: "Places", value: data.places}), "Places")
+viewof dropCopy = Inputs.toggle({label: "Count the duplicate cell once (11 distinct cells)", value: false})
+```
+
+```{ojs}
+//| label: result
+copyCell = "inconsistent|at_feeder"
+copySelected = owners.includes("inconsistent") && places.includes("at_feeder")
+cells = selectCells(data, owners, places, dropCopy ? [copyCell] : [])
+r = estimate(data, measure, "V", cells)
+hint = copySelected
+  ? html`<p class="explorer-hint">Hint: in every life (inconsistent, at_feeder) is identical to (attentive, at_feeder), so the 12 cells hold 11 distinct ones. ${dropCopy ? "The duplicate is left out here." : "Switch on “Count the duplicate cell once” to leave it out, as the official 11-cell estimate does."}</p>`
+  : html``
+r === null
+  ? html`<div class="explorer-result explorer-empty" role="status">${owners.length && places.length ? "The only selected cell is the duplicate (inconsistent, at_feeder), which is left out: select another cell or switch the toggle off." : "Select at least one owner type and one place."}</div>${hint}`
+  : html`<div class="explorer-result" role="status" aria-live="polite">
+      <p class="explorer-estimate"><span class="explorer-what">body_variant − control, ${measure}</span><br>
+      <strong>${fmt(r, 3)}</strong></p>
+      <p class="explorer-meta">Mean of ${r.n} per-unit differences over ${r.cells} ${r.cells === 1 ? "cell" : "cells"}; sd ${r.sd.toFixed(3)}; 95% CI with t = ${data.t975.toFixed(4)} (n − 1 = ${r.n - 1}).</p>
+    </div>${hint}`
+```
+
+```{ojs}
+//| label: chart
+//| fig-cap: "Each dot is one unit's paired difference body_variant − control, averaged over the selected cells (spread vertically only so the dots do not overlap). The black bar below them is the 95% CI of the mean, the dot on it the estimate; the dashed line is zero."
+chart = r === null ? html`` : Plot.plot({
+  width,
+  height: 220,
+  marginLeft: 10,
+  marginRight: 16,
+  marginBottom: 44,
+  ariaLabel: "Per-unit paired differences and the 95% confidence interval",
+  ariaDescription: `${r.n} per-unit differences body_variant minus control on ${measure}; estimate ${fmt(r, 3)}.`,
+  x: {label: "body_variant − control", tickFormat: "+.3~f", nice: true, labelAnchor: "center", labelOffset: 38, ticks: Math.max(3, Math.floor(width / 110))},
+  y: {axis: null, domain: [-0.35, 1]},
+  marks: [
+    Plot.ruleX([0], {strokeDasharray: "4,3", stroke: "#888"}),
+    Plot.dot(r.diffs.map((d, i) => ({d, j: ((i * 0.6180339887) % 1) * 0.9 + 0.08})),
+      {x: "d", y: "j", r: 3.5, fill: "#2c7fb8", fillOpacity: 0.6, stroke: null}),
+    Plot.ruleY([-0.17], {x1: r.ci_low, x2: r.ci_high, stroke: "black", strokeWidth: 4}),
+    Plot.dot([r.mean], {x: d => d, y: -0.17, r: 4, fill: "black"}),
+    Plot.text([r.mean], {x: d => d, y: -0.17, dy: 14, text: () => "95% CI", fontSize: 11})
+  ]
+})
+```
+
+With 20 units the interval is wide, and a single cell is 20 lives per arm. The measures are described in the [data dictionary](../data/SCHEMA.md#case-2).

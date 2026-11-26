@@ -9,10 +9,13 @@ project:
     - notebooks/04_body_triage_case_study.ipynb
     - notebooks/03_reproduce_body_triage.ipynb
     - resumo-pt-corpo.qmd
+    - explorer/reward.qmd
+    - explorer/triage.qmd
     - data/SCHEMA.md
     - PROVENANCE.md
   resources:
     - assets/cover.png
+    - explorer/data/*.json
 
 website:
   title: "Two experiments on a virtual pet"
@@ -34,6 +37,8 @@ website:
             text: Reproduction appendix
           - href: resumo-pt.qmd
             text: Resumo em português
+          - href: explorer/reward.qmd
+            text: Explorer
       - text: "Case 2: the effect that shrank"
         menu:
           - href: notebooks/04_body_triage_case_study.ipynb
@@ -42,6 +47,8 @@ website:
             text: Reproduction appendix
           - href: resumo-pt-corpo.qmd
             text: Resumo em português
+          - href: explorer/triage.qmd
+            text: Explorer
       - href: data/SCHEMA.md
         text: Data schema
       - href: PROVENANCE.md
