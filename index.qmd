@@ -6,7 +6,9 @@ Two case studies from the same simulated virtual pet, each told as question, des
 
 ::: {.case-links}
 [<i class="bi bi-journal-text"></i> Report: case 1](notebooks/02_case_study.ipynb){.btn .btn-outline-secondary .btn-sm}
+[<i class="bi bi-file-earmark-pdf"></i> PDF: case 1](notebooks/02_case_study.pdf){.btn .btn-outline-secondary .btn-sm}
 [<i class="bi bi-journal-text"></i> Report: case 2](notebooks/04_body_triage_case_study.ipynb){.btn .btn-outline-secondary .btn-sm}
+[<i class="bi bi-file-earmark-pdf"></i> PDF: case 2](notebooks/04_body_triage_case_study.pdf){.btn .btn-outline-secondary .btn-sm}
 [<i class="bi bi-github"></i> Code](https://github.com/matheusmmmp/digilab-reward-case-study){.btn .btn-outline-secondary .btn-sm}
 [<i class="bi bi-table"></i> Data](data/SCHEMA.md){.btn .btn-outline-secondary .btn-sm}
 [<i class="bi bi-quote"></i> Cite](#cite){.btn .btn-outline-secondary .btn-sm}

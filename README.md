@@ -2,7 +2,7 @@
 
 [![site](https://github.com/matheusmmmp/digilab-reward-case-study/actions/workflows/site.yml/badge.svg)](https://github.com/matheusmmmp/digilab-reward-case-study/actions/workflows/site.yml)
 
-Two data-science case studies on the same simulated virtual pet, each told as question → design → data → result → what I would do differently, with every official number recomputed from the published data. The site is published at <https://matheusmmmp.github.io/digilab-reward-case-study/>.
+Two data-science case studies on the same simulated virtual pet, each told as question → design → data → result → what I would do differently, with every official number recomputed from the published data. The site is published at <https://matheusmmmp.github.io/digilab-reward-case-study/>; each case study is also there as a PDF report ([case 1](https://matheusmmmp.github.io/digilab-reward-case-study/notebooks/02_case_study.pdf), [case 2](https://matheusmmmp.github.io/digilab-reward-case-study/notebooks/04_body_triage_case_study.pdf)).
 
 ## Case 1: does reward keep a virtual pet awake? A pre-registered simulation study
 
@@ -31,7 +31,7 @@ uv sync
 uv run python scripts/reproduce.py
 ```
 
-This runs the DuckDB integrity checks of both cases (`scripts/check_data.py`), exports the explorers' data (checked against both references; the page's JavaScript too when `node` is installed), then `quarto render` executes the four notebooks in place (each stops on a failed assertion; the outputs are written back into the `.ipynb`) and renders the site into `docs/` (ignored by git; open `docs/index.html`). A second run leaves `git status` clean.
+This runs the DuckDB integrity checks of both cases (`scripts/check_data.py`), exports the explorers' data (checked against both references; the page's JavaScript too when `node` is installed), then `quarto render` executes the four notebooks in place (each stops on a failed assertion; the outputs are written back into the `.ipynb`) and renders the site into `docs/` (ignored by git; open `docs/index.html`), with a PDF of each case study rendered from the same notebook by Quarto's bundled Typst (no LaTeX needed). A second run leaves `git status` clean.
 
 On every push and pull request, GitHub Actions (`.github/workflows/site.yml`) runs the same command on Linux, so any number that no longer matches the official reference fails the build; on `main` the rendered site is deployed to GitHub Pages.
 
@@ -71,7 +71,7 @@ uvx pre-commit install       # optional: run ruff on every commit (.pre-commit-c
 | `tests/` | pytest unit tests of the helpers in `casestudy/` and of the explorer's algorithm |
 | `.pre-commit-config.yaml` | ruff hooks for pre-commit (not installed by default) |
 | `.python-version` | the Python version the lock was built with |
-| `scripts/make_cover.py`, `assets/` | the site's social-preview cover (drawn from the two reference files), favicon and stylesheet |
+| `scripts/make_cover.py`, `assets/` | the site's social-preview cover (drawn from the two reference files), favicon and stylesheet; `assets/pdf-*.typ` and `assets/pdf-links.lua` set up the PDF reports (header and footer, links to the site) |
 | `CITATION.cff` | how to cite this work (also shown as BibTeX on the site's landing page) |
 
 ## License

@@ -1,7 +1,7 @@
 """One command to rebuild everything that needs no private data:
 check the data extracts, draw the cover image, export the explorer data (checked against the
 references), then let Quarto execute every notebook and page and render the site into docs/
-(not committed: CI renders it and deploys it to GitHub Pages).
+(not committed: CI renders it and deploys it to GitHub Pages), with a PDF of each case study.
 
 Quarto executes each notebook in place (its outputs are written back into the .ipynb, so
 GitHub shows them) and stops on the first failed assertion. `_quarto.yml` sets
@@ -18,6 +18,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 EXE = ".exe" if sys.platform == "win32" else ""
+PDFS = ["notebooks/02_case_study.pdf", "notebooks/04_body_triage_case_study.pdf"]  # Quarto's bundled Typst, no LaTeX
 
 
 def find_quarto() -> str:
@@ -55,5 +56,12 @@ for nb in sorted((ROOT / "notebooks").glob("*.ipynb")):  # Quarto writes the pla
     raw = nb.read_bytes()
     if b"\r\n" in raw:
         nb.write_bytes(raw.replace(b"\r\n", b"\n"))
+    # The two case studies also render a PDF (format typst, SVG figures), listed before html so that
+    # the outputs written back into the .ipynb are the HTML ones (PNG): fail if that ever changes.
+    if b'"image/svg+xml"' in raw:
+        sys.exit(f"reproduce: {nb.name} has SVG outputs written back from the PDF render")
+for pdf in PDFS:
+    if not (ROOT / "docs" / pdf).is_file():
+        sys.exit(f"reproduce: docs/{pdf} was not rendered")
 (ROOT / "docs" / ".nojekyll").touch()  # GitHub Pages: serve site_libs/ as is
 print("reproduce: OK")
