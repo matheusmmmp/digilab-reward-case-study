@@ -4,3 +4,6 @@ __pycache__/
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Rendered site: built by scripts/reproduce.py and deployed by GitHub Actions
+/docs/
