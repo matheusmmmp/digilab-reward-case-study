@@ -22,7 +22,7 @@ Two data-science case studies on the same simulated virtual pet, each told as qu
 
 ## Stack
 
-uv (pinned environment, `uv.lock`) · polars and DuckDB SQL over Parquet · Jupyter notebooks rendered with Quarto (pinned as `quarto-cli` from PyPI) · matplotlib · scikit-learn · scipy.
+uv (pinned environment, `uv.lock`) · DuckDB SQL and pandas over Parquet (pyarrow) · Jupyter notebooks rendered with Quarto (pinned as `quarto-cli` from PyPI) · matplotlib · scikit-learn · scipy.
 
 ## Reproduce
 

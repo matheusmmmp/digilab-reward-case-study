@@ -1,14 +1,19 @@
 """Build data/lives.parquet from the private per-life measures file.
 
 Only the source fields behind the published columns are read; nothing else from the
-source is touched or written."""
+source is touched or written.
+
+The committed file was written by an earlier version of this script that used polars 2.1.0;
+this one writes it with pyarrow: the same schema, values (bit for bit) and row order, but not
+the same bytes (the writer name and page layout inside the file differ)."""
 import argparse
 import gzip
 import hashlib
 import json
 from pathlib import Path
 
-import polars as pl
+import pyarrow as pa
+import pyarrow.parquet as pq
 
 SHA = "e8333972cc635f366ef7ae41b1e767adaa192858168d0a44310e3e7e3ad0e413"
 ARM = {"R0": "no_petting", "R-CORPO": "petting_body_only",
@@ -50,20 +55,27 @@ def main():
     if len(lives) != N:
         raise ValueError(f"expected {N} rows, got {len(lives)}")
     rows = [row(r) for r in lives]  # KeyError on any missing key / unknown code
-    df = pl.DataFrame(rows)
     # unit = 1..200: the dense rank of the private unit key
-    df = df.with_columns(pl.col("_unit_key").rank("dense").cast(pl.Int64).alias("unit"))
-    if df["_unit_key"].n_unique() != N_UNITS or df["unit"].max() != N_UNITS:
+    keys = sorted({r["_unit_key"] for r in rows})
+    rank = {k: i + 1 for i, k in enumerate(keys)}
+    for r in rows:
+        r["unit"] = rank[r.pop("_unit_key")]
+    if len(keys) != N_UNITS or max(rank.values()) != N_UNITS:
         raise ValueError(f"expected {N_UNITS} units")
-    measures = [c for c in rows[0] if c not in DESIGN and c != "_unit_key"]
-    df = df.select(DESIGN + measures).sort("arm_code", "owner", "place", "unit")
-    if df.height != N:
+    measures = [c for c in rows[0] if c not in DESIGN]
+    rows.sort(key=lambda r: (r["arm_code"], r["owner"], r["place"], r["unit"]))
+    if len(rows) != N:
         raise ValueError("row count changed")
-    if not df["unit"].is_between(1, N_UNITS).all():
+    if not all(1 <= r["unit"] <= N_UNITS for r in rows):
         raise ValueError("unit outside 1..200")
+    # strings as large_string, integers as int64, measures as double: the published schema
+    types = {c: pa.large_string() for c in DESIGN if c != "unit"}
+    table = pa.table({c: pa.array([r[c] for r in rows],
+                                  types.get(c, pa.float64() if isinstance(rows[0][c], float) else pa.int64()))
+                      for c in DESIGN + measures})
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
-    df.write_parquet(a.out, compression="zstd", statistics=False)
-    print(f"wrote {a.out}: {df.height} rows, {df.width} columns")
+    pq.write_table(table, a.out, compression="zstd", write_statistics=False)
+    print(f"wrote {a.out}: {table.num_rows} rows, {table.num_columns} columns")
 
 
 if __name__ == "__main__":
