@@ -4,7 +4,7 @@
 
 Two data-science case studies on the same simulated virtual pet, each told as question → design → data → result → what I would do differently, with every official number recomputed from the published data. The site is published at <https://matheusmmmp.github.io/digilab-reward-case-study/>; each case study is also there as a PDF report ([case 1](https://matheusmmmp.github.io/digilab-reward-case-study/notebooks/02_case_study.pdf), [case 2](https://matheusmmmp.github.io/digilab-reward-case-study/notebooks/04_body_triage_case_study.pdf)).
 
-Hugging Face mirror: (pending)
+Hugging Face mirror: <https://huggingface.co/datasets/teteco25/digilab-reward-case-study> (the two tables with a dataset card; same files, same license)
 
 ## Case 1: does reward keep a virtual pet awake? A pre-registered simulation study
 

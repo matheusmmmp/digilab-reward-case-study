@@ -8,7 +8,7 @@ toc: false
 ::: {.case-links}
 [<i class="bi bi-journal-text"></i> Case study](../notebooks/02_case_study.ipynb){.btn .btn-outline-secondary .btn-sm}
 [<i class="bi bi-github"></i> Code](https://github.com/matheusmmmp/digilab-reward-case-study/blob/main/explorer/paired.js){.btn .btn-outline-secondary .btn-sm}
-[<i class="bi bi-table"></i> Data](../data/SCHEMA.md#case-1){.btn .btn-outline-secondary .btn-sm}
+[<i class="bi bi-table"></i> Data](../data/SCHEMA.md#case-1){.btn .btn-outline-secondary .btn-sm} [<i class="bi bi-database"></i> Hugging Face](https://huggingface.co/datasets/teteco25/digilab-reward-case-study){.btn .btn-outline-secondary .btn-sm}
 :::
 
 ::: {.callout-warning .explorer-label appearance="simple" icon="false"}

@@ -44,8 +44,8 @@ Each config has a single split, `train`, which is simply the whole table: the da
 ```python
 from datasets import load_dataset
 
-lives = load_dataset("<user>/digilab-reward-case-study", "reward_test", split="train")
-triage = load_dataset("<user>/digilab-reward-case-study", "body_triage", split="train")
+lives = load_dataset("teteco25/digilab-reward-case-study", "reward_test", split="train")
+triage = load_dataset("teteco25/digilab-reward-case-study", "body_triage", split="train")
 ```
 
 ## `reward_test`: the reward study (case 1)
