@@ -31,9 +31,21 @@ uv sync
 uv run python scripts/reproduce.py
 ```
 
-This runs the DuckDB integrity checks of both cases (`scripts/check_data.py`), executes the four notebooks in place (each stops on a failed assertion), exports the explorers' data (checked against both references; the page's JavaScript too when `node` is installed) and renders the site into `docs/` (ignored by git; open `docs/index.html`). A second run leaves `git status` clean.
+This runs the DuckDB integrity checks of both cases (`scripts/check_data.py`), exports the explorers' data (checked against both references; the page's JavaScript too when `node` is installed), then `quarto render` executes the four notebooks in place (each stops on a failed assertion; the outputs are written back into the `.ipynb`) and renders the site into `docs/` (ignored by git; open `docs/index.html`). A second run leaves `git status` clean.
 
 On every push and pull request, GitHub Actions (`.github/workflows/site.yml`) runs the same command on Linux, so any number that no longer matches the official reference fails the build; on `main` the rendered site is deployed to GitHub Pages.
+
+## Development
+
+```
+uv sync                      # the dev group (pytest, ruff) is installed by default; same as uv sync --group dev
+uv run pytest -q             # unit tests: reading rules, paired estimates, explorer parity (no private data)
+uv run ruff check            # lint (.py files; the notebooks are excluded, their code is shown on the site)
+uv run ruff format --check   # formatting
+uvx pre-commit install       # optional: run ruff on every commit (.pre-commit-config.yaml)
+```
+
+`_quarto.yml` sets `freeze: auto`, so a plain `uv run quarto preview` reuses the last execution of pages whose code has not changed (cached in `_freeze/`, not committed); `scripts/reproduce.py` and CI always execute everything. CI runs the lint, format and test steps before `reproduce.py`.
 
 ## Repo map
 
@@ -55,7 +67,9 @@ On every push and pull request, GitHub Actions (`.github/workflows/site.yml`) ru
 | `PROVENANCE.md` | where the published data comes from: checksums, sample sizes, dates and the commit timelines |
 | `scripts/build_lives.py`, `scripts/build_reference.py`, `scripts/build_triage_lives.py`, `scripts/build_triage_reference.py` | rebuild the extracts and the references from the private source files (not needed to reproduce) |
 | `_quarto.yml`, `index.qmd` | Quarto website config and landing page; the site renders into `docs/` (not committed) |
-| `.github/workflows/site.yml` | CI: reproduce everything on Linux, then deploy the site to GitHub Pages from `main` |
+| `.github/workflows/site.yml` | CI: lint, tests, reproduce everything on Linux, then deploy the site to GitHub Pages from `main` |
+| `tests/` | pytest unit tests of the helpers in `casestudy/` and of the explorer's algorithm |
+| `.pre-commit-config.yaml` | ruff hooks for pre-commit (not installed by default) |
 | `.python-version` | the Python version the lock was built with |
 | `scripts/make_cover.py`, `assets/` | the site's social-preview cover (drawn from the two reference files), favicon and stylesheet |
 | `CITATION.cff` | how to cite this work (also shown as BibTeX on the site's landing page) |
